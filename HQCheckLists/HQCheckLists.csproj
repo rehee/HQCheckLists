@@ -9,6 +9,7 @@
     <Compile Remove="SPA\**" />
     <Content Remove="SPA\**" />
     <EmbeddedResource Remove="SPA\**" />
+    <EmbeddedResource Include="Areas\Admin\Views\**\*.cshtml" />
     <None Remove="SPA\**" />
   </ItemGroup>
 
@@ -2645,6 +2646,15 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="SDHCC" Version="0.1.0-alpha3" />
     <PackageReference Include="SDHCC.Admin.View" Version="0.1.0-alpha2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SDHCC.Admins.Views">
+      <HintPath>..\..\net\AspNetCoreMongoDBIdentity\SDHCCContent\bin\Release\netcoreapp2.1\SDHCC.Admins.Views.dll</HintPath>
+    </Reference>
+    <Reference Include="SDHCC.Admins.Views.Views">
+      <HintPath>..\..\net\AspNetCoreMongoDBIdentity\SDHCCContent\bin\Release\netcoreapp2.1\SDHCC.Admins.Views.Views.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
