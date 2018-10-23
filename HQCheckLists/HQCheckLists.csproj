@@ -2644,6 +2644,7 @@
     <PackageReference Include="Microsoft.AspNetCore.All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="SDHCC" Version="0.1.0-alpha3" />
+    <PackageReference Include="SDHCC.Admin.View" Version="0.1.0-alpha2" />
   </ItemGroup>
 
 </Project>
