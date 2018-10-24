@@ -17,23 +17,6 @@
     <Content Include="SPA\index.html">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="SPA\www\assets\fonts\ionicons.eot" />
-    <Content Include="SPA\www\assets\fonts\ionicons.ttf" />
-    <Content Include="SPA\www\assets\fonts\ionicons.woff" />
-    <Content Include="SPA\www\assets\fonts\noto-sans-bold.ttf" />
-    <Content Include="SPA\www\assets\fonts\noto-sans-bold.woff" />
-    <Content Include="SPA\www\assets\fonts\noto-sans-regular.ttf" />
-    <Content Include="SPA\www\assets\fonts\noto-sans-regular.woff" />
-    <Content Include="SPA\www\assets\fonts\roboto-bold.ttf" />
-    <Content Include="SPA\www\assets\fonts\roboto-bold.woff" />
-    <Content Include="SPA\www\assets\fonts\roboto-light.ttf" />
-    <Content Include="SPA\www\assets\fonts\roboto-light.woff" />
-    <Content Include="SPA\www\assets\fonts\roboto-medium.ttf" />
-    <Content Include="SPA\www\assets\fonts\roboto-medium.woff" />
-    <Content Include="SPA\www\assets\fonts\roboto-regular.ttf" />
-    <Content Include="SPA\www\assets\fonts\roboto-regular.woff" />
-    <Content Include="SPA\www\assets\icon\favicon.ico" />
-    <Content Include="SPA\www\assets\imgs\logo.png" />
     <Content Include="SPA\www\build\main.css" />
     <Content Include="SPA\www\index.html" />
     <Content Include="SPA\www\manifest.json" />
@@ -44,15 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="SPA\www\assets\fonts\ionicons.scss" />
-    <None Include="SPA\www\assets\fonts\ionicons.svg" />
-    <None Include="SPA\www\assets\fonts\ionicons.woff2" />
-    <None Include="SPA\www\assets\fonts\noto-sans.scss" />
-    <None Include="SPA\www\assets\fonts\roboto-bold.woff2" />
-    <None Include="SPA\www\assets\fonts\roboto-light.woff2" />
-    <None Include="SPA\www\assets\fonts\roboto-medium.woff2" />
-    <None Include="SPA\www\assets\fonts\roboto-regular.woff2" />
-    <None Include="SPA\www\assets\fonts\roboto.scss" />
     <None Include="SPA\www\build\main.css.map" />
     <None Include="SPA\www\build\main.js" />
     <None Include="SPA\www\build\main.js.map" />
