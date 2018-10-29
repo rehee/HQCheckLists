@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="fileupload\" />
     <Folder Include="SPA\www\" />
   </ItemGroup>
 
