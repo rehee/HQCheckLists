@@ -6,19 +6,19 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content>
-    <input type="button" value="添加库存" (click)="Create()">
+<ion-content padding>
+    <button ion-button (click)="Create()" full >添加清单</button>
     <ion-list>
         <ion-item-sliding *ngFor="let i of Inventories">
-            <ion-item>
-                <ion-avatar item-start>
-                    <img src="img/slimer.png">
-                </ion-avatar>
+            <ion-item (click)="NumberUpdate(i)"> 
+                <ion-thumbnail item-start>
+                    <img src="/images/Inventory/{{i.Id}}">
+                </ion-thumbnail>
                 <h2>{{i.Name}}</h2>
                 <p>{{i.QTY}}</p>
             </ion-item>
             <ion-item-options side="left">
-                <button ion-button color="secondary">
+                <button ion-button color="secondary" (click)="InventoryModel(i)">
                     <ion-icon name="call"></ion-icon>
                     修改
                 </button>

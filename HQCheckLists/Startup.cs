@@ -65,7 +65,7 @@ namespace HQCheckLists
         RequestPath = "",
         EnableDirectoryBrowsing = false
       });
-
+      app.UseDeveloperExceptionPage();
       StartUpFunction.Configure(app, env);
     }
   }

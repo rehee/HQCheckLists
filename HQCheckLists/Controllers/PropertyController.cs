@@ -31,32 +31,39 @@ namespace HQCheckLists.Controllers
       var content = db.GetChildrenContent(propertyId).Select(b => b as InventoryModel).ToList();
       return Json(content);
     }
+
+    public JsonResult GetPropertyInventory(string id)
+    {
+      if (String.IsNullOrEmpty(id))
+        return null;
+      var model = db.GetContent(id).MyTryConvert<InventoryModel>();
+      return Json(model);
+    }
+
     [HttpPost]
     public JsonResult CreatePropertyInventory(InventoryModel model)
     {
       var a = model;
-      Save(a.fff, out var s);
+      a.fff.Save(out var s);
+      a.Image = s;
+      db.AddContent(model);
+      return Json("Ok");
+    }
+    
+    [HttpPost]
+    public JsonResult UpdatePropertyInventory(InventoryModel model)
+    {
+      if (model.fff != null)
+      {
+        model.fff.Save(out var path);
+        if (!string.IsNullOrEmpty(path))
+        {
+          model.Image = path;
+        }
+      }
+      db.UpdateContent(model);
       return Json("Ok");
     }
 
-    public  void Save( IFormFile file, out string filePath)
-    {
-      filePath = "";
-      if (file == null)
-        return;
-      var path = Path.Combine(Directory.GetCurrentDirectory(),
-                               "fileupload", file.FileName);
-      var exist = Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(),
-                               "fileupload"));
-      if (!exist)
-      {
-        Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(),
-                               "fileupload"));
-      }
-      using (var stream = new FileStream(path, FileMode.Create))
-      {
-        file.CopyToAsync(stream).GetAsyncValue();
-      }
-    }
   }
 }

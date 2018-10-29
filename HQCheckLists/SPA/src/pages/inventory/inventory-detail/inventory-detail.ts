@@ -4,29 +4,27 @@ import { DataService } from '../../../services';
 import { Inventory } from '../../../models';
 import { FileContain } from '../../../core/core-function';
 @Component({
-  selector: 'page-inventory-create',
-  templateUrl: 'inventory-create.html'
+  selector: 'page-inventory-detail',
+  templateUrl: 'inventory-detail.html'
 })
-export class InventoryCreatePage {
+export class InventoryDetailPage {
 
   constructor(public navCtrl: NavController, public param: NavParams, private ds: DataService) {
     this.Model = new Inventory();
   }
   async Init() {
-    if (!this.param.get("propertyId")) {
+    if (!this.param.get('Id')) {
       this.navCtrl.pop();
     }
-    
-    this.Model.ParentId = this.param.get("propertyId");
+    this.Model = this.param.data;
   }
-  @ViewChild('fileInput') fileInput;
   ionViewWillEnter() {
     this.Init();
   }
   Model: Inventory = null;
   save() {
-    this.Model.ImageUpload = this.fileInput;
-    this.ds.CreatePropertyInventory(this.Model, this.Files);
+    this.ds.UpdatePropertyInventory(this.Model, this.Files);
+    this.navCtrl.pop();
   }
   Files: FileContain[] = [];
   FileChange(input: any, filename: any) {

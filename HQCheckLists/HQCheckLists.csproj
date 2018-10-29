@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+    <UserSecretsId>a28ec850-89cd-4c01-a6bb-51757a31fdda</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -2620,7 +2621,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
-    <PackageReference Include="SDHCC" Version="0.1.0-alpha7" />
+    <PackageReference Include="SDHCC" Version="0.1.0-alpha8" />
   </ItemGroup>
 
 </Project>

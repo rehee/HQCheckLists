@@ -14,13 +14,14 @@ import { HttpModule } from '../../node_modules/@angular/http';
 import { PropertyPage } from '../pages/property/property';
 import { InventoryListPage } from '../pages/inventory/inventory-list/inventory-list';
 import { InventoryCreatePage } from '../pages/inventory/inventory-create/inventory-create';
+import { InventoryDetailPage } from '../pages/inventory/inventory-detail/inventory-detail';
 
 @NgModule({
   declarations: [
     MyApp,
     ContactPage,
     HomePage,
-    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage
+    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -31,7 +32,7 @@ import { InventoryCreatePage } from '../pages/inventory/inventory-create/invento
     MyApp,
     ContactPage,
     HomePage,
-    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage
+    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage
   ],
   providers: [
     StatusBar,

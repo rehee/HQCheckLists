@@ -15,7 +15,13 @@ export class DataService {
   public async GetInventoryByProperty(propertyId: string): Promise<Inventory[]> {
     return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.GetInventoryByProperty), null, propertyId);
   }
+  public async GetPropertyInventory(inventoryId: string): Promise<Inventory[]> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.GetPropertyInventory), null, `/${inventoryId}`);
+  }
   public async CreatePropertyInventory(model: Inventory, files: FileContain[]): Promise<Inventory> {
     return await (await this.httpRequest())(HttpType.File, Number(ApiCall.CreatePropertyInventory), model, null, files);
+  }
+  public async UpdatePropertyInventory(model: Inventory, files: FileContain[]): Promise<Inventory> {
+    return await (await this.httpRequest())(HttpType.File, Number(ApiCall.UpdatePropertyInventory), model, null, files);
   }
 }

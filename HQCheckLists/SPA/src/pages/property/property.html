@@ -6,7 +6,7 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
     <ion-list>
         <ion-item-sliding *ngFor="let p of Properties">
             <ion-item>
@@ -18,7 +18,7 @@
             <ion-item-options side="left">
                 <button ion-button color="primary" (click)="GoToInventory(p.Id)">
                     <ion-icon name="text"></ion-icon>
-                    库存
+                    清单
                 </button>
                 <button ion-button color="secondary">
                     <ion-icon name="call"></ion-icon>
@@ -32,8 +32,5 @@
                 </button>
             </ion-item-options>
         </ion-item-sliding>
-
     </ion-list>
-    <input type="file" #fileInput multiple name="file" />
-    <input type="button" value="submit" (click)="save()" />
 </ion-content>

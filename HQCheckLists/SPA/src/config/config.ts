@@ -23,19 +23,24 @@ export class ApiProperty {
 export enum ApiCall {
   GetAllProperties = 101,
   GetInventoryByProperty = 201,
+  GetPropertyInventory = 210,
   CreatePropertyInventory = 211,
+  UpdatePropertyInventory = 212
+  
 }
 export class Config {
   static URLTyle = {
-    UAT: 'https://localhost:44304',
-    PROD: 'https://localhost:44304',
+    UAT: '',
+    PROD: '',
   }
-  static DefaultApi = "https://localhost:44304";
+  static DefaultApi = "";
   static BaseUrl: string = Config.URLTyle.PROD;
   static ApiUrl: { [key: number]: ApiProperty } = {
     [ApiCall.GetAllProperties]: Config.setApi("/Property/GetAllProperties", false, []),
     [ApiCall.GetInventoryByProperty]: Config.setApi("/Property/GetInventoryByProperty?propertyId=", false, []),
     [ApiCall.CreatePropertyInventory]: Config.setApi("/Property/CreatePropertyInventory", false, []),
+    [ApiCall.UpdatePropertyInventory]: Config.setApi("/Property/UpdatePropertyInventory", false, []),
+    [ApiCall.GetPropertyInventory]: Config.setApi("/Property/GetPropertyInventory", false, []),
   }
   private static setApi(url: string, useMock: boolean, m: any) {
     return new ApiProperty(url, useMock, m);
