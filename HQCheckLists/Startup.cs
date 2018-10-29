@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using HQCheckLists.Models.Contents;
+using HQCheckLists.Models.DropDowns;
 using HQCheckLists.Models.Users;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -50,7 +52,17 @@ namespace HQCheckLists
     // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
+      var a = configuration.GetConnectionString("DefaultConnection");
       E.Setting = configuration.GetSection("SiteSetting").Get<SiteSetting>();
+
+      if (hostingEnvironment.IsDevelopment())
+      {
+        E.Setting = configuration.GetSection("SiteSetting").Get<SiteSetting>();
+      }
+      else
+      {
+        E.Setting = configuration.GetSection("SiteSetting").Get<SiteSetting>();
+      }
       //TelemetryConfiguration.Active.DisableTelemetry = true;
       //services.Configure<CookiePolicyOptions>(options =>
       //{
@@ -78,8 +90,8 @@ namespace HQCheckLists
       E.RootPath = hostingEnvironment.WebRootPath;
       ContentE.RootPath = hostingEnvironment.WebRootPath;
 
-      ContentE.RootType = typeof(HQCheckLists.Models.Contents.ContentBaseModel);
-      ContentE.RootDropDown = typeof(HQCheckLists.Models.DropDowns.DropDownModel);
+      ContentE.RootType = typeof(ContentBaseModel);
+      ContentE.RootDropDown = typeof(DropDownModel);
 
       services.AddScoped<ISDHCCDbContext, SDHCCDbContext>();
       services.AddScoped<IRoleStore<IdentityRole>, SDHCCRoleStore<IdentityRole, SDHCUserRole>>();
@@ -102,10 +114,29 @@ namespace HQCheckLists
 
       //services.AddDefaultIdentity<IdentityUser>().AddDefaultTokenProviders();
       //.AddEntityFrameworkStores<ApplicationDbContext>();
-      var assembly = Assembly.Load("SDHCC.Admins");
+      var assembly = typeof(SDHCC.Admins.Controllers.PageController).Assembly;
       var assemblyView = Assembly.Load("SDHCC.Admins.Views");
       services.AddMvc()
-        .AddApplicationPart(assembly).AddControllersAsServices()
+        .AddApplicationPart(assembly)
+        //.ConfigureRazorViewEngine(options =>
+        //{
+        //  var oldRoot = ApplicationEnviroment.ApplicationBasePath;
+        //  var trimmedRoot = oldRoot.Remove(oldRoot.LastIndexOf('\\'));
+
+        //  options.FileProvider = new PhysicalFileProvider(trimmedRoot);
+        //})
+        ////.AddApplicationPart(assemblyView)
+        //.ConfigureApplicationPartManager(m =>
+        //{
+        //  var feature = new ControllerFeature();
+        //  m.ApplicationParts.Add(new AssemblyPart(assembly));
+        //  m.PopulateFeature(feature);
+        //  services.AddSingleton(feature.Controllers.Select(t => t.AsType()).ToArray());
+        //})
+        //.AddRazorOptions(options =>
+        //{
+        //  options.AddCloudscribeSimpleContentBootstrap3Views(assembly);
+        //})
         .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
       services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie(options =>
@@ -115,7 +146,7 @@ namespace HQCheckLists
       services.Configure<RazorViewEngineOptions>(options =>
       {
         options.FileProviders.Add(
-            new EmbeddedFileProvider(assemblyView));
+            new EmbeddedFileProvider(assemblyView, "SDHCC.Admins.Views"));
       });
     }
 
