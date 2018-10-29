@@ -35,6 +35,7 @@
     <None Include="SPA\www\build\vendor.js" />
     <None Include="SPA\www\build\vendor.js.map" />
     <None Include="SPA\www\service-worker.js" />
+    <None Include="Views\Account\Login.cshtml" />
     <None Include="wwwroot\lib\admin\assets\images\background\Thumbs.db" />
     <None Include="wwwroot\lib\admin\assets\images\big\Thumbs.db" />
     <None Include="wwwroot\lib\admin\assets\images\gallery\photothumb.db" />

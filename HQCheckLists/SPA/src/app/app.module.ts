@@ -9,16 +9,21 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { DataService } from '../services';
+import { HttpModule } from '../../node_modules/@angular/http';
+import { PropertyPage } from '../pages/property/property';
+import { InventoryListPage } from '../pages/inventory/inventory-list/inventory-list';
+import { InventoryCreatePage } from '../pages/inventory/inventory-create/inventory-create';
 
 @NgModule({
   declarations: [
     MyApp,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage
   ],
   imports: [
-    BrowserModule,
+    BrowserModule, HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -26,12 +31,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    DataService
   ]
 })
-export class AppModule {}
+export class AppModule { }

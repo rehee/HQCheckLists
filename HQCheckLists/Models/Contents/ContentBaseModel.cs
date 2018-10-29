@@ -11,7 +11,7 @@ namespace HQCheckLists.Models.Contents
     ChildrenType = new Type[] { typeof(PropertyModel) },
     CreateRoles = new string[] { "Admin" },
     EditRoles = new string[] { "Admin" })]
-  public class ContentBaseModel: ContentBase
+  public class HQBaseModel: ContentBase
   {
 
   }

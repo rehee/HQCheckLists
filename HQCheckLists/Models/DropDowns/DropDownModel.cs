@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace HQCheckLists.Models.DropDowns
 {
   [AllowChildren(
-    ChildrenType = new Type[] { },
+    ChildrenType = new Type[] { typeof(PropertyOwner) },
     CreateRoles = new string[] { "Admin" },
     EditRoles = new string[] { "Admin" })]
-  public class DropDownModel: DropDownBase
+  public class HQDropDownModel : DropDownBase
   {
 
   }
