@@ -18,6 +18,7 @@ namespace HQCheckLists.Models.Contents
   {
     public decimal QTY { get; set; } = 0;
     public string Image { get; set; } = "";
+    public string ImgToken { get; set; } = "";
     public bool IsPercentage { get; set; } = false;
     [IgnoreEdit]
     [BsonIgnore]

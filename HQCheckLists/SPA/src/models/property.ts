@@ -14,4 +14,5 @@ export class Inventory {
   Image: string;
   IsPercentage: boolean;
   ImageUpload: any;
+  ImgToken:string = "";
 }

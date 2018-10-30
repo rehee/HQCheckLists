@@ -6,7 +6,7 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
     <ion-list>
         <ion-item-sliding *ngFor="let p of Properties">
             <ion-item>
@@ -15,17 +15,15 @@
                 </ion-avatar>
                 <h2>{{p.Name}}</h2>
             </ion-item>
-            <ion-item-options side="left">
-                <button ion-button color="primary" (click)="GoToInventory(p.Id)">
-                    <ion-icon name="text"></ion-icon>
-                    清单
-                </button>
-                <button ion-button color="secondary">
-                    <ion-icon name="call"></ion-icon>
-                    检查
-                </button>
-            </ion-item-options>
             <ion-item-options side="right">
+                    <button ion-button color="primary" (click)="GoToInventory(p.Id)">
+                            <ion-icon name="text"></ion-icon>
+                            清单
+                        </button>
+                        <button ion-button color="secondary">
+                            <ion-icon name="call"></ion-icon>
+                            检查
+                        </button>
                 <button ion-button color="primary">
                     <ion-icon name="mail"></ion-icon>
                     清洁

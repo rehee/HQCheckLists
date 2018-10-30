@@ -53,15 +53,23 @@ namespace HQCheckLists.Controllers
     [HttpPost]
     public JsonResult UpdatePropertyInventory(InventoryModel model)
     {
+      if (String.IsNullOrEmpty(model.Id))
+        return null;
+      var content = db.GetContent(model.Id).MyTryConvert<InventoryModel>();
+      if (content == null)
+        return null;
+      content.Name = model.Name;
+      content.QTY = model.QTY;
       if (model.fff != null)
       {
         model.fff.Save(out var path);
         if (!string.IsNullOrEmpty(path))
         {
-          model.Image = path;
+          content.Image = path;
+          content.ImgToken = Guid.NewGuid().ToString();
         }
       }
-      db.UpdateContent(model);
+      db.UpdateContent(content);
       return Json("Ok");
     }
 

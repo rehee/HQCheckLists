@@ -17,14 +17,22 @@ namespace HQCheckLists.Controllers
     }
     public IActionResult Inventory(string id)
     {
-      if (string.IsNullOrEmpty(id))
+      try
+      {
+        if (string.IsNullOrEmpty(id))
+          return null;
+        var item = db.GetContent(id).MyTryConvert<InventoryModel>();
+        if (item == null)
+          return null;
+        if (String.IsNullOrEmpty(item.Image))
+          return null;
+        return item.Image.GetFileFromPath(this);
+      }
+      catch
+      {
         return null;
-      var item = db.GetContent(id).MyTryConvert<InventoryModel>();
-      if (item == null)
-        return null;
-      if (String.IsNullOrEmpty(item.Image))
-        return null;
-      return item.Image.GetFileFromPath(this);
+      }
+      
     }
   }
 }
