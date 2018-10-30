@@ -29,7 +29,9 @@ export class InventoryListPage {
   Create() {
     this.navCtrl.push(InventoryCreatePage, { propertyId: this.param.get("propertyId") });
   }
-
+  random(){
+    return Math.random();
+  }
   InventoryModel(inventory: Inventory) {
     let profileModal = this.modelCtrl.create(InventoryDetailPage, inventory);
     profileModal.present();
