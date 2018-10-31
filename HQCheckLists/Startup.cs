@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -30,7 +31,7 @@ namespace HQCheckLists
 {
  public class Startup
   {
-    
+
     public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
     {
       this.configuration = configuration;
@@ -48,13 +49,21 @@ namespace HQCheckLists
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
+      app.UseMvc(r =>
+      {
+        r.MapRoute(
+          name: "default",
+                  template: "{controller=Images}/{action=Index}/{id}/{token}"
+          );
+      });
       app.UseFileServer(new FileServerOptions
       {
         FileProvider = new PhysicalFileProvider(
-            Path.Combine(Directory.GetCurrentDirectory(), "SPA/www")),
+          Path.Combine(Directory.GetCurrentDirectory(), "SPA/www")),
         RequestPath = "",
         EnableDirectoryBrowsing = false
       });
+
       app.UseDeveloperExceptionPage();
       StartUpFunction.Configure(app, env);
     }

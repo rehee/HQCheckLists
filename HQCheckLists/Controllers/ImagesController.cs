@@ -8,10 +8,10 @@ using SDHCC.DB;
 
 namespace HQCheckLists.Controllers
 {
-  public class ImagesController : Controller
+  public class buildController : Controller
   {
     ISDHCCDbContext db;
-    public ImagesController(ISDHCCDbContext db)
+    public buildController(ISDHCCDbContext db)
     {
       this.db = db;
     }
