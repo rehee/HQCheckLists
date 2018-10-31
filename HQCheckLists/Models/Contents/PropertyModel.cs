@@ -1,5 +1,6 @@
 ﻿using HQCheckLists.Models.DropDowns;
 using HQCheckLists.Models.Users;
+using Microsoft.AspNetCore.Http;
 using SDHCC;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,9 @@ namespace HQCheckLists.Models.Contents
     [InputType(EditorType = EnumInputType.DropDwon, RelatedType = typeof(PropertyOwner))]
     public string PropertyOwner { get; set; } = "";
 
+
+    public string Image { get; set; } = "";
+    [IgnoreEdit]
+    public IFormFile ImageFile { get; set; } = null;
   }
 }

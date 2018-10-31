@@ -4,6 +4,7 @@ export class Property {
   Name: string;
   PropertyAddress: string;
   PropertyOwner: string;
+  Image:string;
 }
 
 export class Inventory {

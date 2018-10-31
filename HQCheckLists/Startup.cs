@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using HQCheckLists.Models.Contents;
 using HQCheckLists.Models.DropDowns;
 using HQCheckLists.Models.Users;
+using HQCheckLists.Services.PropertyService;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,18 +29,7 @@ using SDHCC.Identity.Services;
 
 namespace HQCheckLists
 {
-  public static class starts
-  {
-    public static RazorViewEngineOptions AddCloudscribeSimpleContentBootstrap3Views(this RazorViewEngineOptions options, Assembly ass)
-    {
-      options.FileProviders.Add(new EmbeddedFileProvider(
-                  ass
-            ));
-
-      return options;
-    }
-  }
-  public class Startup
+ public class Startup
   {
 
     public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
@@ -50,11 +40,10 @@ namespace HQCheckLists
     //http://jackhiston.com/2017/8/15/sharing-controllers-and-views-in-aspnet-core/
     public IConfiguration configuration { get; }
     public IHostingEnvironment hostingEnvironment { get; }
-    // This method gets called by the runtime. Use this method to add services to the container.
-    // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
       StartUpFunction.ConfigureServices<HQUser, HQBaseModel, HQDropDownModel>(services, configuration, hostingEnvironment);
+      services.AddScoped(typeof(IPropertyService), typeof(PropertyService));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

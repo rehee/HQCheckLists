@@ -14,12 +14,5 @@ export class HomePage {
   async Init() {
     let result = await this.ds.GetAllProperties();
     console.log(result);
-    if (result != null) {
-      for (let p of result) {
-        let inventory = await this.ds.GetInventoryByProperty(p.Id);
-        console.log(inventory);
-      }
-    }
   }
-
 }

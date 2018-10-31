@@ -22,11 +22,19 @@ export class ApiProperty {
 }
 export enum ApiCall {
   GetAllProperties = 101,
+  CreateProperty = 102,
+  UpdateProperty = 103,
+
   GetInventoryByProperty = 201,
   GetPropertyInventory = 210,
   CreatePropertyInventory = 211,
-  UpdatePropertyInventory = 212
-  
+  UpdatePropertyInventory = 212,
+
+  GetCurrentUser = 301,
+  Login = 302,
+  LogOff = 303,
+  CanAccess = 304,
+
 }
 export class Config {
   static URLTyle = {
@@ -36,11 +44,20 @@ export class Config {
   static DefaultApi = "";
   static BaseUrl: string = Config.URLTyle.PROD;
   static ApiUrl: { [key: number]: ApiProperty } = {
-    [ApiCall.GetAllProperties]: Config.setApi("/Property/GetAllProperties", false, []),
+
+    [ApiCall.GetAllProperties]: Config.setApi("/Api/Property/Index", false, []),
+    [ApiCall.CreateProperty]: Config.setApi("/Api/Property/Create", false, []),
+    [ApiCall.UpdateProperty]: Config.setApi("/Api/Property/Update", false, []),
+
     [ApiCall.GetInventoryByProperty]: Config.setApi("/Property/GetInventoryByProperty?propertyId=", false, []),
     [ApiCall.CreatePropertyInventory]: Config.setApi("/Property/CreatePropertyInventory", false, []),
     [ApiCall.UpdatePropertyInventory]: Config.setApi("/Property/UpdatePropertyInventory", false, []),
     [ApiCall.GetPropertyInventory]: Config.setApi("/Property/GetPropertyInventory", false, []),
+
+    [ApiCall.GetCurrentUser]: Config.setApi("/User/CurrentUser", false, []),
+    [ApiCall.Login]: Config.setApi("/User/Login", false, []),
+    [ApiCall.LogOff]: Config.setApi("/User/Logoff", false, []),
+    [ApiCall.CanAccess]: Config.setApi("/User/CanAccess", false, []),
   }
   private static setApi(url: string, useMock: boolean, m: any) {
     return new ApiProperty(url, useMock, m);

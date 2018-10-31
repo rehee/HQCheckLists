@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { CoreFunction, FileContain } from "../core/core-function";
 import { HttpType, ApiCall } from '../config/config';
-import { Property, Inventory } from '../models/index';
+import { Property, Inventory } from '../models';
+import { ApiResponse } from '../models/ApiResponse';
 @Injectable()
 export class DataService {
   constructor(private http: Http) { }
   private async httpRequest() {
     return await CoreFunction.GetHttpResponseAsync(this.http);
   }
-  public async GetAllProperties(): Promise<Property[]> {
+  public async GetAllProperties(): Promise<ApiResponse<Property[]>> {
     return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.GetAllProperties));
   }
   public async GetInventoryByProperty(propertyId: string): Promise<Inventory[]> {
