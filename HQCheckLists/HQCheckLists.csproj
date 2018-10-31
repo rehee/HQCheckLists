@@ -2624,7 +2624,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
-    <PackageReference Include="SDHCC" Version="0.1.0-alpha9" />
+    <PackageReference Include="SDHCC" Version="0.1.0-alpha10" />
   </ItemGroup>
 
 </Project>

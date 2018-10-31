@@ -37,7 +37,7 @@ namespace HQCheckLists.Services.PropertyService
           return db.GetChildrenContent("").Select(b => b as PropertyModel).ToList();
         }
         var ownerId = hqUser.PropertyOwner;
-        var t = db.Where<PropertyModel>(b => b["ParentId"] == "", ((SDHCCDbContext)db).BaseContentType, db.ConvertBsonToGeneric<PropertyModel>()).ToList();
+        var t = db.Where<PropertyModel>(b => b["ParentId"] == "", db.BaseContentType, db.ConvertBsonToGeneric<PropertyModel>()).ToList();
         var result = db.GetChildrenContent("").Select(b => b as PropertyModel).Where(b => b.PropertyOwner == ownerId).ToList();
         response.Success = true;
         return result;

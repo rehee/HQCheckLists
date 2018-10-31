@@ -10,5 +10,19 @@ namespace HQCheckLists
   {
     public static HQSetting Setting { get; set; } = new HQSetting();
     public static AccessPermissions Access { get; set; } = new AccessPermissions();
+
+    public static Dictionary<EnumPages, IEnumerable<string>> PageAccessRoleMap { get; set; } = new Dictionary<EnumPages, IEnumerable<string>>
+    {
+      [EnumPages.PropertyIndex] = Access.PropertyIndex,
+      [EnumPages.PropertyCreate] = Access.PropertyCreate,
+      [EnumPages.PropertyUpdate] = Access.PropertyUpdate,
+    };
+  }
+
+  public enum EnumPages
+  {
+    PropertyIndex = 1,
+    PropertyCreate = 2,
+    PropertyUpdate = 3,
   }
 }

@@ -19,12 +19,14 @@ import { IonicStorageModule } from '@ionic/storage';
 import { UserService } from '../services/user-service';
 import { LandingPage } from '../pages/publics/landing/landing';
 import { Network } from '@ionic-native/network';
+import { PropertyListPage } from '../pages/properties/property-list/property-list';
+import { PropertycreatePage } from '../pages/properties/property-create/property-create';
 @NgModule({
   declarations: [
     MyApp,
     ContactPage,
     HomePage,
-    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage
+    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -41,7 +43,7 @@ import { Network } from '@ionic-native/network';
     MyApp,
     ContactPage,
     HomePage,
-    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage
+    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage
   ],
   providers: [
     StatusBar,

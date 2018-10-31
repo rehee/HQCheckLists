@@ -45,5 +45,25 @@ namespace HQCheckLists.Controllers
       }
 
     }
+    [HttpPost]
+    public JsonResult CanAccess([FromBody]EnumPages page)
+    {
+      var result = new ApiResponse<object>(false, "", null);
+      if (!HQE.PageAccessRoleMap.ContainsKey(page))
+      {
+        return Json(result);
+      }
+      var accessRoles = HQE.PageAccessRoleMap[page];
+      if (accessRoles.Count() == 0)
+      {
+        result.Success = true;
+      }
+      else
+      {
+        var canAccess = users.IsUserInRoles(User, accessRoles);
+        result.Success = canAccess;
+      }
+      return Json(result);
+    }
   }
 }

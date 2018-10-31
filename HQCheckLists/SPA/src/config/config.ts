@@ -33,6 +33,7 @@ export enum ApiCall {
   GetCurrentUser = 301,
   Login = 302,
   LogOff = 303,
+  CanAccess = 304,
 
 }
 export class Config {
@@ -56,6 +57,7 @@ export class Config {
     [ApiCall.GetCurrentUser]: Config.setApi("/User/CurrentUser", false, []),
     [ApiCall.Login]: Config.setApi("/User/Login", false, []),
     [ApiCall.LogOff]: Config.setApi("/User/Logoff", false, []),
+    [ApiCall.CanAccess]: Config.setApi("/User/CanAccess", false, []),
   }
   private static setApi(url: string, useMock: boolean, m: any) {
     return new ApiProperty(url, useMock, m);

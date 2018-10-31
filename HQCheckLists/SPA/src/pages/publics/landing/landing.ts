@@ -4,6 +4,7 @@ import { DataService } from '../../../services';
 import { SiteInfo, SiteKey } from '../../../config/site-info';
 import { LoginViewModel } from '../../../models/users/login-model';
 import { UserService } from '../../../services/user-service';
+import { EnumPages } from '../../../models/access/enum-pages';
 
 @Component({
   selector: 'page-landing',
@@ -15,6 +16,8 @@ export class LandingPage {
     this.Init();
   }
   async Init() {
+    let canAccess = await this.userService.CanAccessCheck(EnumPages.PropertyCreate);
+    console.log(canAccess);
     let currentUser = await SiteInfo.GetSiteValue(SiteKey.UserName);
     console.log(currentUser);
     if (currentUser == null || currentUser == "") {
