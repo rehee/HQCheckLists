@@ -6,13 +6,13 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
     <button ion-button (click)="Create()" full >添加清单</button>
     <ion-list>
         <ion-item-sliding *ngFor="let i of Inventories">
-            <ion-item> 
+            <ion-item>
                 <ion-thumbnail item-start>
-                    <img src="/images/Inventory/{{i.Id}}?n={{i.ImgToken}}">
+                    <img src="/build/Inventory/{{i.Id}}">
                 </ion-thumbnail>
                 <h2 (click)="NumberUpdate(i)">{{i.Name}}</h2>
                 <p (click)="NumberUpdate(i)">{{i.QTY}}</p>
