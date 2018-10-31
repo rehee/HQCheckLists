@@ -15,9 +15,10 @@ export class PropertyPage {
   }
   async Init() {
     let result = await this.ds.GetAllProperties();
-    if (result != null) {
-      this.Properties = result.map(b => b);
+    if (result == null || result.Success == false) {
+      return;
     }
+    this.Properties = result.Data.map(b => b);
   }
   Properties: Property[] = [];
   @ViewChild('fileInput') fileInput;
