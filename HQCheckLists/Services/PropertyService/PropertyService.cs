@@ -57,11 +57,6 @@ namespace HQCheckLists.Services.PropertyService
       
       try
       {
-        if (property.ImageFile != null)
-        {
-          property.ImageFile.Save(out var path);
-          property.Image = path;
-        }
         db.AddContent(property);
         response.Success = true;
       }
@@ -76,11 +71,6 @@ namespace HQCheckLists.Services.PropertyService
 
       try
       {
-        if (property.ImageFile != null)
-        {
-          property.ImageFile.Save(out var path);
-          property.Image = path;
-        }
         var pass = property.ConvertToPassingModel();
         var p = db.GetContent(property.Id);
         var pPass = p.ConvertToPassingModel();

@@ -7,7 +7,8 @@ export enum HttpType {
   Post = 2,
   Put = 3,
   Delete = 4,
-  File = 5
+  File = 5,
+  Mix = 6,
 }
 
 export class ApiProperty {
@@ -24,6 +25,8 @@ export enum ApiCall {
   GetAllProperties = 101,
   CreateProperty = 102,
   UpdateProperty = 103,
+  PreCreateProperty = 104,
+  PostModel = 105,
 
   GetInventoryByProperty = 201,
   GetPropertyInventory = 210,
@@ -48,6 +51,9 @@ export class Config {
     [ApiCall.GetAllProperties]: Config.setApi("/Api/Property/Index", false, []),
     [ApiCall.CreateProperty]: Config.setApi("/Api/Property/Create", false, []),
     [ApiCall.UpdateProperty]: Config.setApi("/Api/Property/Update", false, []),
+    [ApiCall.PreCreateProperty]: Config.setApi("/Api/Property/PreCreate", false, []),
+    [ApiCall.PostModel]: Config.setApi("/Api/Property/PostModel", false, []),
+    
 
     [ApiCall.GetInventoryByProperty]: Config.setApi("/Property/GetInventoryByProperty?propertyId=", false, []),
     [ApiCall.CreatePropertyInventory]: Config.setApi("/Property/CreatePropertyInventory", false, []),
@@ -58,6 +64,8 @@ export class Config {
     [ApiCall.Login]: Config.setApi("/User/Login", false, []),
     [ApiCall.LogOff]: Config.setApi("/User/Logoff", false, []),
     [ApiCall.CanAccess]: Config.setApi("/User/CanAccess", false, []),
+
+
   }
   private static setApi(url: string, useMock: boolean, m: any) {
     return new ApiProperty(url, useMock, m);

@@ -5,6 +5,9 @@ import { SiteInfo, SiteKey } from '../../../config/site-info';
 import { LoginViewModel } from '../../../models/users/login-model';
 import { UserService } from '../../../services/user-service';
 import { EnumPages } from '../../../models/access/enum-pages';
+import { ContentPostModel } from '../../../models/contents/content-pass';
+import { HomePage } from '../../home/home';
+import { PropertyPage } from '../../property/property';
 
 @Component({
   selector: 'page-landing',
@@ -16,17 +19,29 @@ export class LandingPage {
     this.Init();
   }
   async Init() {
+    let premodel = await this.ds.PreCreateProperty();
+    if (premodel.Data != null) {
+      this.AAA = premodel.Data;
+    }
     let canAccess = await this.userService.CanAccessCheck(EnumPages.PropertyCreate);
     console.log(canAccess);
     let currentUser = await SiteInfo.GetSiteValue(SiteKey.UserName);
     console.log(currentUser);
     if (currentUser == null || currentUser == "") {
-      this.presentPrompt();
+      // this.presentPrompt();
     }
   }
   async Logout() {
     let user = await this.userService.LogOff();
     console.log(user);
+  }
+  AAA: ContentPostModel = new ContentPostModel();
+  async check() {
+    console.log(this.AAA);
+    let response = await this.ds.PostModel(this.AAA);
+  }
+  home() {
+    this.navCtrl.push(PropertyPage);
   }
   presentPrompt() {
     let alert = this.alertCtrl.create({

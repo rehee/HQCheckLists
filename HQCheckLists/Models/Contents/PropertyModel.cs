@@ -16,10 +16,7 @@ namespace HQCheckLists.Models.Contents
     public string PropertyAddress { get; set; } = "";
     [InputType(EditorType = EnumInputType.DropDwon, RelatedType = typeof(PropertyOwner))]
     public string PropertyOwner { get; set; } = "";
-
-
+    [InputType(EditorType = EnumInputType.FileUpload)]
     public string Image { get; set; } = "";
-    [IgnoreEdit]
-    public IFormFile ImageFile { get; set; } = null;
   }
 }

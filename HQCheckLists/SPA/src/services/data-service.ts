@@ -4,6 +4,7 @@ import { CoreFunction, FileContain } from "../core/core-function";
 import { HttpType, ApiCall } from '../config/config';
 import { Property, Inventory } from '../models';
 import { ApiResponse } from '../models/ApiResponse';
+import { ContentPostModel } from '../models/contents/content-pass';
 @Injectable()
 export class DataService {
   constructor(private http: Http) { }
@@ -24,5 +25,12 @@ export class DataService {
   }
   public async UpdatePropertyInventory(model: Inventory, files: FileContain[]): Promise<Inventory> {
     return await (await this.httpRequest())(HttpType.File, Number(ApiCall.UpdatePropertyInventory), model, null, files);
+  }
+
+  public async PreCreateProperty(): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Post, Number(ApiCall.PreCreateProperty));
+  }
+  public async PostModel(model: ContentPostModel): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.PostModel), model);
   }
 }

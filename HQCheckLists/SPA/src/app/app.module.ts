@@ -21,12 +21,14 @@ import { LandingPage } from '../pages/publics/landing/landing';
 import { Network } from '@ionic-native/network';
 import { PropertyListPage } from '../pages/properties/property-list/property-list';
 import { PropertycreatePage } from '../pages/properties/property-create/property-create';
+import { SDHCPostCom } from '../components/sdhc-post/sdhc-post';
 @NgModule({
   declarations: [
     MyApp,
     ContactPage,
     HomePage,
-    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage
+    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
+    SDHCPostCom
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -43,7 +45,8 @@ import { PropertycreatePage } from '../pages/properties/property-create/property
     MyApp,
     ContactPage,
     HomePage,
-    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage
+    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
+    SDHCPostCom
   ],
   providers: [
     StatusBar,

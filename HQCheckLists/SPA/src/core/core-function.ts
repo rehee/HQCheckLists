@@ -5,6 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import { HttpType, Config, ApiProperty, ApiCall } from '../config/config';
+import { ContentPostModel } from '../models/contents/content-pass';
 
 export class CoreFunction {
 
@@ -102,6 +103,48 @@ export class CoreFunction {
           observable = http.post(
             url, formData, options
           )
+          break;
+        case HttpType.Mix:
+          let passModel = <ContentPostModel>data;
+          let passHeaders = new Headers();
+          let passOptions = new RequestOptions({ headers: passHeaders });
+          let passFormData: FormData = new FormData();
+          passModel.Properties.forEach((b, i) => {
+            let key = `Properties[${i}].`;
+            if (b.File != null) {
+              passFormData.append(`${key}File`, b.File, b.File.name);
+            } else {
+              passFormData.append(`${key}File`, null);
+            }
+            passFormData.append(`${key}Key`, b.Key);
+            passFormData.append(`${key}Value`, b.Value);
+            b.MultiValue.forEach(
+              (m, mi) => {
+                passFormData.append(`${key}MultiValue[${mi}]`, m);
+              }
+            );
+            passFormData.append(`${key}ValueType`, b.ValueType);
+            passFormData.append(`${key}Title`, b.Title);
+            passFormData.append(`${key}EditorType`, String(b.EditorType));
+            passFormData.append(`${key}MultiSelect`, String(b.MultiSelect));
+            b.SelectItems.forEach((ms, mi) => {
+              passFormData.append(`${key}SelectItems[${mi}]`, ms.Name);
+              passFormData.append(`${key}SelectItems[${mi}]`, String(ms.Select));
+              passFormData.append(`${key}SelectItems[${mi}]`, ms.Value);
+            })
+            passFormData.append(`${key}RemoveFile`, String(b.RemoveFile));
+            passFormData.append(`${key}BaseProperty`, String(b.BaseProperty));
+            passFormData.append(`${key}IgnoreProperty`, String(b.IgnoreProperty));
+            passFormData.append(`${key}CustomProperty`, String(b.CustomProperty));
+          })
+          passFormData.append("ParentId", passModel.ParentId);
+          passFormData.append("Name", passModel.Name);
+          passFormData.append("SortOrder", String(passModel.SortOrder));
+          observable = http.post(
+            url, passFormData, passOptions
+          )
+          break
+
       }
 
       return observable.map((reponse: Response) => {

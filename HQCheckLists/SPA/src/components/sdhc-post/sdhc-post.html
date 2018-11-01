@@ -1,0 +1,15 @@
+<div>
+    123
+</div>
+
+<div *ngFor="let p of PostModel.Properties">
+    <div [ngSwitch]="p.EditorType">
+        <div *ngSwitchCase="0">
+            {{p.Title}} <input type="text" [(ngModel)]="p.Value">
+        </div>
+        <div *ngSwitchCase="6">
+            {{p.Title}} <input type="file" (change)="FileChange($event,p)">
+        </div>
+    </div>
+
+</div>

@@ -6,6 +6,7 @@ using HQCheckLists.Models.Apis;
 using HQCheckLists.Models.Contents;
 using HQCheckLists.Services.PropertyService;
 using Microsoft.AspNetCore.Mvc;
+using SDHCC.DB.Content;
 
 namespace HQCheckLists.Areas.Api.Controllers
 {
@@ -21,6 +22,18 @@ namespace HQCheckLists.Areas.Api.Controllers
     {
       var result = property.GetAllPropertyByUser(User, out var response);
       return Json(new ApiResponse<IEnumerable<PropertyModel>>(response.Success, response.Message, result));
+    }
+
+    [HttpPost]
+    public JsonResult PreCreate()
+    {
+      var model = new PropertyModel().ConvertToPassingModel();
+      return Json(new ApiResponse<ContentPostModel>(true, null, model));
+    }
+    [HttpPost]
+    public JsonResult PostModel(ContentPostModel model)
+    {
+      return Json(new ApiResponse<ContentPostModel>(true, null, model));
     }
     [HttpPost]
     public JsonResult Create(PropertyModel model)
