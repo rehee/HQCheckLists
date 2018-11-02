@@ -65,6 +65,7 @@ namespace HQCheckLists.Services
         basePass.Properties = model.Properties;
 
         db.UpdateContent(basePass.ConvertToBaseModel(), ignoreKey, takeKey);
+        response.Success = true;
       }
       catch { }
     }

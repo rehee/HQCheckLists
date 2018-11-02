@@ -17,10 +17,11 @@ export class InventoryListPage {
     if (!this.param.get("propertyId")) {
       return;
     }
-    let result = await this.ds.GetInventoryByProperty(this.param.get("propertyId"));
-    if (result != null) {
-      this.Inventories = result.map(b => b);
+    let result = await this.ds.InventoryRead(this.param.get("propertyId"));
+    if (result == null || result.Success != true) {
+      return;
     }
+    this.Inventories = result.Data.map(b => b);
   }
   ionViewWillEnter() {
     this.Init();
@@ -29,7 +30,7 @@ export class InventoryListPage {
   Create() {
     this.navCtrl.push(InventoryCreatePage, { propertyId: this.param.get("propertyId") });
   }
-  random(){
+  random() {
     return Math.random();
   }
   InventoryModel(inventory: Inventory) {
@@ -58,8 +59,14 @@ export class InventoryListPage {
         {
           text: '更新',
           handler: data => {
-            inventory.QTY = Number(data['QTY']);
-            this.ds.UpdatePropertyInventory(inventory, []);
+            //
+            // this.ds.UpdatePropertyInventory(inventory, []);
+            this.ds.InventoryUpdateQty(inventory.Id,data['QTY']).then(b=>{
+              if(b==null ||b.Success!=true){
+                return;
+              }
+              inventory.QTY = Number(data['QTY']);
+            })
           }
         }
       ]

@@ -23,7 +23,7 @@ export class InventoryDetailPage {
   }
   Model: Inventory = null;
   async save() {
-    await this.ds.UpdatePropertyInventory(this.Model, this.Files);
+    // await this.ds.UpdatePropertyInventory(this.Model, this.Files);
     this.navCtrl.pop();
   }
   Files: FileContain[] = [];

@@ -16,7 +16,7 @@ export class InventoryCreatePage {
     if (!this.param.get("propertyId")) {
       this.navCtrl.pop();
     }
-    
+
     this.Model.ParentId = this.param.get("propertyId");
   }
   @ViewChild('fileInput') fileInput;
@@ -26,7 +26,7 @@ export class InventoryCreatePage {
   Model: Inventory = null;
   save() {
     this.Model.ImageUpload = this.fileInput;
-    this.ds.CreatePropertyInventory(this.Model, this.Files);
+    // this.ds.CreatePropertyInventory(this.Model, this.Files);
   }
   Files: FileContain[] = [];
   FileChange(input: any, filename: any) {

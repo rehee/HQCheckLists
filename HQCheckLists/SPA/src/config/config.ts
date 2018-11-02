@@ -25,12 +25,12 @@ export enum ApiCall {
   PropertyCreate = 101,
   PropertyRead = 102,
   PropertyUpdate = 103,
-  
 
-  GetInventoryByProperty = 201,
-  GetPropertyInventory = 210,
-  CreatePropertyInventory = 211,
-  UpdatePropertyInventory = 212,
+
+  InventoryCreate = 201,
+  InventoryRead = 202,
+  InventoryUpdate = 203,
+  InventoryUpdateQty = 204,
 
   GetCurrentUser = 301,
   Login = 302,
@@ -50,12 +50,11 @@ export class Config {
     [ApiCall.PropertyCreate]: Config.setApi("/Api/Property/Create", false, []),
     [ApiCall.PropertyRead]: Config.setApi("/Api/Property/Read", false, []),
     [ApiCall.PropertyUpdate]: Config.setApi("/Api/Property/Update", false, []),
-    
-    [ApiCall.GetInventoryByProperty]: Config.setApi("/Api/PropertyInventory/Read", false, []),
-    [ApiCall.CreatePropertyInventory]: Config.setApi("/Api/PropertyInventory/Create", false, []),
-    [ApiCall.UpdatePropertyInventory]: Config.setApi("/Api/Update", false, []),
 
-    [ApiCall.GetPropertyInventory]: Config.setApi("/Property/GetPropertyInventory", false, []),
+    [ApiCall.InventoryCreate]: Config.setApi("/Api/PropertyInventory/Create", false, []),
+    [ApiCall.InventoryRead]: Config.setApi("/Api/PropertyInventory/Read", false, []),
+    [ApiCall.InventoryUpdate]: Config.setApi("/Api/PropertyInventory/Update", false, []),
+    [ApiCall.InventoryUpdateQty]: Config.setApi("/Api/PropertyInventory/UpdateQty", false, []),
 
     [ApiCall.GetCurrentUser]: Config.setApi("/User/CurrentUser", false, []),
     [ApiCall.Login]: Config.setApi("/User/Login", false, []),

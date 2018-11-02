@@ -28,17 +28,25 @@ export class DataService {
   }
 
 
-  public async GetInventoryByProperty(propertyId: string): Promise<Inventory[]> {
-    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.GetInventoryByProperty), null, propertyId);
+  public async InventoryRead(propertyId: string): Promise<ApiResponse<Inventory[]>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.InventoryRead), null, `/?propertyId=${propertyId}`);
   }
-  public async GetPropertyInventory(inventoryId: string): Promise<Inventory[]> {
-    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.GetPropertyInventory), null, `/${inventoryId}`);
+
+  public async InventoryPreCreate(propertyId: string): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.InventoryCreate), null, `/?propertyId=${propertyId}`);
   }
-  public async CreatePropertyInventory(model: Inventory, files: FileContain[]): Promise<Inventory> {
-    return await (await this.httpRequest())(HttpType.File, Number(ApiCall.CreatePropertyInventory), model, null, files);
+  public async InventoryCreate(model: ContentPostModel): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.InventoryCreate), model);
   }
-  public async UpdatePropertyInventory(model: Inventory, files: FileContain[]): Promise<Inventory> {
-    return await (await this.httpRequest())(HttpType.File, Number(ApiCall.UpdatePropertyInventory), model, null, files);
+  public async InventoryPreUpdate(inventoryId: string): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.InventoryUpdate), null, `/?inventoryId=${inventoryId}`);
+  }
+
+  public async InventoryUpdate(model: ContentPostModel): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.InventoryUpdate), model);
+  }
+  public async InventoryUpdateQty(inventoryId: string, number: string): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Post, Number(ApiCall.InventoryUpdateQty), { inventoryId: inventoryId, number: number });
   }
 
 

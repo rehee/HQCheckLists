@@ -8,89 +8,68 @@ using HQCheckLists.Services.PropertyInventoryServices;
 using Microsoft.AspNetCore.Mvc;
 using SDHCC.DB.Content;
 using System.Linq.Expressions;
+using HQCheckLists.Managers;
 
 namespace HQCheckLists.Areas.Api.Controllers
 {
   [Area("Api")]
   public class PropertyInventoryController : Controller
   {
-    IPropertyInventoryService service; 
-    public PropertyInventoryController(IPropertyInventoryService service)
+    IPropertyInventoryManager propertyInventoryManager;
+    public PropertyInventoryController(IPropertyInventoryManager propertyInventoryManager)
     {
-      this.service = service;
-    }
-    public string Index()
-    {
-      var a = service.Read(c => c.ParentId=="");
-      var b = a.ToList();
-      return "";
+      this.propertyInventoryManager = propertyInventoryManager;
     }
     [HttpGet]
-    public JsonResult Create(string id)
+    public JsonResult Create(string propertyId)
     {
-      var result = new ApiResponse<ContentPostModel>();
-      if (id.IsNullOrEmpty() || User.IsInHQRole(EnumPages.InventoryCreate))
-        return Json(result);
-      var inventory = new InventoryModel();
-      inventory.ParentId = id;
-      result.Success = true;
-      result.Data = inventory.ConvertToPassingModel();
-      return Json(result);
-
+      var model = propertyInventoryManager.CreateInventory(User, propertyId);
+      return Json(new ApiResponse<ContentPostModel>(model != null, null, model));
     }
     [HttpPost]
     public JsonResult Create(ContentPostModel model)
     {
-      var result = new ApiResponse<ContentPostModel>();
-      if (model == null || model.ParentId.IsNullOrEmpty() || User.IsInHQRole(EnumPages.InventoryCreate))
-        return Json(result);
-      ContentBase.context.AddContent(model.ConvertToBaseModel());
-      result.Success = true;
-      return Json(result);
+      propertyInventoryManager.CreateInventory(User, model, out var response);
+      return Json(new ApiResponse<ContentPostModel>(response.Success, null, model));
     }
-    [HttpPost]
-    public JsonResult Read(string parentId, string inventoryId)
+    public JsonResult Read(string propertyId)
     {
-      var result = new ApiResponse<List<InventoryModel>>();
-      result.Data = new List<InventoryModel>();
-
-      return Json(result);
-
+      var result = propertyInventoryManager.GetAllInventory(User, propertyId);
+      return Json(
+        new ApiResponse<IEnumerable<InventoryModel>>(result != null, null, result));
     }
     public JsonResult Update(string inventoryId)
     {
-      var result = new ApiResponse<ContentPostModel>();
-      if (User.IsInHQRole(EnumPages.InventoryUpdate) || inventoryId.IsNullOrEmpty())
-        return Json(result);
-      var inventory = ContentBase.context.GetContent(inventoryId);
-      if (inventory != null)
-      {
-        result.Success = true;
-        result.Data = inventory.ConvertToPassingModel();
-      }
-      return Json(result);
+      var model = propertyInventoryManager.UpdateInventory(User, inventoryId);
+      return Json(
+        new ApiResponse<ContentPostModel>(model != null, null, model));
     }
     [HttpPost]
     public JsonResult Update(ContentPostModel model)
     {
-      var result = new ApiResponse<ContentPostModel>();
-      if (model == null || model.ParentId.IsNullOrEmpty() || model.Id.IsNullOrEmpty())
-        return Json(result);
+      propertyInventoryManager.UpdateInventory(User, model, out var response);
+      return Json(
+        new ApiResponse<ContentPostModel>(response.Success, null, model));
+    }
 
-      var inven = ContentBase.context.GetContent(model.Id);
-      if (inven == null)
+    [HttpPost]
+    public JsonResult UpdateQty([FromBody]UpQTY m)
+    {
+      var result = new ApiResponse<object>();
+      var model = propertyInventoryManager.UpdateInventory(User, m.inventoryId);
+      if (model == null)
         return Json(result);
-      var invenPass = inven.ConvertToPassingModel();
-      invenPass.Properties = model.Properties;
-      var iBack = invenPass.ConvertToBaseModel();
-      ContentBase.context.UpdateContent(iBack);
-      result.Success = true;
+      var baseModel = (InventoryModel)model.ConvertToBaseModel();
+      baseModel.QTY = m.number.MyTryConvert<decimal>();
+      propertyInventoryManager.UpdateInventory(User, baseModel.ConvertToPassingModel(), out var response);
+      result.Success = response.Success;
       return Json(result);
     }
-    [HttpPost]
-    public JsonResult Delete(string id)
-    {
-      return null;
-    }
+
+  }
+  public class UpQTY
+  {
+    public string inventoryId { get; set; }
+    public string number { get; set; }
   }
 }
