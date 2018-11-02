@@ -38,7 +38,7 @@ namespace HQCheckLists.Managers
 
     public IEnumerable<PropertyModel> GetAllProperty(ClaimsPrincipal user)
     {
-      if (!user.IsInHQRole(EnumPages.PropertyIndex))
+      if (!us.IsUserInRoles(user, HQE.Access.PropertyIndex, false))
         return null;
       if (us.IsUserInRole(user, E.Setting.AdminRole))
       {
