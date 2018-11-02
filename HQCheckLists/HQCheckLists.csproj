@@ -32,6 +32,7 @@
     <Folder Include="Areas\Api\Models\" />
     <Folder Include="Areas\Api\Views\" />
     <Folder Include="fileupload\" />
+    <Folder Include="HQEs\" />
     <Folder Include="SPA\www\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

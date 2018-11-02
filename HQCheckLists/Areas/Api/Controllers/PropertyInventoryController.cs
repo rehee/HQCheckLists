@@ -4,14 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using HQCheckLists.Models.Apis;
 using HQCheckLists.Models.Contents;
+using HQCheckLists.Services.PropertyInventoryServices;
 using Microsoft.AspNetCore.Mvc;
 using SDHCC.DB.Content;
+using System.Linq.Expressions;
 
 namespace HQCheckLists.Areas.Api.Controllers
 {
   [Area("Api")]
   public class PropertyInventoryController : Controller
   {
+    IPropertyInventoryService service; 
+    public PropertyInventoryController(IPropertyInventoryService service)
+    {
+      this.service = service;
+    }
+    public string Index()
+    {
+
+      var a = service.Read(c => c.ParentId=="");
+      var b = a.ToList();
+      return "";
+    }
     [HttpGet]
     public JsonResult Create(string id)
     {
@@ -38,27 +52,9 @@ namespace HQCheckLists.Areas.Api.Controllers
     [HttpPost]
     public JsonResult Read(string parentId, string inventoryId)
     {
-      var result = new ApiResponse<List<ContentPostModel>>();
-      result.Data = new List<ContentPostModel>();
-      if (User.IsInHQRole(EnumPages.InventoryRead)) ;
-      if (!inventoryId.IsNullOrEmpty())
-      {
-        var inventory = ContentBase.context.GetContent(inventoryId);
-        if (inventory != null)
-        {
-          result.Success = true;
-          result.Data.Add(inventory.ConvertToPassingModel());
-        }
-      }
-      if (!parentId.IsNullOrEmpty())
-      {
-        var contents = ContentBase.context.GetChildrenContent(parentId).Select(b => b.ConvertToPassingModel()).ToList();
-        if (contents != null)
-        {
-          result.Success = true;
-          result.Data = contents;
-        }
-      }
+      var result = new ApiResponse<List<InventoryModel>>();
+      result.Data = new List<InventoryModel>();
+
       return Json(result);
 
     }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using HQCheckLists.Models.Contents;
 using HQCheckLists.Models.DropDowns;
 using HQCheckLists.Models.Users;
+using HQCheckLists.Services.PropertyInventoryServices;
 using HQCheckLists.Services.PropertyService;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -44,6 +45,7 @@ namespace HQCheckLists
     {
       StartUpFunction.ConfigureServices<HQUser, HQBaseModel, HQDropDownModel>(services, configuration, hostingEnvironment);
       services.AddScoped(typeof(IPropertyService), typeof(PropertyService));
+      services.AddScoped<IPropertyInventoryService, PropertyInventoryService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

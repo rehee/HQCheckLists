@@ -11,16 +11,22 @@ namespace HQCheckLists
   {
     public static HQSetting Setting { get; set; } = new HQSetting();
     public static AccessPermissions Access { get; set; } = new AccessPermissions();
-    
 
 
 
-    public static bool IsInHQRole(this ClaimsPrincipal user, EnumPages page,bool ifNoneRule=true)
+
+    public static bool IsInHQRole(this ClaimsPrincipal user, EnumPages page, bool ifNoneRule = true)
     {
       if (!PageAccessRoleMap.ContainsKey(page))
         return ifNoneRule;
-      var rule = PageAccessRoleMap[page];
+      var rule = PageAccessRoleMap[page].Select(b => b.ToLower());
       return rule.Where(b => user.IsInRole(b)).FirstOrDefault() != null;
+    }
+    public static bool IsInHQRole(this ClaimsPrincipal user, string role, bool ifNoneRule = true)
+    {
+      if (role.IsNormalized())
+        return ifNoneRule;
+      return user.IsInRole(role.ToLower());
     }
     public static Dictionary<EnumPages, IEnumerable<string>> PageAccessRoleMap { get; set; } =
       new Dictionary<EnumPages, IEnumerable<string>>
@@ -33,7 +39,7 @@ namespace HQCheckLists
         [EnumPages.InventoryRead] = Access.InventoryRead,
         [EnumPages.InventoryUpdate] = Access.InventoryUpdate,
         [EnumPages.InventoryDelete] = Access.InventoryDelete,
-    };
+      };
   }
 
   public enum EnumPages
