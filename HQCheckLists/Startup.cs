@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using HQCheckLists.Managers;
 using HQCheckLists.Models.Contents;
 using HQCheckLists.Models.DropDowns;
 using HQCheckLists.Models.Users;
@@ -30,7 +31,7 @@ using SDHCC.Identity.Services;
 
 namespace HQCheckLists
 {
- public class Startup
+  public class Startup
   {
 
     public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
@@ -46,6 +47,8 @@ namespace HQCheckLists
       StartUpFunction.ConfigureServices<HQUser, HQBaseModel, HQDropDownModel>(services, configuration, hostingEnvironment);
       services.AddScoped(typeof(IPropertyService), typeof(PropertyService));
       services.AddScoped<IPropertyInventoryService, PropertyInventoryService>();
+
+      services.AddScoped<IPropertyManager, PropertyManager>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

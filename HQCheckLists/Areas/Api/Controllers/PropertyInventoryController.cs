@@ -21,7 +21,6 @@ namespace HQCheckLists.Areas.Api.Controllers
     }
     public string Index()
     {
-
       var a = service.Read(c => c.ParentId=="");
       var b = a.ToList();
       return "";
