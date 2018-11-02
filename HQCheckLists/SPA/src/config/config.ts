@@ -22,11 +22,10 @@ export class ApiProperty {
   }
 }
 export enum ApiCall {
-  GetAllProperties = 101,
-  CreateProperty = 102,
-  UpdateProperty = 103,
-  PreCreateProperty = 104,
-  PostModel = 105,
+  PropertyCreate = 101,
+  PropertyRead = 102,
+  PropertyUpdate = 103,
+  
 
   GetInventoryByProperty = 201,
   GetPropertyInventory = 210,
@@ -48,13 +47,10 @@ export class Config {
   static BaseUrl: string = Config.URLTyle.PROD;
   static ApiUrl: { [key: number]: ApiProperty } = {
 
-    [ApiCall.GetAllProperties]: Config.setApi("/Api/Property/Index", false, []),
-    [ApiCall.CreateProperty]: Config.setApi("/Api/Property/Create", false, []),
-    [ApiCall.UpdateProperty]: Config.setApi("/Api/Property/Update", false, []),
-    [ApiCall.PreCreateProperty]: Config.setApi("/Api/Property/PreCreate", false, []),
-    [ApiCall.PostModel]: Config.setApi("/Api/Property/PostModel", false, []),
-
-
+    [ApiCall.PropertyCreate]: Config.setApi("/Api/Property/Create", false, []),
+    [ApiCall.PropertyRead]: Config.setApi("/Api/Property/Read", false, []),
+    [ApiCall.PropertyUpdate]: Config.setApi("/Api/Property/Update", false, []),
+    
     [ApiCall.GetInventoryByProperty]: Config.setApi("/Api/PropertyInventory/Read", false, []),
     [ApiCall.CreatePropertyInventory]: Config.setApi("/Api/PropertyInventory/Create", false, []),
     [ApiCall.UpdatePropertyInventory]: Config.setApi("/Api/Update", false, []),

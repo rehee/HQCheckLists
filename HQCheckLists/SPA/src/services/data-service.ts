@@ -11,9 +11,23 @@ export class DataService {
   private async httpRequest() {
     return await CoreFunction.GetHttpResponseAsync(this.http);
   }
-  public async GetAllProperties(): Promise<ApiResponse<Property[]>> {
-    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.GetAllProperties));
+  public async PropertyGetAll(): Promise<ApiResponse<Property[]>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.PropertyRead));
   }
+  public async PropertyPreCreate(): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.PropertyCreate));
+  }
+  public async PropertCreate(model: ContentPostModel): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.PropertyCreate), model);
+  }
+  public async PropertyPreUpdate(propertyId: string): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.PropertyUpdate), null, `/?propertyId=${propertyId}`);
+  }
+  public async PropertyUpdate(model: ContentPostModel): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.PropertyUpdate), model);
+  }
+
+
   public async GetInventoryByProperty(propertyId: string): Promise<Inventory[]> {
     return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.GetInventoryByProperty), null, propertyId);
   }
@@ -27,13 +41,5 @@ export class DataService {
     return await (await this.httpRequest())(HttpType.File, Number(ApiCall.UpdatePropertyInventory), model, null, files);
   }
 
-  public async PreCreateProperty(): Promise<ApiResponse<ContentPostModel>> {
-    return await (await this.httpRequest())(HttpType.Post, Number(ApiCall.PreCreateProperty));
-  }
-  public async PostModel(model: ContentPostModel): Promise<ApiResponse<ContentPostModel>> {
-    return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.PostModel), model);
-  }
-  public async PrePropertyUpdate(propertyId: string): Promise<ApiResponse<ContentPostModel>> {
-    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.UpdateProperty), null, `/${propertyId}`);
-  }
+
 }

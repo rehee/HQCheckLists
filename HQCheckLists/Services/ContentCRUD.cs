@@ -34,7 +34,8 @@ namespace HQCheckLists.Services
     }
     public virtual IQueryable<T> Read(Expression<Func<T, bool>> where)
     {
-      return db.Where<T>(b => b["_t"] == nameof(T), db.BaseContentType, db.ConvertBsonToGeneric<T>()).Where(where);
+      var type = typeof(T);
+      return db.Where<T>(b => b["_t"] == type.Name, db.BaseContentType, db.ConvertBsonToGeneric<T>()).Where(where);
     }
     public virtual ContentPostModel Update(Expression<Func<T, bool>> where)
     {
@@ -58,8 +59,11 @@ namespace HQCheckLists.Services
         var baseModel = Read(b => b.Id == model.Id).FirstOrDefault();
         if (baseModel == null)
           return;
+        baseModel.Name = model.Name;
+        baseModel.SortOrder = model.SortOrder;
         var basePass = baseModel.ConvertToPassingModel();
         basePass.Properties = model.Properties;
+
         db.UpdateContent(basePass.ConvertToBaseModel(), ignoreKey, takeKey);
       }
       catch { }

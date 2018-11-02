@@ -25,7 +25,10 @@ self.toolbox.precache(
 
 // dynamically cache any other local assets
 
-self.toolbox.router.any('/build/*', self.toolbox.networkFirst);
+self.toolbox.router.any('/build/*', self.toolbox.fastest);
+self.toolbox.router.get('/api/*', self.toolbox.fastest);
+
+
 self.toolbox.router.any('/user/*', self.toolbox.networkOnly);
 
 // for any other requests go to the network, cache,

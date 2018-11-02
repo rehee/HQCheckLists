@@ -15,7 +15,7 @@ export class PropertyListPage {
 
   }
   async Init() {
-    let result = await this.ds.GetAllProperties();
+    let result = await this.ds.PropertyGetAll();
     if (result == null || result.Success == false) {
       return;
     }

@@ -19,13 +19,22 @@ namespace HQCheckLists.Areas.Api.Controllers
     {
       this.pm = pm;
     }
-    public JsonResult Index()
+    public JsonResult Read(string propertyId = null)
     {
-      var result = pm.GetAllProperty(User);
-      return Json(new ApiResponse<IEnumerable<PropertyModel>>(result != null, null, result));
+      if (propertyId.IsNullOrEmpty())
+      {
+        var result = pm.GetAllProperty(User);
+        return Json(new ApiResponse<IEnumerable<PropertyModel>>(result != null, null, result));
+      }
+      else
+      {
+        var result = pm.GetProperty(User, propertyId);
+        return Json(new ApiResponse<IEnumerable<PropertyModel>>(result != null, null, result));
+      }
+
     }
-    [HttpPost]
-    public JsonResult PreCreate()
+    [HttpGet]
+    public JsonResult Create()
     {
       var model = pm.CreateProperty(User);
       return Json(new ApiResponse<ContentPostModel>(model != null, null, model));
@@ -36,8 +45,8 @@ namespace HQCheckLists.Areas.Api.Controllers
       pm.CreateProperty(User, model, out var response);
       return Json(new ApiResponse<ContentPostModel>(response.Success, null, model));
     }
-    [HttpPost]
-    public JsonResult PreUpdate(string propertyId)
+    [HttpGet]
+    public JsonResult Update(string propertyId)
     {
       var model = pm.UpdateProperty(User, propertyId);
       return Json(new ApiResponse<ContentPostModel>(model != null, null, model));

@@ -19,14 +19,14 @@ export class PropertycreatePage {
 
   async init() {
     if (!this.PropertyId) {
-      let result = await this.ds.PreCreateProperty();
+      let result = await this.ds.PropertyPreCreate();
       if (result == null || !result.Success) {
         this.navCtrl.pop();
       }
       this.PropertyPass = result.Data;
     } else {
-      let updateResult = await this.ds.PrePropertyUpdate(this.PropertyId);
-      if(updateResult==null||!updateResult.Success){
+      let updateResult = await this.ds.PropertyPreUpdate(this.PropertyId);
+      if (updateResult == null || !updateResult.Success) {
         this.navCtrl.pop();
       }
       this.PropertyPass = updateResult.Data;
@@ -34,7 +34,12 @@ export class PropertycreatePage {
   }
 
   async Maintain() {
-    await this.ds.PostModel(this.PropertyPass);
-    this.navCtrl.pop();
+    if (!this.PropertyId) {
+      await this.ds.PropertCreate(this.PropertyPass);
+      this.navCtrl.pop();
+    } else {
+      await this.ds.PropertyUpdate(this.PropertyPass);
+      this.navCtrl.pop();
+    }
   }
 }
