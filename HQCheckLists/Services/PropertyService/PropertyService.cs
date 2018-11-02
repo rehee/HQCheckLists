@@ -48,6 +48,27 @@ namespace HQCheckLists.Services.PropertyService
       }
 
     }
+    public PropertyModel GetPropertyById(string propertyId, ClaimsPrincipal user, out MethodResponse response)
+    {
+      response = new MethodResponse();
+      var hqUser = user.ConvertToHQUser(users);
+      if (hqUser == null || !users.IsUserInRoles(user, HQE.Access.PropertyIndex))
+        return null;
+      var property = this.db.GetContent(propertyId);
+      if (property == null || !property.ParentId.IsNullOrEmpty())
+        return null;
+      var p = (PropertyModel)property;
+      if (users.IsUserInRole(user,E.Setting.AdminRole))
+      {
+        response.Success = true;
+        return p;
+      }
+      if (p.PropertyOwner != hqUser.PropertyOwner)
+        return null;
+      response.Success = true;
+      return p;
+
+    }
     public void CreateProperty(PropertyModel property, ClaimsPrincipal user, out MethodResponse response)
     {
       response = new MethodResponse();
@@ -68,14 +89,9 @@ namespace HQCheckLists.Services.PropertyService
       var hqUser = user.ConvertToHQUser(users);
       if (hqUser == null || !users.IsUserInRoles(user, HQE.Access.PropertyUpdate))
         return;
-
       try
       {
-        var pass = property.ConvertToPassingModel();
-        var p = db.GetContent(property.Id);
-        var pPass = p.ConvertToPassingModel();
-        pPass.Properties = pass.Properties;
-        db.UpdateContent(pPass.ConvertToBaseModel());
+        db.UpdateContent(property);
         response.Success = true;
       }
       catch { }

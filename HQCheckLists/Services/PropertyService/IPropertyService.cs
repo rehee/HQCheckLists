@@ -11,6 +11,7 @@ namespace HQCheckLists.Services.PropertyService
   public interface IPropertyService
   {
     IEnumerable<PropertyModel> GetAllPropertyByUser(ClaimsPrincipal user, out MethodResponse response);
+    PropertyModel GetPropertyById(string propertyId, ClaimsPrincipal user, out MethodResponse response);
     void CreateProperty(PropertyModel property, ClaimsPrincipal user, out MethodResponse response);
     void UpdateProperty(PropertyModel property, ClaimsPrincipal user, out MethodResponse response);
   }

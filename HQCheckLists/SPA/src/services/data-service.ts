@@ -33,4 +33,7 @@ export class DataService {
   public async PostModel(model: ContentPostModel): Promise<ApiResponse<ContentPostModel>> {
     return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.PostModel), model);
   }
+  public async PrePropertyUpdate(propertyId: string): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.UpdateProperty), null, `/${propertyId}`);
+  }
 }

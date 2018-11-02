@@ -137,9 +137,15 @@ export class CoreFunction {
             passFormData.append(`${key}IgnoreProperty`, String(b.IgnoreProperty));
             passFormData.append(`${key}CustomProperty`, String(b.CustomProperty));
           })
+          passFormData.append("Id", passModel.Id);
           passFormData.append("ParentId", passModel.ParentId);
           passFormData.append("Name", passModel.Name);
           passFormData.append("SortOrder", String(passModel.SortOrder));
+          passFormData.append("AssemblyName", passModel.AssemblyName);
+          passFormData.append("FullType", passModel.FullType);
+          passFormData.append("Publish", String(passModel.Publish));
+          passFormData.append("RequireLogin", String(passModel.RequireLogin));
+
           observable = http.post(
             url, passFormData, passOptions
           )

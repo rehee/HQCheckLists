@@ -11,7 +11,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DataService } from '../services';
 import { HttpModule } from '@angular/http';
-import { PropertyPage } from '../pages/property/property';
 import { InventoryListPage } from '../pages/inventory/inventory-list/inventory-list';
 import { InventoryCreatePage } from '../pages/inventory/inventory-create/inventory-create';
 import { InventoryDetailPage } from '../pages/inventory/inventory-detail/inventory-detail';
@@ -22,13 +21,20 @@ import { Network } from '@ionic-native/network';
 import { PropertyListPage } from '../pages/properties/property-list/property-list';
 import { PropertycreatePage } from '../pages/properties/property-create/property-create';
 import { SDHCPostCom } from '../components/sdhc-post/sdhc-post';
+import { SDHCItemCom } from '../components/sdhc-item/sdhc-item';
+import { SDHCInputTextCom } from '../components/sdhc-input/sdhc-input-text/sdhc-input-text';
+import { SDHCInputTextAreaCom } from '../components/sdhc-input/sdhc-input-textarea/sdhc-input-textarea';
+import { SDHCInputNumberCom } from '../components/sdhc-input/sdhc-input-number/sdhc-input-number';
+import { SDHCInputFileCom } from '../components/sdhc-input/sdhc-input-file/sdhc-input-file';
+import { SDHCInputDropDownCom } from '../components/sdhc-input/sdhc-input-dropdown/sdhc-input-dropdown';
+import { SDHCInputDateTimeCom } from '../components/sdhc-input/sdhc-input-datetime/sdhc-input-datetime';
 @NgModule({
   declarations: [
     MyApp,
     ContactPage,
     HomePage,
-    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
-    SDHCPostCom
+    TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
+    SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -45,8 +51,8 @@ import { SDHCPostCom } from '../components/sdhc-post/sdhc-post';
     MyApp,
     ContactPage,
     HomePage,
-    TabsPage, PropertyPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
-    SDHCPostCom
+    TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
+    SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom
   ],
   providers: [
     StatusBar,

@@ -32,7 +32,24 @@ namespace HQCheckLists.Controllers
       {
         return null;
       }
-      
+    }
+    public IActionResult Property(string id)
+    {
+      try
+      {
+        if (string.IsNullOrEmpty(id))
+          return null;
+        var item = db.GetContent(id).MyTryConvert<PropertyModel>();
+        if (item == null)
+          return null;
+        if (String.IsNullOrEmpty(item.Image))
+          return null;
+        return item.Image.GetFileFromPath(this);
+      }
+      catch
+      {
+        return null;
+      }
     }
   }
 }

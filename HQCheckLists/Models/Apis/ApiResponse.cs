@@ -12,7 +12,7 @@ namespace HQCheckLists.Models.Apis
     public string Message { get; set; } = "";
     public ApiResponse(bool success = false, string message = "", object model = null)
     {
-      this.Data = (T)model;
+      this.Data = model == null ? default(T) : (T)model;
       this.Success = success;
       this.Message = message;
     }

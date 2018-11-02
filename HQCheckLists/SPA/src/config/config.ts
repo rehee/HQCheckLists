@@ -53,11 +53,12 @@ export class Config {
     [ApiCall.UpdateProperty]: Config.setApi("/Api/Property/Update", false, []),
     [ApiCall.PreCreateProperty]: Config.setApi("/Api/Property/PreCreate", false, []),
     [ApiCall.PostModel]: Config.setApi("/Api/Property/PostModel", false, []),
-    
 
-    [ApiCall.GetInventoryByProperty]: Config.setApi("/Property/GetInventoryByProperty?propertyId=", false, []),
-    [ApiCall.CreatePropertyInventory]: Config.setApi("/Property/CreatePropertyInventory", false, []),
-    [ApiCall.UpdatePropertyInventory]: Config.setApi("/Property/UpdatePropertyInventory", false, []),
+
+    [ApiCall.GetInventoryByProperty]: Config.setApi("/Api/PropertyInventory/Read", false, []),
+    [ApiCall.CreatePropertyInventory]: Config.setApi("/Api/PropertyInventory/Create", false, []),
+    [ApiCall.UpdatePropertyInventory]: Config.setApi("/Api/Update", false, []),
+
     [ApiCall.GetPropertyInventory]: Config.setApi("/Property/GetPropertyInventory", false, []),
 
     [ApiCall.GetCurrentUser]: Config.setApi("/User/CurrentUser", false, []),

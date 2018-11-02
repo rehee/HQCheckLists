@@ -1,0 +1,14 @@
+<div [ngSwitch]="Property.EditorType">
+  <sdhc-input-text [Property]="Property" *ngSwitchCase="0">
+  </sdhc-input-text>
+  <sdhc-input-textarea [Property]="Property" *ngSwitchCase="1">
+  </sdhc-input-textarea>
+  <sdhc-input-number [Property]="Property" *ngSwitchCase="3">
+  </sdhc-input-number>
+  <sdhc-input-datetime [Property]="Property" *ngSwitchCase="4">
+  </sdhc-input-datetime>
+  <sdhc-input-dropdown [Property]="Property" *ngSwitchCase="5">
+  </sdhc-input-dropdown>
+  <sdhc-input-file [Property]="Property" *ngSwitchCase="6">
+  </sdhc-input-file>
+</div>

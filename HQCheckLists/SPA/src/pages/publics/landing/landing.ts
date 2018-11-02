@@ -4,10 +4,7 @@ import { DataService } from '../../../services';
 import { SiteInfo, SiteKey } from '../../../config/site-info';
 import { LoginViewModel } from '../../../models/users/login-model';
 import { UserService } from '../../../services/user-service';
-import { EnumPages } from '../../../models/access/enum-pages';
-import { ContentPostModel } from '../../../models/contents/content-pass';
-import { HomePage } from '../../home/home';
-import { PropertyPage } from '../../property/property';
+import { TabsPage } from '../../tabs/tabs';
 
 @Component({
   selector: 'page-landing',
@@ -19,29 +16,19 @@ export class LandingPage {
     this.Init();
   }
   async Init() {
-    let premodel = await this.ds.PreCreateProperty();
-    if (premodel.Data != null) {
-      this.AAA = premodel.Data;
-    }
-    let canAccess = await this.userService.CanAccessCheck(EnumPages.PropertyCreate);
-    console.log(canAccess);
     let currentUser = await SiteInfo.GetSiteValue(SiteKey.UserName);
-    console.log(currentUser);
     if (currentUser == null || currentUser == "") {
-      // this.presentPrompt();
+      this.presentPrompt();
+    } else {
+      this.home();
     }
   }
   async Logout() {
     let user = await this.userService.LogOff();
     console.log(user);
   }
-  AAA: ContentPostModel = new ContentPostModel();
-  async check() {
-    console.log(this.AAA);
-    let response = await this.ds.PostModel(this.AAA);
-  }
   home() {
-    this.navCtrl.push(PropertyPage);
+    this.navCtrl.push(TabsPage);
   }
   presentPrompt() {
     let alert = this.alertCtrl.create({
@@ -61,8 +48,7 @@ export class LandingPage {
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: data => {
-
+          handler: () => {
           }
         },
         {
@@ -72,8 +58,8 @@ export class LandingPage {
             userLogin.Login = data['username'];
             userLogin.Password = data['password'];
             this.userService.LoginAndCheck(userLogin).then(
-              (b) => {
-                console.log(b);
+              () => {
+                this.home();
               }
             ).catch(
               () => {

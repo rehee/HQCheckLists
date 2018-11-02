@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace HQCheckLists
@@ -10,12 +11,28 @@ namespace HQCheckLists
   {
     public static HQSetting Setting { get; set; } = new HQSetting();
     public static AccessPermissions Access { get; set; } = new AccessPermissions();
+    
 
-    public static Dictionary<EnumPages, IEnumerable<string>> PageAccessRoleMap { get; set; } = new Dictionary<EnumPages, IEnumerable<string>>
+
+
+    public static bool IsInHQRole(this ClaimsPrincipal user, EnumPages page,bool ifNoneRule=true)
     {
-      [EnumPages.PropertyIndex] = Access.PropertyIndex,
-      [EnumPages.PropertyCreate] = Access.PropertyCreate,
-      [EnumPages.PropertyUpdate] = Access.PropertyUpdate,
+      if (!PageAccessRoleMap.ContainsKey(page))
+        return ifNoneRule;
+      var rule = PageAccessRoleMap[page];
+      return rule.Where(b => user.IsInRole(b)).FirstOrDefault() != null;
+    }
+    public static Dictionary<EnumPages, IEnumerable<string>> PageAccessRoleMap { get; set; } =
+      new Dictionary<EnumPages, IEnumerable<string>>
+      {
+        [EnumPages.PropertyIndex] = Access.PropertyIndex,
+        [EnumPages.PropertyCreate] = Access.PropertyCreate,
+        [EnumPages.PropertyUpdate] = Access.PropertyUpdate,
+
+        [EnumPages.InventoryCreate] = Access.InventoryCreate,
+        [EnumPages.InventoryRead] = Access.InventoryRead,
+        [EnumPages.InventoryUpdate] = Access.InventoryUpdate,
+        [EnumPages.InventoryDelete] = Access.InventoryDelete,
     };
   }
 
@@ -24,5 +41,10 @@ namespace HQCheckLists
     PropertyIndex = 1,
     PropertyCreate = 2,
     PropertyUpdate = 3,
+
+    InventoryCreate = 201,
+    InventoryRead = 202,
+    InventoryUpdate = 203,
+    InventoryDelete = 204,
   }
 }

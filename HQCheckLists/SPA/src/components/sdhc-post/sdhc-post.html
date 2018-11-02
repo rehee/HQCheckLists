@@ -1,15 +1,8 @@
-<div>
-    123
-</div>
+<ion-list>
 
-<div *ngFor="let p of PostModel.Properties">
-    <div [ngSwitch]="p.EditorType">
-        <div *ngSwitchCase="0">
-            {{p.Title}} <input type="text" [(ngModel)]="p.Value">
-        </div>
-        <div *ngSwitchCase="6">
-            {{p.Title}} <input type="file" (change)="FileChange($event,p)">
-        </div>
-    </div>
-
-</div>
+  <ion-item>
+    <ion-label floating>{{!Name?"名称":Name}}</ion-label>
+    <ion-input type="text" [(ngModel)]="PostModel.Name"></ion-input>
+  </ion-item>
+  <sdhc-item *ngFor="let p of PostModel.Properties" [Property]="p"></sdhc-item>
+</ion-list>

@@ -33,13 +33,49 @@ namespace HQCheckLists.Areas.Api.Controllers
     [HttpPost]
     public JsonResult PostModel(ContentPostModel model)
     {
-      return Json(new ApiResponse<ContentPostModel>(true, null, model));
+      var result = new ApiResponse<ContentPostModel>();
+      if (model.Id.IsNullOrEmpty())
+      {
+        var p = model.ConvertToBaseModel();
+        property.CreateProperty((PropertyModel)p, User, out var response);
+        result.Success = true;
+        return Json(result);
+      }
+      else
+      {
+        var p = this.property.GetPropertyById(model.Id, User, out var response);
+        if (response.Success)
+        {
+          var pass = p.ConvertToPassingModel();
+          pass.Properties = model.Properties;
+          this.property.UpdateProperty((PropertyModel)pass.ConvertToBaseModel(), User, out var res);
+          result.Success = res.Success;
+        }
+      }
+      return Json(result);
+
+
     }
     [HttpPost]
     public JsonResult Create(PropertyModel model)
     {
       this.property.CreateProperty(model, User, out var response);
       var result = new ApiResponse<PropertyModel>(response.Success, response.Message, model);
+      return Json(result);
+    }
+    
+    [HttpGet]
+    public JsonResult Update(string id)
+    {
+      var result = new ApiResponse<ContentPostModel>();
+      if(id.IsNullOrEmpty())
+        return Json(result);
+      var p = property.GetPropertyById(id, User, out var response);
+      if (response.Success)
+      {
+        result.Success = true;
+        result.Data = p.ConvertToPassingModel();
+      }
       return Json(result);
     }
     [HttpPost]
