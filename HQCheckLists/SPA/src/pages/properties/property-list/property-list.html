@@ -11,31 +11,22 @@
 
 <ion-content>
   <ion-list>
-    <ion-item-sliding *ngFor="let p of Properties">
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="build/Property/{{p.Id}}">
-            </ion-thumbnail>
-          <h2>{{p.Name}}</h2>
-          <p>----</p>
-          <button ion-button clear item-end (click)="Edit(p)">编辑</button>
-          <button ion-button clear item-end>View2</button>
-      </ion-item>
-
-      <ion-item-options side="right">
+    <ion-item *ngFor="let p of Properties">
+      <ion-thumbnail item-start>
+        <img src="build/Property/{{p.Id}}/100">
+              </ion-thumbnail>
+        <h2>{{p.Name}}</h2>
+        <p>----</p>
+        <button ion-button clear item-end (click)="Edit(p)">编辑</button>
         <button ion-button color="primary" (click)="GoToInventory(p.Id)">
-          <ion-icon name="text"></ion-icon>
-          清单
+            清单
         </button>
-        <button ion-button color="secondary">
-          <ion-icon name="call"></ion-icon>
-          检查
+        <button ion-button color="primary" (click)="GoToReservation(p.Id)">
+            预定
         </button>
-        <button ion-button color="primary">
-          <ion-icon name="mail"></ion-icon>
-          清洁
+        <button ion-button color="primary" (click)="GoToCleaning(p.Id)">
+            清洁
         </button>
-      </ion-item-options>
-    </ion-item-sliding>
+    </ion-item>
   </ion-list>
 </ion-content>

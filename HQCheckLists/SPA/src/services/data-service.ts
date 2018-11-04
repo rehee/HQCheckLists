@@ -5,6 +5,8 @@ import { HttpType, ApiCall } from '../config/config';
 import { Property, Inventory } from '../models';
 import { ApiResponse } from '../models/ApiResponse';
 import { ContentPostModel } from '../models/contents/content-pass';
+import { Reservation } from '../models/reservation';
+import { Cleaning } from '../models/cleaning';
 @Injectable()
 export class DataService {
   constructor(private http: Http) { }
@@ -49,5 +51,40 @@ export class DataService {
     return await (await this.httpRequest())(HttpType.Post, Number(ApiCall.InventoryUpdateQty), { inventoryId: inventoryId, number: number });
   }
 
+  public async ReservationPreCreate(propertyId: string): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.ReservationCreate), null, `/?propertyId=${propertyId}`);
+  }
+  public async ReservationCreate(model: ContentPostModel): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.ReservationCreate), model);
+  }
+  public async ReservationRead(propertyId: string): Promise<ApiResponse<Reservation[]>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.ReservationRead), null, `/?propertyId=${propertyId}`);
+  }
+  public async ReservationPreUpdate(reservationId: string): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.ReservationUpdate), null, `/?reservationId=${reservationId}`);
+  }
+  public async ReservationUpdate(model: ContentPostModel): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.ReservationUpdate), model);
+  }
+
+  public async CleaningReadByPropertyId(propertyId: string): Promise<ApiResponse<Cleaning[]>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.CleaningRead), null, `/?propertyId=${propertyId}`);
+  }
+  public async CleaningPreCreate(propertyId: string, reservationId: string): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.CleaningCreate), null, `/?propertyId=${propertyId}&reservationId=${reservationId}`);
+  }
+  public async CleaningCreate(model: ContentPostModel): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.CleaningCreate), model);
+  }
+  public async CleaningPreUpdate(cleaningId: string): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.CleaningUpdate), null, `/?cleaningId=${cleaningId}`);
+  }
+  public async CleaningUpdate(model: ContentPostModel): Promise<ApiResponse<ContentPostModel>> {
+    return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.CleaningUpdate), model);
+  }
+
+  public async CleaningItemReadPostModel(cleaningId:string): Promise<ApiResponse<ContentPostModel[]>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.CleaningItemReadPostModels), null,`/?cleaningId=${cleaningId}`);
+  }
 
 }

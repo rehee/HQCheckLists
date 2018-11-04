@@ -3,39 +3,58 @@ import { NavController, NavParams } from 'ionic-angular';
 import { DataService } from '../../../services';
 import { Inventory } from '../../../models';
 import { FileContain } from '../../../core/core-function';
+import { ContentPostModel } from '../../../models/contents/content-pass';
 @Component({
   selector: 'page-inventory-create',
   templateUrl: 'inventory-create.html'
 })
 export class InventoryCreatePage {
 
+  propertyId: string;
+  inventoryId: string;
   constructor(public navCtrl: NavController, public param: NavParams, private ds: DataService) {
-    this.Model = new Inventory();
-  }
-  async Init() {
-    if (!this.param.get("propertyId")) {
-      this.navCtrl.pop();
-    }
-
-    this.Model.ParentId = this.param.get("propertyId");
-  }
-  @ViewChild('fileInput') fileInput;
-  ionViewWillEnter() {
+    this.propertyId = param.get("propertyId");
+    this.inventoryId = param.get("inventoryId");
     this.Init();
   }
-  Model: Inventory = null;
-  save() {
-    this.Model.ImageUpload = this.fileInput;
-    // this.ds.CreatePropertyInventory(this.Model, this.Files);
-  }
-  Files: FileContain[] = [];
-  FileChange(input: any, filename: any) {
-    let check = this.Files.filter(b => b.FileName == filename);
-    if (check.length <= 0) {
-      this.Files.push(new FileContain(filename, input.target.files[0]));
+  model: ContentPostModel = new ContentPostModel();
+  async Init() {
+    if (!this.inventoryId && !this.propertyId) {
+      this.navCtrl.pop();
+      return;
     }
-    else {
-      check[0].File = input.target.files[0];
+    if (!!this.propertyId) {
+      let newResult = await this.ds.InventoryPreCreate(this.propertyId);
+      if (newResult != null && newResult.Success) {
+        this.model = newResult.Data;
+      }
+    }
+    if (!!this.inventoryId) {
+      let updateResult = await this.ds.InventoryPreUpdate(this.inventoryId);
+      if (updateResult != null && updateResult.Success) {
+        this.model = updateResult.Data;
+      }
     }
   }
+
+  async save() {
+    if (!this.inventoryId && !this.propertyId) {
+      this.navCtrl.pop();
+      return;
+    }
+    if (!!this.propertyId) {
+      let newResult = await this.ds.InventoryCreate(this.model);
+      if (newResult != null && newResult.Success) {
+        this.model = newResult.Data;
+      }
+    }
+    if (!!this.inventoryId) {
+      let updateResult = await this.ds.InventoryUpdate(this.model);
+      if (updateResult != null && updateResult.Success) {
+        this.model = updateResult.Data;
+      }
+    }
+    this.navCtrl.pop();
+  }
+
 }

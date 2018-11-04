@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>维护 清洁</ion-title>
+
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <sdhc-post [PostModel]="Model" [Name]="'预定名'"></sdhc-post>
+
+  <div *ngFor="let item of CleanItems">
+      <sdhc-post [PostModel]="item" [Name]="'aaa'"></sdhc-post>
+  </div>
+
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button full (click)="Maintain()">确认</button>
+  </ion-toolbar>
+</ion-footer>

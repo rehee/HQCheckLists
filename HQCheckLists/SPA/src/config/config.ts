@@ -37,6 +37,21 @@ export enum ApiCall {
   LogOff = 303,
   CanAccess = 304,
 
+  ReservationCreate = 401,
+  ReservationRead = 402,
+  ReservationUpdate = 403,
+  ReservationDelete = 404,
+
+  CleaningCreate = 501,
+  CleaningRead = 502,
+  CleaningUpdate = 503,
+  CleaningDelete = 504,
+
+  CleaningItemCreate = 501,
+  CleaningItemRead = 502,
+  CleaningItemUpdate = 503,
+  CleaningItemDelete = 504,
+  CleaningItemReadPostModels = 505,
 }
 export class Config {
   static URLTyle = {
@@ -61,6 +76,17 @@ export class Config {
     [ApiCall.LogOff]: Config.setApi("/User/Logoff", false, []),
     [ApiCall.CanAccess]: Config.setApi("/User/CanAccess", false, []),
 
+    [ApiCall.ReservationCreate]: Config.setApi("/Api/Reservation/Create", false, []),
+    [ApiCall.ReservationRead]: Config.setApi("/Api/Reservation/Read", false, []),
+    [ApiCall.ReservationUpdate]: Config.setApi("/Api/Reservation/Update", false, []),
+    // [ApiCall.ReservationDelete]: Config.setApi("/Api/Reservation", false, []),
+
+    [ApiCall.CleaningCreate]: Config.setApi("/Api/Cleaning/Create", false, []),
+    [ApiCall.CleaningRead]: Config.setApi("/Api/Cleaning/Read", false, []),
+    [ApiCall.CleaningUpdate]: Config.setApi("/Api/Cleaning/Update", false, []),
+    [ApiCall.CleaningDelete]: Config.setApi("/Api/Cleaning/Delete", false, []),
+
+    [ApiCall.CleaningItemReadPostModels]: Config.setApi("/Api/CleaningItem/ReadPostModels", false, []),
 
   }
   private static setApi(url: string, useMock: boolean, m: any) {

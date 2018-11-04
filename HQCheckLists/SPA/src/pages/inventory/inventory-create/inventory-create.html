@@ -1,31 +1,20 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>
-            添加清单
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>
+      添加/修改 清单
+    </ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-list>
+  <sdhc-post [PostModel]="model" [Name]="'清单名'"></sdhc-post>
+  <ion-list no-lines>
+    <ion-item>
+      <ion-label stacked>重要程度</ion-label>
+      <ion-input type="range" [(ngModel)]="model.SortOrder"></ion-input>
+    </ion-item>
+  </ion-list>
 
-        <ion-item>
-            <ion-label floating>名称</ion-label>
-            <ion-input type="text" [(ngModel)]="Model.Name"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label floating>数量</ion-label>
-            <ion-input type="number" [(ngModel)]="Model.QTY"></ion-input>
-        </ion-item>
-        <ion-item>
-            显示百分比
-            <ion-toggle [(ngModel)]="Model.IsPercentage"></ion-toggle>
-        </ion-item>
-        <ion-item>
-            图片 <input type="file" name="file" (change)="FileChange($event,'fff')" />
-        </ion-item>
-
-    </ion-list>
-    <button ion-button (click)="save()" full>确认</button>
+  <br>
+  <button ion-button (click)="save()" full>确认</button>
 </ion-content>

@@ -4,6 +4,8 @@ import { DataService } from '../../../services';
 import { Property } from '../../../models';
 import { PropertycreatePage } from '../property-create/property-create';
 import { InventoryListPage } from '../../inventory/inventory-list/inventory-list';
+import { ReservationListPage } from '../../reservation';
+import { CleaningListPage } from '../../cleaning';
 
 @Component({
   selector: 'page-property-list',
@@ -33,5 +35,11 @@ export class PropertyListPage {
   }
   GoToInventory(propertyId: string) {
     this.navCtrl.push(InventoryListPage, { propertyId: propertyId });
+  }
+  GoToReservation(propertyId: string) {
+    this.navCtrl.push(ReservationListPage, { propertyId: propertyId });
+  }
+  GoToCleaning(propertyId: string) {
+    this.navCtrl.push(CleaningListPage, { propertyId: propertyId });
   }
 }

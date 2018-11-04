@@ -28,13 +28,18 @@ import { SDHCInputNumberCom } from '../components/sdhc-input/sdhc-input-number/s
 import { SDHCInputFileCom } from '../components/sdhc-input/sdhc-input-file/sdhc-input-file';
 import { SDHCInputDropDownCom } from '../components/sdhc-input/sdhc-input-dropdown/sdhc-input-dropdown';
 import { SDHCInputDateTimeCom } from '../components/sdhc-input/sdhc-input-datetime/sdhc-input-datetime';
+import { SDHCInputBoolCom } from '../components/sdhc-input/sdhc-input-bool/sdhc-input-bool';
+import { ReservationDetailPage, ReservationListPage, ReservationMaintainPage } from '../pages/reservation/index';
+import { CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage } from '../pages/cleaning/index';
 @NgModule({
   declarations: [
     MyApp,
     ContactPage,
     HomePage,
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
-    SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom
+    SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
+    ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
+    CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -52,7 +57,9 @@ import { SDHCInputDateTimeCom } from '../components/sdhc-input/sdhc-input-dateti
     ContactPage,
     HomePage,
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
-    SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom
+    SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
+    ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
+    CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage
   ],
   providers: [
     StatusBar,

@@ -1,6 +1,6 @@
 ﻿using HQCheckLists.Models.Contents;
 using HQCheckLists.Models.Users;
-using HQCheckLists.Services.PropertyService;
+using HQCheckLists.Services;
 using SDHCC.Core.MethodResponse;
 using SDHCC.DB.Content;
 using SDHCC.Identity.Services;
@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace HQCheckLists.Managers
 {

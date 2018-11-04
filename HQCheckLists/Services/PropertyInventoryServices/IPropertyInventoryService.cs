@@ -7,7 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace HQCheckLists.Services.PropertyInventoryServices
+namespace HQCheckLists.Services
 {
   public interface IPropertyInventoryService : ICRUD<InventoryModel>
   {

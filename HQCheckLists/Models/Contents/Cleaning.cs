@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace HQCheckLists.Models.Contents
 {
-  public class CheckIn : SDHCCBaseEntity
+  public class Cleaning : HQBaseModel
   {
-    public DateTime CheckInDate { get; set; } = DateTime.Now;
     public string PropertyId { get; set; } = "";
+    public string ReservationId { get; set; } = "";
+    public DateTime CheckInDate { get; set; } = DateTime.Now;
+    
     public string CleanerId { get; set; } = "";
     public string SpecialRequirement { get; set; } = "";
   }

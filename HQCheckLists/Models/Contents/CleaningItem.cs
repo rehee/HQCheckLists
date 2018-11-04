@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HQCheckLists.Models.Contents
 {
-  public class CheckInItem : SDHCCBaseEntity
+  public class CleaningItem : HQBaseModel
   {
-    public string CheckInId { get; set; }
+    public string CleaningId { get; set; }
     public string InventoryId { get; set; }
     public decimal InitNumber { get; set; }
     public decimal ActuallyNumber { get; set; }

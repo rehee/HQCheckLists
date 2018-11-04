@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HQCheckLists.Models.Contents
 {
-  public class Guest : SDHCCBaseEntity
+  public class Guest : HQBaseModel
   {
     public string GuestIdentity { get; set; } = "";
     public IFormFile GuestIdentityFile { get; set; } = null;

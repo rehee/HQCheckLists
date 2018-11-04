@@ -21,7 +21,8 @@ export enum EnumInputType {
     Number,
     DateTime,
     DropDwon,
-    FileUpload
+    FileUpload,
+    Bool
 }
 export class DropDownViewModel {
     Name: string = "";

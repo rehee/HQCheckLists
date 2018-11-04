@@ -12,7 +12,6 @@ export class HomePage {
     this.Init();
   }
   async Init() {
-    let result = await this.ds.PropertyGetAll();
-    console.log(result);
+
   }
 }

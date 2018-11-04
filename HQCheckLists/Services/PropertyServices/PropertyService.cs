@@ -12,7 +12,7 @@ using SDHCC.DB;
 using SDHCC.DB.Content;
 using SDHCC.Identity.Services;
 
-namespace HQCheckLists.Services.PropertyService
+namespace HQCheckLists.Services
 {
   public class PropertyService : ContentCRUD<PropertyModel>, IPropertyService
   {

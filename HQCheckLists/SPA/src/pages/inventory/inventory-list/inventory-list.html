@@ -5,27 +5,24 @@
     </ion-title>
   </ion-navbar>
   <ion-toolbar>
-      <button ion-button (click)="Create()" full>添加清单</button>
+    <button ion-button (click)="Create()" full>添加清单</button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item-sliding *ngFor="let i of Inventories">
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="/build/Inventory/{{i.Id}}">
-                </ion-thumbnail>
-          <h2 (click)="NumberUpdate(i)">{{i.Name}}</h2>
-          <p (click)="NumberUpdate(i)">{{i.QTY}}</p>
-      </ion-item>
-      <ion-item-options side="right">
+    <ion-item *ngFor="let i of Inventories">
+      <ion-thumbnail item-start>
+        <img src="/build/Inventory/{{i.Id}}/100">
+                  </ion-thumbnail>
+        <h2 (click)="NumberUpdate(i)">{{i.Name}}</h2>
+        <p (click)="NumberUpdate(i)">{{i.QTY}}</p>
         <button ion-button color="secondary" (click)="InventoryModel(i)">
           <ion-icon name="call"></ion-icon>
           修改
         </button>
-      </ion-item-options>
-    </ion-item-sliding>
+    </ion-item>
+
 
   </ion-list>
 </ion-content>

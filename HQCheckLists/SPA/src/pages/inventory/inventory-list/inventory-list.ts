@@ -10,31 +10,34 @@ import { InventoryDetailPage } from '../inventory-detail/inventory-detail';
 })
 export class InventoryListPage {
 
+  propertyId: string;
   constructor(public navCtrl: NavController, public modelCtrl: ModalController, public param: NavParams, private ds: DataService, private alertCtrl: AlertController) {
 
   }
   async Init() {
-    if (!this.param.get("propertyId")) {
+    this.propertyId = this.param.get("propertyId");
+    if (!this.propertyId) {
       return;
     }
-    let result = await this.ds.InventoryRead(this.param.get("propertyId"));
+    let result = await this.ds.InventoryRead(this.propertyId);
     if (result == null || result.Success != true) {
       return;
     }
     this.Inventories = result.Data.map(b => b);
+    console.log(this.Inventories);
   }
   ionViewWillEnter() {
     this.Init();
   }
   Inventories: Inventory[] = [];
   Create() {
-    this.navCtrl.push(InventoryCreatePage, { propertyId: this.param.get("propertyId") });
+    this.navCtrl.push(InventoryCreatePage, { propertyId: this.propertyId });
   }
   random() {
     return Math.random();
   }
   InventoryModel(inventory: Inventory) {
-    let profileModal = this.modelCtrl.create(InventoryDetailPage, inventory);
+    let profileModal = this.modelCtrl.create(InventoryCreatePage, { inventoryId: inventory.Id });
     profileModal.present();
   }
   NumberUpdate(inventory: Inventory) {
@@ -61,8 +64,8 @@ export class InventoryListPage {
           handler: data => {
             //
             // this.ds.UpdatePropertyInventory(inventory, []);
-            this.ds.InventoryUpdateQty(inventory.Id,data['QTY']).then(b=>{
-              if(b==null ||b.Success!=true){
+            this.ds.InventoryUpdateQty(inventory.Id, data['QTY']).then(b => {
+              if (b == null || b.Success != true) {
                 return;
               }
               inventory.QTY = Number(data['QTY']);

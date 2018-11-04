@@ -16,15 +16,14 @@ namespace HQCheckLists.Models.Contents
 
   public class InventoryModel : HQBaseModel
   {
-    public decimal QTY { get; set; } = 0;
-    public string Image { get; set; } = "";
-    public string ImgToken { get; set; } = "";
+    [Display(Name ="百分比显示")]
+    [InputType(EditorType = EnumInputType.Bool)]
     public bool IsPercentage { get; set; } = false;
-    [IgnoreEdit]
-    [BsonIgnore]
-    public IFormFile ImageUpload { get; set; } = null;
-    [IgnoreEdit]
-    [BsonIgnore]
-    public IFormFile fff { get; set; } = null;
+    [Display(Name = "数量")]
+    [InputType(EditorType = EnumInputType.Number)]
+    public decimal QTY { get; set; } = 0;
+    [Display(Name = "图片")]
+    [InputType(EditorType =  EnumInputType.FileUpload)]
+    public string Image { get; set; } = "";
   }
 }

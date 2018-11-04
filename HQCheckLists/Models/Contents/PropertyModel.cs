@@ -18,5 +18,16 @@ namespace HQCheckLists.Models.Contents
     public string PropertyOwner { get; set; } = "";
     [InputType(EditorType = EnumInputType.FileUpload)]
     public string Image { get; set; } = "";
+
+    [InputType(EditorType = EnumInputType.DateTime)]
+    public DateTime PickTime { get; set; } = DateTime.Now;
+    [InputType(EditorType = EnumInputType.Number)]
+    public decimal PickNumber { get; set; } = 0;
+    [InputType(EditorType = EnumInputType.TextArea)]
+    public string PickArea { get; set; } = "";
+    [InputType(EditorType = EnumInputType.Bool)]
+    public bool PickBool { get; set; } = false;
+
+
   }
 }

@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using HQCheckLists.Models.Contents;
 using HQCheckLists.Models.Users;
-using HQCheckLists.Services.PropertyInventoryServices;
-using HQCheckLists.Services.PropertyService;
+using HQCheckLists.Services;
 using SDHCC.Core.MethodResponse;
 using SDHCC.DB.Content;
 using SDHCC.Identity.Services;
@@ -55,12 +53,12 @@ namespace HQCheckLists.Managers
         return null;
       if (us.IsUserInRole(user, E.Setting.AdminRole))
       {
-        return pis.Read(b => b.ParentId == propertyId).ToList();
+        return pis.Read(b => b.ParentId == propertyId).OrderByDescending(b => b.SortOrder).ToList();
       }
       var hqU = (HQUser)us.GetUserByName(user.Identity.Name);
       if (hqU.PropertyOwner == property.PropertyOwner)
       {
-        return pis.Read(b => b.ParentId == propertyId).ToList();
+        return pis.Read(b => b.ParentId == propertyId).OrderByDescending(b=>b.SortOrder).ToList();
       }
       return null;
     }

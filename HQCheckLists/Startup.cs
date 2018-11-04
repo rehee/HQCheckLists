@@ -1,33 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using HQCheckLists.Managers;
 using HQCheckLists.Models.Contents;
 using HQCheckLists.Models.DropDowns;
 using HQCheckLists.Models.Users;
-using HQCheckLists.Services.PropertyInventoryServices;
-using HQCheckLists.Services.PropertyService;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using HQCheckLists.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using MongoDB.Driver;
-using Newtonsoft.Json.Serialization;
-using SDHCC;
-using SDHCC.DB;
-using SDHCC.DB.Models;
-using SDHCC.Identity;
-using SDHCC.Identity.Models.UserRoles;
-using SDHCC.Identity.Services;
 
 namespace HQCheckLists
 {
@@ -45,11 +28,18 @@ namespace HQCheckLists
     public void ConfigureServices(IServiceCollection services)
     {
       StartUpFunction.ConfigureServices<HQUser, HQBaseModel, HQDropDownModel>(services, configuration, hostingEnvironment);
-      services.AddScoped(typeof(IPropertyService), typeof(PropertyService));
+      services.AddScoped<IPropertyService, PropertyService>();
       services.AddScoped<IPropertyInventoryService, PropertyInventoryService>();
+      services.AddScoped<IReservationService, ReservationService>();
+      services.AddScoped<ICleaningService, CleaningService>();
+      services.AddScoped<ICleaningItemService, CleaningItemService>();
+
 
       services.AddScoped<IPropertyManager, PropertyManager>();
       services.AddScoped<IPropertyInventoryManager, PropertyInventoryManager>();
+      services.AddScoped<IReservationManager, ReservationManager>();
+      services.AddScoped<ICleaningManager, CleaningManager>();
+      services.AddScoped<ICleaningItemManager, CleaningItemManager>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +49,7 @@ namespace HQCheckLists
       {
         r.MapRoute(
           name: "default",
-                  template: "{controller=Images}/{action=Index}/{id}/{token}"
+                  template: "{controller=Images}/{action=Index}/{id}/{widthpx}"
           );
       });
       app.UseFileServer(new FileServerOptions

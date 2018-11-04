@@ -17,5 +17,9 @@ namespace HQCheckLists.Models.Users
     [CustomProperty]
     [InputType(EditorType = EnumInputType.DropDwon, RelatedType = typeof(PropertyOwner))]
     public string PropertyOwner { get; set; } = "";
+
+    [CustomProperty]
+    [InputType(EditorType = EnumInputType.Bool)]
+    public bool IsCleaner { get; set; } = false;
   }
 }

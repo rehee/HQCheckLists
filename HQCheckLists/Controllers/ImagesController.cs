@@ -15,7 +15,7 @@ namespace HQCheckLists.Controllers
     {
       this.db = db;
     }
-    public IActionResult Inventory(string id)
+    public IActionResult Inventory(string id, int widthpx = 0)
     {
       try
       {
@@ -26,14 +26,14 @@ namespace HQCheckLists.Controllers
           return null;
         if (String.IsNullOrEmpty(item.Image))
           return null;
-        return item.Image.GetFileFromPath(this);
+        return item.Image.GetFileFromPath(this, widthpx);
       }
       catch
       {
         return null;
       }
     }
-    public IActionResult Property(string id)
+    public IActionResult Property(string id, int widthpx = 0)
     {
       try
       {
@@ -44,9 +44,10 @@ namespace HQCheckLists.Controllers
           return null;
         if (String.IsNullOrEmpty(item.Image))
           return null;
-        return item.Image.GetFileFromPath(this);
+        var a = item.Image.GetFileStreamFromPath(this, widthpx);
+        return item.Image.GetFileFromPath(this, widthpx);
       }
-      catch
+      catch(Exception ex)
       {
         return null;
       }

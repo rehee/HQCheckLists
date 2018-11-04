@@ -8,7 +8,7 @@ using SDHCC.Core.MethodResponse;
 using SDHCC.DB;
 using SDHCC.DB.Content;
 
-namespace HQCheckLists.Services.PropertyInventoryServices
+namespace HQCheckLists.Services
 {
   public class PropertyInventoryService : ContentCRUD<InventoryModel>, IPropertyInventoryService
   {

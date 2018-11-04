@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using HQCheckLists.Managers;
 using HQCheckLists.Models.Apis;
 using HQCheckLists.Models.Contents;
-using HQCheckLists.Services.PropertyService;
 using Microsoft.AspNetCore.Mvc;
 using SDHCC.DB.Content;
 
