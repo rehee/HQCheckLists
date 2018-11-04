@@ -25,7 +25,6 @@ export class LandingPage {
   }
   async Logout() {
     let user = await this.userService.LogOff();
-    console.log(user);
   }
   home() {
     this.navCtrl.push(TabsPage);
@@ -63,7 +62,6 @@ export class LandingPage {
               }
             ).catch(
               () => {
-                console.log("error");
               }
             );
           }

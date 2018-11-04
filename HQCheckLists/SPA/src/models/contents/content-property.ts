@@ -12,6 +12,8 @@ export class ContentProperty {
     BaseProperty: boolean = false;
     IgnoreProperty: boolean = false;
     CustomProperty: boolean = false;
+    RangeMin:number = 0;
+    RangeMax:number = 100;
 }
 
 export enum EnumInputType {
@@ -22,7 +24,8 @@ export enum EnumInputType {
     DateTime,
     DropDwon,
     FileUpload,
-    Bool
+    Bool,
+    Range
 }
 export class DropDownViewModel {
     Name: string = "";

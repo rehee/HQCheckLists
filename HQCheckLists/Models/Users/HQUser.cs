@@ -21,5 +21,9 @@ namespace HQCheckLists.Models.Users
     [CustomProperty]
     [InputType(EditorType = EnumInputType.Bool)]
     public bool IsCleaner { get; set; } = false;
+
+    [CustomProperty]
+    [InputType(EditorType = EnumInputType.Bool)]
+    public bool IsDisableUser { get; set; } = false;
   }
 }

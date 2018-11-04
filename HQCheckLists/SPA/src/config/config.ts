@@ -46,12 +46,15 @@ export enum ApiCall {
   CleaningRead = 502,
   CleaningUpdate = 503,
   CleaningDelete = 504,
+  CleaningReadByReservationId = 505,
 
-  CleaningItemCreate = 501,
-  CleaningItemRead = 502,
-  CleaningItemUpdate = 503,
-  CleaningItemDelete = 504,
-  CleaningItemReadPostModels = 505,
+  CleaningItemCreate = 601,
+  CleaningItemRead = 602,
+  CleaningItemUpdate = 603,
+  CleaningItemDelete = 604,
+  CleaningItemReadPostModels = 605,
+
+  UserReadAllCleaner = 711,
 }
 export class Config {
   static URLTyle = {
@@ -85,8 +88,14 @@ export class Config {
     [ApiCall.CleaningRead]: Config.setApi("/Api/Cleaning/Read", false, []),
     [ApiCall.CleaningUpdate]: Config.setApi("/Api/Cleaning/Update", false, []),
     [ApiCall.CleaningDelete]: Config.setApi("/Api/Cleaning/Delete", false, []),
+    [ApiCall.CleaningReadByReservationId]: Config.setApi("/Api/Cleaning/ReadByReservationId", false, []),
+
 
     [ApiCall.CleaningItemReadPostModels]: Config.setApi("/Api/CleaningItem/ReadPostModels", false, []),
+    [ApiCall.CleaningItemUpdate]: Config.setApi("/Api/CleaningItem/Update", false, []),
+
+    [ApiCall.UserReadAllCleaner]: Config.setApi("/Api/User/ReadAllCleaner", false, []),
+
 
   }
   private static setApi(url: string, useMock: boolean, m: any) {

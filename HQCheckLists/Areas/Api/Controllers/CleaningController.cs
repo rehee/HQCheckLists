@@ -45,5 +45,11 @@ namespace HQCheckLists.Areas.Api.Controllers
       cleaningManager.Update(User, model, out var response);
       return Json(new ApiResponse<ContentPostModel>(response.Success, null, model));
     }
+
+    public JsonResult ReadByReservationId(string reservationId)
+    {
+      var cleaning = cleaningManager.CleaningGetByReservatinId(User, reservationId);
+      return Json(new ApiResponse<Cleaning>(cleaning != null, null, cleaning));
+    }
   }
 }

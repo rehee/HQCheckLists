@@ -53,7 +53,8 @@ namespace HQCheckLists.Managers
 
     public void CleaningItemUpdate(ClaimsPrincipal user, ContentPostModel model, out MethodResponse response)
     {
-      throw new NotImplementedException();
+      cleanItemService.Update(model, out response);
     }
+    
   }
 }

@@ -20,9 +20,7 @@ export class CleaningListPage {
     this.Init();
   }
   async Init() {
-    console.log(1);
     let result = await this.ds.CleaningReadByPropertyId(this.PropertyId);
-    console.log(result);
     if (!result || !result.Success) {
       return;
     }

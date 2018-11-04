@@ -4,6 +4,7 @@ import { DataService } from '../../../services';
 import { Inventory } from '../../../models';
 import { InventoryCreatePage } from '../inventory-create/inventory-create';
 import { InventoryDetailPage } from '../inventory-detail/inventory-detail';
+import { AppFunctions } from '../../../config/app-function';
 @Component({
   selector: 'page-inventory-list',
   templateUrl: 'inventory-list.html'
@@ -19,12 +20,14 @@ export class InventoryListPage {
     if (!this.propertyId) {
       return;
     }
+    AppFunctions.PresentLoader();
     let result = await this.ds.InventoryRead(this.propertyId);
+    AppFunctions.DismissLoader();
     if (result == null || result.Success != true) {
       return;
     }
     this.Inventories = result.Data.map(b => b);
-    console.log(this.Inventories);
+
   }
   ionViewWillEnter() {
     this.Init();
@@ -39,6 +42,9 @@ export class InventoryListPage {
   InventoryModel(inventory: Inventory) {
     let profileModal = this.modelCtrl.create(InventoryCreatePage, { inventoryId: inventory.Id });
     profileModal.present();
+    profileModal.onDidDismiss(b => {
+      this.Init();
+    });
   }
   NumberUpdate(inventory: Inventory) {
     let alert = this.alertCtrl.create({
@@ -56,7 +62,7 @@ export class InventoryListPage {
           text: '取消',
           role: 'cancel',
           handler: data => {
-            console.log('Cancel clicked');
+
           }
         },
         {

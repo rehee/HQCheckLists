@@ -31,6 +31,7 @@ import { SDHCInputDateTimeCom } from '../components/sdhc-input/sdhc-input-dateti
 import { SDHCInputBoolCom } from '../components/sdhc-input/sdhc-input-bool/sdhc-input-bool';
 import { ReservationDetailPage, ReservationListPage, ReservationMaintainPage } from '../pages/reservation/index';
 import { CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage } from '../pages/cleaning/index';
+import { HqSelectCom } from '../components/hq-inputs/hq-select/hq-select';
 @NgModule({
   declarations: [
     MyApp,
@@ -39,7 +40,8 @@ import { CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemLi
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
     SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
     ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
-    CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage
+    CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
+    HqSelectCom
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -59,7 +61,8 @@ import { CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemLi
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
     SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
     ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
-    CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage
+    CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
+    HqSelectCom,
   ],
   providers: [
     StatusBar,

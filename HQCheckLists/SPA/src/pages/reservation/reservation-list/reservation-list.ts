@@ -21,11 +21,13 @@ export class ReservationListPage {
       return;
     }
     let result = await this.ds.ReservationRead(this.PropertyId);
-    console.log(result);
     if (result == null || !result.Success) {
       return;
     }
-    this.Reservations = result.Data.map(b => b);
+    this.Reservations = result.Data.map(b => {
+      this.CheckCleaningForReservation(b);
+      return b;
+    });
   }
   ionViewWillEnter() {
     this.Init();
@@ -36,7 +38,21 @@ export class ReservationListPage {
   Maintain(reservationId: string) {
     this.navCtrl.push(ReservationMaintainPage, { reservationId: reservationId });
   }
-  CreateCleaning(r: Reservation) {
+
+  async CheckCleaningForReservation(r: Reservation) {
+    if (!!r && !!r.Id) {
+      let cleaning = await this.ds.CleaningReadByReservationId(r.Id);
+      if (!!cleaning && cleaning.Success) {
+        r.CleaningRecord  = cleaning.Data;
+      }
+    }
+  }
+
+  async MaintainCleaning(r: Reservation) {
+    if (!!r && !!r.CleaningRecord && r.CleaningRecord.Id) {
+      this.navCtrl.push(CleaningMaintainPage, { cleaningId: r.CleaningRecord.Id });
+      return;
+    }
     this.navCtrl.push(CleaningMaintainPage, { reservationId: r.Id, propertyId: r.PropertyId });
   }
 }

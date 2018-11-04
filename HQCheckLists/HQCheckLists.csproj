@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
     <UserSecretsId>a28ec850-89cd-4c01-a6bb-51757a31fdda</UserSecretsId>
   </PropertyGroup>
 
@@ -19,9 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="SPA\index.html">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Include="SPA\www\build\main.css" />
     <Content Include="SPA\www\index.html" />
     <Content Include="SPA\www\manifest.json" />
@@ -52,7 +50,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0-preview3-35497" />
-    <PackageReference Include="SDHCC" Version="0.1.1-alpha06" />
+    <PackageReference Include="SDHCC" Version="0.1.1-alpha07" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0005" />
   </ItemGroup>
 

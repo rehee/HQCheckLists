@@ -16,16 +16,22 @@ namespace HQCheckLists.Models.Contents
 
     [InputType(EditorType = EnumInputType.Hidden)]
     public List<string> GuestIds { get; set; } = new List<string>();
-    
+
     [InputType(EditorType = EnumInputType.DateTime)]
     public DateTime CheckInDate { get; set; } = DateTime.Now;
 
     [InputType(EditorType = EnumInputType.DateTime)]
     public DateTime CheckOutDate { get; set; } = DateTime.Now;
 
-    [Display(Name ="是否需要车位")]
+    [Display(Name = "入住人数")]
+    [InputType(EditorType = EnumInputType.Number)]
+    public int GuestNumber { get; set; } = 1;
+
+
+    [Display(Name = "是否需要车位")]
     [InputType(EditorType = EnumInputType.Bool)]
     public bool NeedCarpark { get; set; } = false;
+
 
     [InputType(EditorType = EnumInputType.TextArea)]
     public string Comment { get; set; } = "";

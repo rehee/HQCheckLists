@@ -5,13 +5,17 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <sdhc-post [PostModel]="Model" [Name]="'预定名'"></sdhc-post>
+  <hq-select [Title]="'分配清洁工'" [Value]="CleanerProperty" [Select]="CleanSelects"></hq-select>
 
-  <div *ngFor="let item of CleanItems">
-      <sdhc-post [PostModel]="item" [Name]="'aaa'"></sdhc-post>
-  </div>
+  <sdhc-post [PostModel]="Model" [Name]="'清洁名'"></sdhc-post>
+  <ion-card *ngFor="let item of CleanItems">
+    <ion-card-content>
+      <sdhc-post [PostModel]="item" [Name]="'清点物品'"></sdhc-post>
+    </ion-card-content>
+  </ion-card>
 
 
+  <hq-select [Title]="'状态'" [Value]="StatusProperty" [Select]="StatusSelects"></hq-select>
 </ion-content>
 <ion-footer>
   <ion-toolbar>

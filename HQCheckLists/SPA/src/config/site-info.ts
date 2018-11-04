@@ -31,7 +31,6 @@ export class SiteInfo {
   }
   public static async GetSiteKey(key: SiteKey): Promise<string> {
     let userName = await SiteInfo.SetUserName();
-    console.log(userName);
     let keyNumber = Number(key);
     if (key == SiteKey.UserName) {
       return String(keyNumber);

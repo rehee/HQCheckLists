@@ -12,11 +12,8 @@ export class SDHCInputDateTimeCom {
   DatePicker: string;
   constructor() {
     this.DatePicker = (new Date()).toISOString();
-    console.log(this.DatePicker);
   }
   ngOnChanges(changes: SimpleChanges) {
-    console.log(this.Property.Value);
-    console.log(changes['Property']['currentValue']['Value'])
     this.Property.Value = new Date(changes['Property']['currentValue']['Value']).toISOString();
     // this.Property.Value = new Date(this.Property.Value).toISOString();
   }

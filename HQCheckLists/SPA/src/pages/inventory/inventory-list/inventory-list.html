@@ -3,10 +3,12 @@
     <ion-title>
       清单
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="Create()" color="primary">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-  <ion-toolbar>
-    <button ion-button (click)="Create()" full>添加清单</button>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -16,9 +18,8 @@
         <img src="/build/Inventory/{{i.Id}}/100">
                   </ion-thumbnail>
         <h2 (click)="NumberUpdate(i)">{{i.Name}}</h2>
-        <p (click)="NumberUpdate(i)">{{i.QTY}}</p>
-        <button ion-button color="secondary" (click)="InventoryModel(i)">
-          <ion-icon name="call"></ion-icon>
+        <p>{{i.QTY}}</p>
+        <button ion-button color="primary" (click)="InventoryModel(i)">
           修改
         </button>
     </ion-item>

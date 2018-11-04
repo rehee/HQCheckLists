@@ -9,7 +9,6 @@ export class SDHCInputFileCom {
   @Input() Property: ContentProperty = new ContentProperty();
 
   FileChange(input: any, property: ContentProperty) {
-    console.log(input);
     property.File = input.target.files[0];
   }
 }

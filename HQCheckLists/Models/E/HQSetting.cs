@@ -7,7 +7,7 @@ namespace HQCheckLists.Models
 {
   public class HQSetting
   {
-    public string LandlordRole { get; set; } = "Landload";
+    public string LandlordRole { get; set; } = "Landlord";
     public string CleanerRole { get; set; } = "Cleaner";
   }
 }

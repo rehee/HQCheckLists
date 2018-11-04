@@ -20,9 +20,7 @@ export class ReservationMaintainPage {
     if (!this.PropertyId && !this.ReservationId) {
       return;
     }
-    console.log(1);
     if (!!this.PropertyId) {
-      console.log(1.1);
       let createResult = await this.ds.ReservationPreCreate(this.PropertyId);
       if (!createResult || !createResult.Success) {
         return;
@@ -31,15 +29,12 @@ export class ReservationMaintainPage {
       this.Model = createResult.Data;
     }
     if (!!this.ReservationId) {
-      console.log(1.2);
       let updateResult = await this.ds.ReservationPreUpdate(this.ReservationId);
       if (!updateResult || !updateResult.Success) {
         return;
       }
       this.Model = updateResult.Data;
     }
-    console.log(2);
-    console.log(this.Model);
   }
   async Maintain() {
     if (!this.Model) {

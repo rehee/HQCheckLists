@@ -17,7 +17,7 @@ namespace HQCheckLists.Managers
 
     ContentPostModel Update(ClaimsPrincipal User, string cleaningId);
     void Update(ClaimsPrincipal User, ContentPostModel model, out MethodResponse response);
+    Cleaning CleaningGetByReservatinId(ClaimsPrincipal user, string reservationIid);
 
-    
   }
 }

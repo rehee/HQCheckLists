@@ -7,6 +7,7 @@ import { ApiResponse } from '../models/ApiResponse';
 import { ContentPostModel } from '../models/contents/content-pass';
 import { Reservation } from '../models/reservation';
 import { Cleaning } from '../models/cleaning';
+import { HQUser } from '../models/users/hq-user';
 @Injectable()
 export class DataService {
   constructor(private http: Http) { }
@@ -83,8 +84,19 @@ export class DataService {
     return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.CleaningUpdate), model);
   }
 
-  public async CleaningItemReadPostModel(cleaningId:string): Promise<ApiResponse<ContentPostModel[]>> {
-    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.CleaningItemReadPostModels), null,`/?cleaningId=${cleaningId}`);
+  public async CleaningReadByReservationId(reservationId: string): Promise<ApiResponse<Cleaning>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.CleaningReadByReservationId), null, `/?reservationId=${reservationId}`);
+  }
+
+  public async CleaningItemReadPostModel(cleaningId: string): Promise<ApiResponse<ContentPostModel[]>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.CleaningItemReadPostModels), null, `/?cleaningId=${cleaningId}`);
+  }
+  public async CleaningItemUpdate(model: ContentPostModel): Promise<ApiResponse<ContentPostModel[]>> {
+    return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.CleaningItemUpdate), model);
+  }
+
+  public async UserReadAllCleaner(activeUser: boolean): Promise<ApiResponse<HQUser[]>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.UserReadAllCleaner), null, `/?activeUser=${String(activeUser)}`);
   }
 
 }

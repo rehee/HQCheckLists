@@ -11,7 +11,7 @@
   <ion-list no-lines>
     <ion-item>
       <ion-label stacked>重要程度</ion-label>
-      <ion-input type="range" [(ngModel)]="model.SortOrder"></ion-input>
+      <ion-range [(ngModel)]="model.SortOrder" pin="true"></ion-range>
     </ion-item>
   </ion-list>
 

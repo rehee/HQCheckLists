@@ -6,6 +6,7 @@ import { PropertycreatePage } from '../property-create/property-create';
 import { InventoryListPage } from '../../inventory/inventory-list/inventory-list';
 import { ReservationListPage } from '../../reservation';
 import { CleaningListPage } from '../../cleaning';
+import { AppFunctions } from '../../../config/app-function';
 
 @Component({
   selector: 'page-property-list',
@@ -17,7 +18,9 @@ export class PropertyListPage {
 
   }
   async Init() {
+    AppFunctions.PresentLoader();
     let result = await this.ds.PropertyGetAll();
+    AppFunctions.DismissLoader();
     if (result == null || result.Success == false) {
       return;
     }

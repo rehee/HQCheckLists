@@ -9,6 +9,5 @@ export class SDHCInputDropDownCom {
   @Input() Property: ContentProperty = new ContentProperty();
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
   }
 }

@@ -1,0 +1,6 @@
+<ion-item>
+  <ion-label>{{Title}}</ion-label>
+  <ion-select [(ngModel)]="Value.Value">
+    <ion-option *ngFor="let item of Select" value="{{item.Value}}">{{item.Name}}</ion-option>
+  </ion-select>
+</ion-item>

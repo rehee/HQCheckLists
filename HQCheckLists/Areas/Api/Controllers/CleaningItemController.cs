@@ -17,10 +17,17 @@ namespace HQCheckLists.Areas.Api.Controllers
     {
       this.cleaningItemManager = cleaningItemManager;
     }
+
     public JsonResult ReadPostModels(string cleaningId)
     {
       var result = cleaningItemManager.CleaningItemsPostByCleaningId(User, cleaningId);
       return Json(new ApiResponse<IEnumerable<ContentPostModel>>(result != null, null, result));
+    }
+    [HttpPost]
+    public JsonResult Update(ContentPostModel model)
+    {
+      cleaningItemManager.CleaningItemUpdate(User, model, out var response);
+      return Json(new ApiResponse<object>(response.Success, null, null));
     }
   }
 }

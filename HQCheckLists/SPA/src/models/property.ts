@@ -1,10 +1,11 @@
 export class Property {
-  Children: string[];
   Id: string;
+  Children: string[];
   Name: string;
   PropertyAddress: string;
   PropertyOwner: string;
-  Image:string;
+  Image: string;
+  BathRoom: number;
 }
 
 export class Inventory {

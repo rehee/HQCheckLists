@@ -19,14 +19,9 @@ namespace HQCheckLists.Models.Contents
     [InputType(EditorType = EnumInputType.FileUpload)]
     public string Image { get; set; } = "";
 
-    [InputType(EditorType = EnumInputType.DateTime)]
-    public DateTime PickTime { get; set; } = DateTime.Now;
+    [Display(Name ="浴室数量")]
     [InputType(EditorType = EnumInputType.Number)]
-    public decimal PickNumber { get; set; } = 0;
-    [InputType(EditorType = EnumInputType.TextArea)]
-    public string PickArea { get; set; } = "";
-    [InputType(EditorType = EnumInputType.Bool)]
-    public bool PickBool { get; set; } = false;
+    public int BathRoom { get; set; } = 1;
 
 
   }
