@@ -14,16 +14,24 @@ export class SiteInfo {
     SiteInfo.storage = storage;
     SiteInfo.userService = userService;
   }
-  public static count= 0;
+  public static count = 0;
   public static async SetUserName(): Promise<string> {
     let userName: string = "";
     if (SiteInfo.OnConnect) {
       let currentUser = await SiteInfo.userService.GetCurrentUser();
-      if (!currentUser.Success) {
+      if (!currentUser || !currentUser.Success) {
         await SiteInfo.storage.set("0", null);
         return null;
       }
       userName = currentUser.Data.Name;
+      let currentUserName = await SiteInfo.storage.get("0");
+      if (!!currentUserName && currentUserName != userName) {
+        this.userService.LogOff();
+        await SiteInfo.storage.set("0", null);
+        return null;
+      } else {
+        await SiteInfo.storage.set("0", userName);
+      }
     } else {
       userName = await SiteInfo.storage.get("0");
     }

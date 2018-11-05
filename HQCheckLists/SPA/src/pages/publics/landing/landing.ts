@@ -13,10 +13,11 @@ import { TabsPage } from '../../tabs/tabs';
 export class LandingPage {
 
   constructor(public navCtrl: NavController, public ds: DataService, public userService: UserService, public alertCtrl: AlertController) {
-    this.Init();
+    // this.Init();
   }
   async Init() {
     let currentUser = await SiteInfo.GetSiteValue(SiteKey.UserName);
+    console.log(currentUser);
     if (currentUser == null || currentUser == "") {
       this.presentPrompt();
     } else {
@@ -25,6 +26,10 @@ export class LandingPage {
   }
   async Logout() {
     let user = await this.userService.LogOff();
+    console.log(user);
+    let currentUser = await SiteInfo.GetSiteValue(SiteKey.UserName);
+    console.log(currentUser);
+
   }
   home() {
     this.navCtrl.push(TabsPage);
@@ -56,12 +61,21 @@ export class LandingPage {
             let userLogin = new LoginViewModel();
             userLogin.Login = data['username'];
             userLogin.Password = data['password'];
+            let loginF = async () => {
+              let user = await SiteInfo.GetSiteValue(SiteKey.UserName);
+              if (!user) {
+                this.presentPrompt();
+              } else {
+                this.home();
+              }
+            }
             this.userService.LoginAndCheck(userLogin).then(
               () => {
-                this.home();
+                loginF();
               }
             ).catch(
               () => {
+                loginF();
               }
             );
           }
