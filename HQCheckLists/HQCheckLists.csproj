@@ -50,7 +50,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0-preview3-35497" />
-    <PackageReference Include="SDHCC" Version="0.1.1-alpha07" />
+    <PackageReference Include="SDHCC" Version="0.1.1-alpha08" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0005" />
   </ItemGroup>
 

@@ -36,6 +36,7 @@ export enum ApiCall {
   Login = 302,
   LogOff = 303,
   CanAccess = 304,
+  UserType = 305,
 
   ReservationCreate = 401,
   ReservationRead = 402,
@@ -78,6 +79,8 @@ export class Config {
     [ApiCall.Login]: Config.setApi("/User/Login", false, []),
     [ApiCall.LogOff]: Config.setApi("/User/Logoff", false, []),
     [ApiCall.CanAccess]: Config.setApi("/User/CanAccess", false, []),
+    [ApiCall.UserType]: Config.setApi("/User/UserType", false, []),
+    
 
     [ApiCall.ReservationCreate]: Config.setApi("/Api/Reservation/Create", false, []),
     [ApiCall.ReservationRead]: Config.setApi("/Api/Reservation/Read", false, []),

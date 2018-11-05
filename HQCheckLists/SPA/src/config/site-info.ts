@@ -1,9 +1,10 @@
 import { Storage } from '@ionic/storage';
 import { UserService } from '../services/user-service';
-import { Network } from '@ionic-native/network';
+import { Network, Connection } from '@ionic-native/network';
+import { EnumUserType } from '../models/enums/enum-user-type';
 export enum SiteKey {
   UserName = 0,
-  Lalala = 1,
+  UserType = 1,
 }
 
 export class SiteInfo {
@@ -48,6 +49,25 @@ export class SiteInfo {
       return null;
     }
     return `${userName}_${String(keyNumber)}`
+  }
+
+  public static async GetUserType(): Promise<EnumUserType> {
+    if (SiteInfo.OnConnect) {
+      let userType = await this.userService.UserType();
+      if(!userType||!userType.Success){
+        
+        SiteInfo.SetSiteValue(SiteKey.UserType,null);
+        return EnumUserType.Anonymous;
+      }
+      SiteInfo.SetSiteValue(SiteKey.UserType,String(Number(userType.Data)));
+      return userType.Data;
+    } else {
+      let result = await SiteInfo.GetSiteValue(SiteKey.UserType);
+      if(!result){
+        return EnumUserType.Anonymous;
+      }
+      return EnumUserType[result];
+    }
   }
 
   public static async SetSiteValue(key: SiteKey, value: string) {

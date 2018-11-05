@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HQCheckLists.Models.Apis;
+using HQCheckLists.Models.Enums;
 using HQCheckLists.ViewModels.Accounts;
 using Microsoft.AspNetCore.Mvc;
 using SDHCC.Identity.Services;
@@ -64,6 +65,24 @@ namespace HQCheckLists.Controllers
         result.Success = canAccess;
       }
       return Json(result);
+    }
+
+    public JsonResult UserType()
+    {
+      var userType = EnumUserType.Anonymous;
+      if (users.IsUserInRole(User, E.Setting.AdminRole))
+      {
+        userType = EnumUserType.Admin;
+      }
+      if (users.IsUserInRole(User, HQE.Setting.LandlordRole))
+      {
+        userType = EnumUserType.Landlord;
+      }
+      if (users.IsUserInRole(User, HQE.Setting.CleanerRole))
+      {
+        userType = EnumUserType.Cleaner;
+      }
+      return Json(new ApiResponse<EnumUserType>(true, null, userType));
     }
   }
 }

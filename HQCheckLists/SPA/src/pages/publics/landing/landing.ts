@@ -5,6 +5,7 @@ import { SiteInfo, SiteKey } from '../../../config/site-info';
 import { LoginViewModel } from '../../../models/users/login-model';
 import { UserService } from '../../../services/user-service';
 import { TabsPage } from '../../tabs/tabs';
+import { EnumUserType } from '../../../models/enums/enum-user-type';
 
 @Component({
   selector: 'page-landing',
@@ -25,11 +26,8 @@ export class LandingPage {
     }
   }
   async Logout() {
-    let user = await this.userService.LogOff();
-    console.log(user);
-    let currentUser = await SiteInfo.GetSiteValue(SiteKey.UserName);
-    console.log(currentUser);
-
+    let result = await SiteInfo.GetUserType();
+    console.log(result == EnumUserType.Admin);
   }
   home() {
     this.navCtrl.push(TabsPage);

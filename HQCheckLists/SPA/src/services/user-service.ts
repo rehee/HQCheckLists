@@ -8,6 +8,7 @@ import { CurrentUser } from '../models/users/current-user';
 import { LoginViewModel } from '../models/users/login-model';
 import { SiteInfo, SiteKey } from '../config/site-info';
 import { EnumPages } from '../models/access/enum-pages';
+import { EnumUserType } from '../models/enums/enum-user-type';
 @Injectable()
 export class UserService {
   constructor(private http: Http) { }
@@ -61,6 +62,10 @@ export class UserService {
       }
       return await SiteInfo.storage.get(key);
     }
+  }
+
+  public async UserType(): Promise<ApiResponse<EnumUserType>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.UserType));
   }
 
 }

@@ -32,10 +32,11 @@ import { SDHCInputBoolCom } from '../components/sdhc-input/sdhc-input-bool/sdhc-
 import { ReservationDetailPage, ReservationListPage, ReservationMaintainPage } from '../pages/reservation/index';
 import { CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage } from '../pages/cleaning/index';
 import { HqSelectCom } from '../components/hq-inputs/hq-select/hq-select';
+import { LogOffPage } from '../pages/publics/log-off/log-off';
 @NgModule({
   declarations: [
     MyApp,
-    ContactPage,
+    ContactPage, LogOffPage,
     HomePage,
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
     SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
@@ -56,7 +57,7 @@ import { HqSelectCom } from '../components/hq-inputs/hq-select/hq-select';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ContactPage,
+    ContactPage, LogOffPage,
     HomePage,
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
     SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
