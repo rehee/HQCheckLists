@@ -27,10 +27,11 @@ export class LogOffPage {
       SiteInfo.SetSiteValue(SiteKey.UserName, null);
     }
     nav.setRoot(LandingPage);
+    AppFunctions.DismissLoader();
 
   }
   ionViewWillLeave() {
-    AppFunctions.DismissLoader();
+
   }
 
 }

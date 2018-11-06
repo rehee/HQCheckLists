@@ -48,6 +48,8 @@ export enum ApiCall {
   CleaningUpdate = 503,
   CleaningDelete = 504,
   CleaningReadByReservationId = 505,
+  CleaningReadCleanerJob = 506,
+  CleaningReadByCleaningId = 507,
 
   CleaningItemCreate = 601,
   CleaningItemRead = 602,
@@ -80,7 +82,7 @@ export class Config {
     [ApiCall.LogOff]: Config.setApi("/User/Logoff", false, []),
     [ApiCall.CanAccess]: Config.setApi("/User/CanAccess", false, []),
     [ApiCall.UserType]: Config.setApi("/User/UserType", false, []),
-    
+
 
     [ApiCall.ReservationCreate]: Config.setApi("/Api/Reservation/Create", false, []),
     [ApiCall.ReservationRead]: Config.setApi("/Api/Reservation/Read", false, []),
@@ -92,6 +94,11 @@ export class Config {
     [ApiCall.CleaningUpdate]: Config.setApi("/Api/Cleaning/Update", false, []),
     [ApiCall.CleaningDelete]: Config.setApi("/Api/Cleaning/Delete", false, []),
     [ApiCall.CleaningReadByReservationId]: Config.setApi("/Api/Cleaning/ReadByReservationId", false, []),
+    [ApiCall.CleaningReadCleanerJob]: Config.setApi("/Api/Cleaning/ReadCleanerJon", false, []),
+    [ApiCall.CleaningReadByCleaningId]: Config.setApi("/Api/Cleaning/ReadByCleaningId", false, []),
+
+
+
 
 
     [ApiCall.CleaningItemReadPostModels]: Config.setApi("/Api/CleaningItem/ReadPostModels", false, []),

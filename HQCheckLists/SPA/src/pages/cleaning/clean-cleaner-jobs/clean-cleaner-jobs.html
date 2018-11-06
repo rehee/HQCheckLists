@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>清洁</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-group *ngFor="let job of Jobs">
+      <ion-item-divider color="light">{{job.JobDate|date:'yyyy-MM-dd'}}</ion-item-divider>
+      <button ion-item *ngFor="let item of job.Jobs" (click)="GotoDetail(item)">
+        {{item.Title}}
+      </button>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

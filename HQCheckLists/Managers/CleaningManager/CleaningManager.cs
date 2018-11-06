@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using HQCheckLists.Models.Contents;
 using HQCheckLists.Services;
+using HQCheckLists.ViewModels.Cleanings;
 using SDHCC.Core.MethodResponse;
 using SDHCC.DB.Content;
 using SDHCC.Identity.Services;
@@ -151,6 +152,45 @@ namespace HQCheckLists.Managers
       if (cleaning == null)
         return null;
       return cleaning;
+    }
+    public CleaningView CleaningGetByCleaningId(ClaimsPrincipal user, string cleaningId)
+    {
+      var result = new CleaningView();
+      result.CleaningRecord = cleaningService.Read(b => b.Id == cleaningId).FirstOrDefault();
+      result.Items = cleanItemService.Read(b => b.CleaningId == cleaningId).ToList();
+      return result;
+    }
+    public IEnumerable<CleanerJob> ReadAllJobForCleaner(ClaimsPrincipal User)
+    {
+      var cleaner = userService.GetUserByName(User.Identity.Name);
+      var allClean = cleaningService.Read(b => b.CleanerId == cleaner.Id && b.Status != Models.Enums.EnumStatus.Draft)
+        .OrderByDescending(b => b.CreateTime).ToList();
+      var propertyIds = allClean.GroupBy(b => b.PropertyId).Select(b => b.Key).ToList();
+      var properties = propertyService.Read(b => propertyIds.Contains(b.Id)).ToList();
+      var cleanItems = allClean.Select(b =>
+      {
+        var property = properties.Where(p => b.PropertyId == p.Id).FirstOrDefault();
+        var job = new ClearJobItem()
+        {
+          CleaningId = b.Id,
+          PropertyId = b.PropertyId,
+          ReserveId = b.ReservationId,
+          Status = b.Status,
+          CleaningDate = b.CleaningDate,
+          Title = $"{property.Name} clean"
+        };
+        return job;
+      }).ToList();
+      var result = cleanItems.GroupBy(b => b.CleaningDate).Select(b =>
+      {
+        var cleanJob = new CleanerJob()
+        {
+          JobDate = b.Key,
+          Jobs = b.ToList()
+        };
+        return cleanJob;
+      }).ToList();
+      return result;
     }
   }
 }

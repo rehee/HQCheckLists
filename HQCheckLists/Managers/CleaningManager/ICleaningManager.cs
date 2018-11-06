@@ -1,4 +1,5 @@
 ﻿using HQCheckLists.Models.Contents;
+using HQCheckLists.ViewModels.Cleanings;
 using SDHCC.Core.MethodResponse;
 using SDHCC.DB.Content;
 using System;
@@ -18,6 +19,8 @@ namespace HQCheckLists.Managers
     ContentPostModel Update(ClaimsPrincipal User, string cleaningId);
     void Update(ClaimsPrincipal User, ContentPostModel model, out MethodResponse response);
     Cleaning CleaningGetByReservatinId(ClaimsPrincipal user, string reservationIid);
+    CleaningView CleaningGetByCleaningId(ClaimsPrincipal user, string cleaningId);
+    IEnumerable<CleanerJob> ReadAllJobForCleaner(ClaimsPrincipal User);
 
   }
 }

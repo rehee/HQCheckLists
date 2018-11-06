@@ -6,7 +6,7 @@ import { Property, Inventory } from '../models';
 import { ApiResponse } from '../models/ApiResponse';
 import { ContentPostModel } from '../models/contents/content-pass';
 import { Reservation } from '../models/reservation';
-import { Cleaning } from '../models/cleaning';
+import { Cleaning, CleanerJob, CleaningView } from '../models/cleaning';
 import { HQUser } from '../models/users/hq-user';
 @Injectable()
 export class DataService {
@@ -86,6 +86,13 @@ export class DataService {
 
   public async CleaningReadByReservationId(reservationId: string): Promise<ApiResponse<Cleaning>> {
     return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.CleaningReadByReservationId), null, `/?reservationId=${reservationId}`);
+  }
+
+  public async CleaningReadCleanerJob(): Promise<ApiResponse<CleanerJob[]>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.CleaningReadCleanerJob));
+  }
+  public async CleaningReadByCleaningId(cleaningId: string): Promise<ApiResponse<CleaningView>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.CleaningReadByCleaningId), null, `/?cleaningId=${cleaningId}`);
   }
 
   public async CleaningItemReadPostModel(cleaningId: string): Promise<ApiResponse<ContentPostModel[]>> {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HQCheckLists.Managers;
 using HQCheckLists.Models.Apis;
 using HQCheckLists.Models.Contents;
+using HQCheckLists.ViewModels.Cleanings;
 using Microsoft.AspNetCore.Mvc;
 using SDHCC.DB.Content;
 
@@ -50,6 +51,17 @@ namespace HQCheckLists.Areas.Api.Controllers
     {
       var cleaning = cleaningManager.CleaningGetByReservatinId(User, reservationId);
       return Json(new ApiResponse<Cleaning>(cleaning != null, null, cleaning));
+    }
+    public JsonResult ReadByCleaningId(string cleaningId)
+    {
+      var cleaning = cleaningManager.CleaningGetByCleaningId(User, cleaningId);
+      return Json(new ApiResponse<CleaningView>(cleaning != null, null, cleaning));
+    }
+
+    public JsonResult ReadCleanerJon()
+    {
+      var jobs = cleaningManager.ReadAllJobForCleaner(User);
+      return Json(new ApiResponse<IEnumerable<CleanerJob>>(jobs != null, null, jobs));
     }
   }
 }

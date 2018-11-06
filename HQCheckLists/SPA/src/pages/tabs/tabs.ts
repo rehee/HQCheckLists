@@ -4,6 +4,8 @@ import { ContactPage } from '../contact/contact';
 import { PropertyListPage } from '../properties/property-list/property-list';
 import { LandingPage } from '../publics/landing/landing';
 import { LogOffPage } from '../publics/log-off/log-off';
+import { CoreFunction } from '../../core/core-function';
+import { CleanCleanerJobsPage } from '../cleaning';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -15,27 +17,27 @@ export class TabsPage {
   tab3Root = LogOffPage;
   TabItems: any[] = [];
   constructor() {
-    console.log(1);
-    this.TabItems.push(
-      {
-        page: PropertyListPage,
-        title: "Home",
-        icon: "home"
-      }
-    );
+    // this.TabItems.push(
+    //   {
+    //     page: PropertyListPage,
+    //     title: "Home",
+    //     icon: "home"
+    //   }
+    // );
   }
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     console.log('will enter');
-    console.log(2) 
+    console.log(2)
+    await CoreFunction.Delay(1000);
     this.TabItems.push({
-      page: PropertyListPage,
-      title: "Home2",
+      page: CleanCleanerJobsPage,
+      title: "Jobs",
       icon: "contacts"
-    }); 
+    });
     this.TabItems.push({
       page: PropertyListPage,
       title: "Home3",
       icon: "contacts"
-    }); 
+    });
   }
 }

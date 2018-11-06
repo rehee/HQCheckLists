@@ -61,6 +61,7 @@ export class LandingPage {
             userLogin.Password = data['password'];
             let loginF = async () => {
               let user = await SiteInfo.GetSiteValue(SiteKey.UserName);
+              console.log(user);
               if (!user) {
                 this.presentPrompt();
               } else {

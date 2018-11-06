@@ -40,3 +40,20 @@ export class CleaningItem {
   Comment: string = "";
   Images: string = "";
 }
+
+export class CleanerJob {
+  JobDate: Date = new Date();
+  Jobs: ClearJobItem[] = [];
+}
+export class ClearJobItem {
+  PropertyId: string;
+  ReserveId: string;
+  CleaningId: string;
+  Title: string;
+  CleaningDate: Date;
+  Status: EnumStatus;
+}
+export class CleaningView {
+  CleaningRecord: Cleaning = new Cleaning();
+  Items: CleaningItem[] = []
+}

@@ -18,9 +18,9 @@ export class PropertyListPage {
 
   }
   async Init() {
-    AppFunctions.PresentLoader();
+    // AppFunctions.PresentLoader();
     let result = await this.ds.PropertyGetAll();
-    AppFunctions.DismissLoader();
+    // AppFunctions.DismissLoader();
     if (result == null || result.Success == false) {
       return;
     }
