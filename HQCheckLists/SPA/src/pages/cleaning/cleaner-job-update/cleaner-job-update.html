@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>清洁</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      检查床上用品
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          大床单 <br>应有 1
+        </ion-label>
+          <ion-toggle></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-range pin="true"></ion-range>
+      </ion-item>
+    </ion-card-content>
+
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      检查室内用品
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-totoro.png"/>
+        </ion-thumbnail>
+        <h2>大床单</h2>
+        <p>应有</p>
+        <button ion-button clear item-end (click)="Pic()">View</button>
+      </ion-item>
+      <ion-item>
+        <ion-label>全齐</ion-label>
+        <ion-toggle></ion-toggle>
+      </ion-item>
+      <ion-item style="display:none;">
+        <input id="a" type="file">
+      </ion-item>
+      <ion-item>
+
+        <ion-range pin="true"></ion-range>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <button ion-button ion-button full>开始打扫</button>
+</ion-content>

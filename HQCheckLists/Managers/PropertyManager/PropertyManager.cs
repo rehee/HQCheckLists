@@ -58,10 +58,10 @@ namespace HQCheckLists.Managers
       {
         return p;
       }
-      var hqUser = (HQUser)us.GetUserByName(user.Identity.Name);
-      if (hqUser.PropertyOwner == p.PropertyOwner)
+      //var hqUser = (HQUser)us.GetUserByName(user.Identity.Name);
+      //if (hqUser.PropertyOwner == p.PropertyOwner)
         return p;
-      return null;
+      //return null;
     }
 
     public ContentPostModel UpdateProperty(ClaimsPrincipal user, string propertyId)

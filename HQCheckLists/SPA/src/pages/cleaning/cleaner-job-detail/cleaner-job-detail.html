@@ -4,6 +4,83 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ion-card>
+    <img [src]="ThisProperty.Id|hqimage:[0,350]" alt="">
+    <ion-item>
+      <h2>打扫房间: {{ThisProperty.Name}}</h2>
+      <p>{{ThisProperty.PropertyAddress}}</p>
+    </ion-item>
+    <ion-item>
+      <h2>打扫日期: {{CleaningData.CleaningRecord.CleaningDate|date:'yyyy-MM-dd HH:mm'}}</h2>
+    </ion-item>
+    <ion-item>
+      <h2>铺床数量: </h2>
+    </ion-item>
+    <ion-item>
+      <h2>沙发床: </h2>
+    </ion-item>
+    <ion-item>
+      <h2>需带床单: </h2>
+    </ion-item>
+    <ion-item>
+      <h2>需带大床单: </h2>
+    </ion-item>
+    <ion-item>
+      <h2>需带被罩: </h2>
+    </ion-item>
+    <ion-item>
+      <h2>需带枕套: </h2>
+    </ion-item>
+    <ion-item>
+      <h2>需带澡巾: </h2>
+    </ion-item>
+    <ion-item>
+      <h2>需带手巾: </h2>
+    </ion-item>
+    <ion-item>
+      <h2>需带地巾: </h2>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      检查床上用品
+    </ion-card-header>
 
+    <ion-card-content>
+      <ion-item>
+        应有澡巾
+      </ion-item>
+      <ion-item>
+        应有手巾
+      </ion-item>
+      <ion-item>
+        应有地巾
+      </ion-item>
+      <ion-item>
+        应有床单
+      </ion-item>
+      <ion-item>
+        应有大床单
+      </ion-item>
+      <ion-item>
+        应有被罩
+      </ion-item>
+      <ion-item>
+        应有枕套
+      </ion-item>
+    </ion-card-content>
+
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      检查室内物品
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item *ngFor="let item of CleaningData.Items">
+        {{item.Name}}: {{item.InitNumber}}{{item.IsPercentage?"%":""}}
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <button ion-button ion-button full (click)="Start()">开始打扫</button>
 </ion-content>

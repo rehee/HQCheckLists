@@ -6,3 +6,4 @@ export * from './cleaning-list/cleaning-list';
 export * from './cleaning-maintain/cleaning-maintain';
 export * from './clean-cleaner-jobs/clean-cleaner-jobs';
 export * from './cleaner-job-detail/cleaner-job-detail';
+export * from './cleaner-job-update/cleaner-job-update';

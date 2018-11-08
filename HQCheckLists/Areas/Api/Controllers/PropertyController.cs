@@ -26,7 +26,7 @@ namespace HQCheckLists.Areas.Api.Controllers
       else
       {
         var result = pm.GetProperty(User, propertyId);
-        return Json(new ApiResponse<IEnumerable<PropertyModel>>(result != null, null, result));
+        return Json(new ApiResponse<PropertyModel>(result != null, null, result));
       }
 
     }

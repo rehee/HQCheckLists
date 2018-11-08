@@ -7,11 +7,11 @@ namespace HQCheckLists.Models
 {
   public class AccessPermissions
   {
-    public List<string> PropertyIndex { get; set; } = 
-      new List<string>() { E.Setting.AdminRole, HQE.Setting.LandlordRole };
-    public List<string> PropertyCreate { get; set; } = 
+    public List<string> PropertyIndex { get; set; } =
+      new List<string>() { E.Setting.AdminRole, HQE.Setting.LandlordRole, HQE.Setting.CleanerRole };
+    public List<string> PropertyCreate { get; set; } =
       new List<string>() { E.Setting.AdminRole };
-    public List<string> PropertyUpdate { get; set; } = 
+    public List<string> PropertyUpdate { get; set; } =
       new List<string>() { E.Setting.AdminRole };
 
     public List<string> InventoryCreate { get; set; } =

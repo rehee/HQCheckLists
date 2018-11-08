@@ -9,6 +9,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Camera } from '@ionic-native/camera';
 import { DataService } from '../services';
 import { HttpModule } from '@angular/http';
 import { InventoryListPage } from '../pages/inventory/inventory-list/inventory-list';
@@ -30,9 +31,11 @@ import { SDHCInputDropDownCom } from '../components/sdhc-input/sdhc-input-dropdo
 import { SDHCInputDateTimeCom } from '../components/sdhc-input/sdhc-input-datetime/sdhc-input-datetime';
 import { SDHCInputBoolCom } from '../components/sdhc-input/sdhc-input-bool/sdhc-input-bool';
 import { ReservationDetailPage, ReservationListPage, ReservationMaintainPage } from '../pages/reservation/index';
-import { CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage } from '../pages/cleaning/index';
+import { CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage } from '../pages/cleaning/index';
 import { HqSelectCom } from '../components/hq-inputs/hq-select/hq-select';
 import { LogOffPage } from '../pages/publics/log-off/log-off';
+import { HQImagePipe } from '../pipes/image-pipe';
+import { CameraMock } from '../config/mocks/camera-mock';
 @NgModule({
   declarations: [
     MyApp,
@@ -41,8 +44,9 @@ import { LogOffPage } from '../pages/publics/log-off/log-off';
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
     SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
     ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
-    CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
-    HqSelectCom
+    CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
+    HqSelectCom,
+    HQImagePipe
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -62,14 +66,14 @@ import { LogOffPage } from '../pages/publics/log-off/log-off';
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
     SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
     ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
-    CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
+    CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
     HqSelectCom,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    DataService, UserService, Network
+    DataService, UserService, Network, { provide: Camera, useClass: CameraMock }
   ]
 })
 export class AppModule { }

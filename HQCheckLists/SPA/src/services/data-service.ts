@@ -29,6 +29,9 @@ export class DataService {
   public async PropertyUpdate(model: ContentPostModel): Promise<ApiResponse<ContentPostModel>> {
     return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.PropertyUpdate), model);
   }
+  public async PropertyReadById(propertyId: string): Promise<ApiResponse<Property>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.PropertyRead), null, `/?propertyId=${propertyId}`);
+  }
 
 
   public async InventoryRead(propertyId: string): Promise<ApiResponse<Inventory[]>> {

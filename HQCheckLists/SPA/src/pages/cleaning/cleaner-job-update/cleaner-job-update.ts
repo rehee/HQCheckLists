@@ -4,18 +4,18 @@ import { DataService } from '../../../services';
 import { CleanerJob, CleaningView } from '../../../models/cleaning';
 import { CleanCleanerJobsPage } from '../clean-cleaner-jobs/clean-cleaner-jobs';
 import { Property } from '../../../models';
-import { CleanerJobUpdatePage } from '../cleaner-job-update/cleaner-job-update';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
-  selector: 'page-cleaner-job-detail',
-  templateUrl: 'cleaner-job-detail.html'
+  selector: 'page-cleaner-job-update',
+  templateUrl: 'cleaner-job-update.html'
 })
-export class CleanerJobDetailPage {
+export class CleanerJobUpdatePage {
 
   CleaningId: string = "";
   CleaningData: CleaningView = new CleaningView();
   ThisProperty: Property = new Property();
-  constructor(public navCtrl: NavController, public param: NavParams, public ds: DataService) {
+  constructor(public navCtrl: NavController, public param: NavParams, public ds: DataService, public camera: Camera) {
     this.CleaningId = param.get("cleaningId");
     if (!this.CleaningId) {
       if (this.navCtrl.canGoBack) {
@@ -41,8 +41,9 @@ export class CleanerJobDetailPage {
     console.log(this.ThisProperty);
     console.log(this.CleaningData);
   }
-  Start() {
-    this.navCtrl.pop();
-    this.navCtrl.push(CleanerJobUpdatePage, { cleaningId: this.CleaningId });
+
+  async Pic() {
+    window.document.getElementById('a').click();
   }
+
 }
