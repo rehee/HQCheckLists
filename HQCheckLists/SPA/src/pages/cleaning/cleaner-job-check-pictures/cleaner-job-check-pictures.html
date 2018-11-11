@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>房间相片</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of CleaningPictures">
+      <ion-thumbnail item-start>
+        <img [src]="item.Id|hqimage:[2,300]">
+          </ion-thumbnail>
+        <h2 (click)="Detail(item.Id)">{{item.Name}}</h2>
+        <p (click)="Detail(item.Id)">{{item.Comment}}</p>
+        <button ion-button clear color="danger" item-end (click)="Delete(item)">删除</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

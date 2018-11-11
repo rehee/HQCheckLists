@@ -1,0 +1,23 @@
+<ion-item>
+    <ion-label>
+      {{Title}} <br>应有 {{Max}}
+    </ion-label>
+      <ion-toggle [(ngModel)]="CleaningRecord[Property+'IsFull']" (ngModelChange)="updateItem(item)"></ion-toggle>
+  </ion-item>
+  <ion-item *ngIf="!CleaningRecord[Property+'IsFull']">
+    <div style="width:33%;display:inline-block">
+      <button ion-button large color="danger" (click)="Remove()">
+        <ion-icon name="remove"></ion-icon>
+      </button>
+    </div>
+    <div style="width:31%;display:inline-block; text-align: center">
+      <button ion-button clear large color="dark">
+        {{Value()}}
+      </button>
+    </div>
+    <div style="width:33%;display:inline-block;text-align: right" (click)="Add()">
+      <button ion-button large>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </div>
+</ion-item>

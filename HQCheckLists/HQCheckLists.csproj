@@ -4,9 +4,12 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
     <ServerGarbageCollection>false</ServerGarbageCollection>
+    <RazorCompileOnPublish>false</RazorCompileOnPublish>
     <UserSecretsId>a28ec850-89cd-4c01-a6bb-51757a31fdda</UserSecretsId>
   </PropertyGroup>
-
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Admins\Views\**\*.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Remove="SPA\**" />
     <Compile Remove="wwwroot\lib\**" />
@@ -26,10 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Areas\Api\Data\" />
     <Folder Include="Areas\Api\Models\" />
     <Folder Include="Areas\Api\Views\" />
     <Folder Include="fileupload\" />
+    <Folder Include="fileupload\CleaningItem\" />
     <Folder Include="HQEs\" />
     <Folder Include="SPA\www\" />
     <Folder Include="wwwroot\" />
@@ -48,9 +53,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="SDHCC" Version="0.1.1-alpha09" />
     <PackageReference Include="Microsoft.AspNetCore.All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0-preview3-35497" />
-    <PackageReference Include="SDHCC" Version="0.1.1-alpha08" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="2.9.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0005" />
   </ItemGroup>
 

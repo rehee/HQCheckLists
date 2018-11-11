@@ -21,30 +21,62 @@ namespace HQCheckLists.Models.Contents
     [InputType(EditorType = EnumInputType.Hidden)]
     public string CleanerId { get; set; } = "";
 
+    [Display(Name = "当前客人数量")]
+    [InputType(EditorType = EnumInputType.Number)]
+    public int CurrentGuestNumber { get; set; } = 1;
+
+    [Display(Name = "下位客人数量")]
+    [InputType(EditorType = EnumInputType.Number)]
+    public int NextGuestNumber { get; set; } = 1;
+
     [Display(Name = "清洁日期")]
     [InputType(EditorType = EnumInputType.DateTime)]
     public DateTime CleaningDate { get; set; } = DateTime.Now;
-
-    [Display(Name = "床铺套数")]
-    [InputType(EditorType = EnumInputType.Number)]
-    public int CustomerPrepare { get; set; } = 1;
 
     [Display(Name = "下客入住天数")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NextBookingDay { get; set; } = 1;
 
-    [Display(Name = "应有澡巾")]
+    [Display(Name = "上客床数")]
+    [InputType(EditorType = EnumInputType.Number)]
+    public int CurrentBedUsed { get; set; } = 1;
+
+    [Display(Name = "床铺套数")]
+    [InputType(EditorType = EnumInputType.Number)]
+    public int CustomerPrepare { get; set; } = 1;
+
+    [Display(Name = "沙发床")]
+    [InputType(EditorType = EnumInputType.Bool)]
+    public bool SofaBad { get; set; } = false;
+
+    [Display(Name = "床单数")]
+    [InputType(EditorType = EnumInputType.Number)]
+    public int SheetNumber { get; set; } = 1;
+
+    [Display(Name = "大床单数")]
+    [InputType(EditorType = EnumInputType.Number)]
+    public int BigSheetNumber { get; set; } = 0;
+
+    [Display(Name = "被罩数")]
+    [InputType(EditorType = EnumInputType.Number)]
+    public int CoverNumber { get; set; } = 1;
+
+    [Display(Name = "应有浴巾")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NumberBathTowelInit { get; set; } = 1;
-    [Display(Name = "实有澡巾")]
+    [Display(Name = "实有浴巾")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NumberBathTowelActual { get; set; } = 1;
-    [Display(Name = "需带澡巾")]
+    [InputType(EditorType = EnumInputType.Hidden)]
+    public bool NumberBathTowelActualIsFull { get; set; } = false;
+    [Display(Name = "需带浴巾")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NumberBathTowelBring { get; set; } = 1;
     [Display(Name = "应有手巾")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NumberHandTowelInit { get; set; } = 1;
+    [InputType(EditorType = EnumInputType.Hidden)]
+    public bool NumberHandTowelActualIsFull { get; set; } = false;
     [Display(Name = "实有手巾")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NumberHandTowelActual { get; set; } = 1;
@@ -58,6 +90,8 @@ namespace HQCheckLists.Models.Contents
     [Display(Name = "实有地巾")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NumberFloorTowelActual { get; set; } = 1;
+    [InputType(EditorType = EnumInputType.Hidden)]
+    public bool NumberFloorTowelActualIsFull { get; set; } = false;
     [Display(Name = "需带地巾")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NumberFloorTowelBring { get; set; } = 1;
@@ -69,5 +103,8 @@ namespace HQCheckLists.Models.Contents
 
     [InputType(EditorType = EnumInputType.Hidden)]
     public EnumStatus Status { get; set; } = EnumStatus.Draft;
+
+    [InputType(EditorType = EnumInputType.Hidden)]
+    public string ImageCorridorId { get; set; }
   }
 }

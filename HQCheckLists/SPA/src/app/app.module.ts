@@ -31,20 +31,22 @@ import { SDHCInputDropDownCom } from '../components/sdhc-input/sdhc-input-dropdo
 import { SDHCInputDateTimeCom } from '../components/sdhc-input/sdhc-input-datetime/sdhc-input-datetime';
 import { SDHCInputBoolCom } from '../components/sdhc-input/sdhc-input-bool/sdhc-input-bool';
 import { ReservationDetailPage, ReservationListPage, ReservationMaintainPage } from '../pages/reservation/index';
-import { CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage } from '../pages/cleaning/index';
+import { CleanerJobCheckPicturesPage, CleanerJobCheckPicturePage, CleanerJobCheckRoomPage, CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage } from '../pages/cleaning/index';
 import { HqSelectCom } from '../components/hq-inputs/hq-select/hq-select';
 import { LogOffPage } from '../pages/publics/log-off/log-off';
 import { HQImagePipe } from '../pipes/image-pipe';
 import { CameraMock } from '../config/mocks/camera-mock';
+import { HQCleanerCheck, HQCleanerInventory } from '../components/hq-inputs';
+import { ImageService } from '../services/image-service';
 @NgModule({
   declarations: [
     MyApp,
     ContactPage, LogOffPage,
     HomePage,
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
-    SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
+    HQCleanerInventory, HQCleanerCheck, SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
     ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
-    CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
+    CleanerJobCheckPicturesPage, CleanerJobCheckPicturePage, CleanerJobCheckRoomPage, CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
     HqSelectCom,
     HQImagePipe
   ],
@@ -66,14 +68,14 @@ import { CameraMock } from '../config/mocks/camera-mock';
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
     SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
     ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
-    CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
+    CleanerJobCheckPicturesPage, CleanerJobCheckPicturePage, CleanerJobCheckRoomPage, CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
     HqSelectCom,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    DataService, UserService, Network, { provide: Camera, useClass: CameraMock }
+    DataService, UserService, Network, { provide: Camera, useClass: CameraMock }, ImageService
   ]
 })
 export class AppModule { }

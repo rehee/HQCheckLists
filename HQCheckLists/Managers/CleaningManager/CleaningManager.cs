@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using HQCheckLists.Models.Contents;
+using HQCheckLists.Models.Enums;
 using HQCheckLists.Services;
 using HQCheckLists.ViewModels.Cleanings;
 using SDHCC.Core.MethodResponse;
@@ -45,6 +46,15 @@ namespace HQCheckLists.Managers
       var nextCustomer = 1;
       var nextBookingDay = 1;
       var guestNumber = 1;
+      var nextGuestNumber = 1;
+      var sofaBed = false;
+      var bedNumber = 1;
+      var currentBed = 1;
+      var bigSheet = 0;
+      var nextBigSheet = 0;
+      var initBathTowel = 0;
+      var initHandTowel = 0;
+      var initFloorTowel = 0;
       if (!reservationId.IsNullOrEmpty())
       {
         var existCleaning = cleaningService.Read(b => b.ReservationId == reservationId).FirstOrDefault();
@@ -53,15 +63,22 @@ namespace HQCheckLists.Managers
         var reservation = reservationService.Read(b => b.Id == reservationId).FirstOrDefault();
         if (reservation != null)
         {
+          currentBed = reservation.BedNumber;
           guestNumber = reservation.GuestNumber;
           cleaningDate = reservation.CheckOutDate;
-          var nextReservation = reservationService.Read(b => b.PropertyId == propertyId && b.CheckInDate > reservation.CheckInDate).OrderBy(b => b.CheckInDate).FirstOrDefault();
+          bigSheet = reservation.SofaBed ? 1 : 0;
+          var nextReservation = reservationService.Read(
+            b => b.PropertyId == propertyId && b.CheckInDate > reservation.CheckInDate)
+            .OrderBy(b => b.CheckInDate).FirstOrDefault();
           if (nextReservation != null)
           {
+            nextBigSheet = nextReservation.SofaBed ? 1 : 0;
             nextCustomer = nextReservation.GuestNumber;
             nextBookingDay = (nextReservation.CheckOutDate - nextReservation.CheckInDate).Days;
             nextBookingDay = nextBookingDay <= 0 ? 1 : nextBookingDay;
-
+            sofaBed = nextReservation.SofaBed;
+            nextGuestNumber = nextReservation.GuestNumber;
+            bedNumber = Math.Max(reservation.BedNumber, nextReservation.BedNumber);
           }
         }
 
@@ -71,22 +88,46 @@ namespace HQCheckLists.Managers
       {
         return null;
       }
+      var preCleaning = cleaningService.Read(b => b.PropertyId == propertyId && b.CleaningDate < cleaningDate).OrderByDescending(b => b.CleaningDate).FirstOrDefault();
+      if (preCleaning != null)
+      {
+        initBathTowel = preCleaning.NumberBathTowelBring > 0 ? preCleaning.NumberBathTowelBring : guestNumber;
+        initHandTowel = preCleaning.NumberHandTowelBring > 0 ? preCleaning.NumberHandTowelBring : guestNumber;
+        initFloorTowel = preCleaning.NumberFloorTowelBring > 0 ? preCleaning.NumberFloorTowelBring : property.BathRoom;
+      }
+      else
+      {
+        initBathTowel =  guestNumber;
+        initHandTowel =  guestNumber;
+        initFloorTowel = property.BathRoom;
+      }
+      bigSheet = Math.Max(bigSheet, nextBigSheet);
       var cleaning = new Cleaning()
       {
+        CurrentGuestNumber = guestNumber,
+        NextGuestNumber = nextGuestNumber,
+        CurrentBedUsed = currentBed,
+        Name = $"{property.Name} {property.BedRoom} 室",
         PropertyId = propertyId.IsNullOrEmpty() ? "" : propertyId,
         ReservationId = reservationId.IsNullOrEmpty() ? "" : reservationId,
         CleaningDate = cleaningDate,
-        CustomerPrepare = nextCustomer,
+        CustomerPrepare = bedNumber,
         NextBookingDay = nextBookingDay,
+        SofaBad = sofaBed,
+        BigSheetNumber = bigSheet,
+        SheetNumber = bedNumber,
+        CoverNumber = bigSheet + bedNumber,
 
-        NumberBathTowelInit = guestNumber,
-        NumberBathTowelActual = guestNumber,
+        NumberBathTowelInit = initBathTowel,
+        NumberBathTowelActual = initBathTowel,
         NumberBathTowelBring = nextCustomer,
-        NumberHandTowelInit = guestNumber,
-        NumberHandTowelActual = guestNumber,
+
+        NumberHandTowelInit = initHandTowel,
+        NumberHandTowelActual = initHandTowel,
         NumberHandTowelBring = nextCustomer,
-        NumberFloorTowelInit = property.BathRoom,
-        NumberFloorTowelActual = property.BathRoom,
+
+        NumberFloorTowelInit = initFloorTowel,
+        NumberFloorTowelActual = initFloorTowel,
         NumberFloorTowelBring = property.BathRoom,
       };
 
@@ -140,9 +181,18 @@ namespace HQCheckLists.Managers
     public void Update(ClaimsPrincipal User, ContentPostModel model, out MethodResponse response)
     {
       response = new MethodResponse();
-      if (!userService.IsUserInRoles(User, HQE.Access.CleaningCreate))
+      if (!userService.IsUserInRoles(User, HQE.Access.CleaningUpdate))
         return;
       cleaningService.Update(model, out response);
+    }
+    public void UpdateStatus(ClaimsPrincipal User, string cleaningId, EnumStatus status, out MethodResponse response)
+    {
+      response = new MethodResponse();
+      var cleaning = cleaningService.Read(b => b.Id == cleaningId).FirstOrDefault();
+      if (cleaning == null)
+        return;
+      cleaning.Status = status;
+      cleaningService.Update(cleaning.ConvertToPassingModel(), out response);
     }
     public Cleaning CleaningGetByReservatinId(ClaimsPrincipal user, string reservationIid)
     {

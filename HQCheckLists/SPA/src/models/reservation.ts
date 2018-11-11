@@ -11,5 +11,6 @@ export class Reservation {
   NeedCarpark: boolean = false;
   Comment: string = ""
   CleaningRecord: Cleaning = new Cleaning();
-
+  BedNumber: number = 1;
+  SofaBed: boolean = false;
 }

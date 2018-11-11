@@ -14,6 +14,6 @@ namespace HQCheckLists.Managers
     IEnumerable<ContentPostModel> CleaningItemsPostByCleaningId(ClaimsPrincipal user, string cleaningId);
     void CleaningItemUpdate(ClaimsPrincipal user, ContentPostModel model, out MethodResponse response);
     IEnumerable<CleaningItem> CleaningItemsByCleaningId(ClaimsPrincipal user, string cleaningId);
-    
+    CleaningItem CleaningItemByCleaningItemId(ClaimsPrincipal user, string cleaningItemId);
   }
 }

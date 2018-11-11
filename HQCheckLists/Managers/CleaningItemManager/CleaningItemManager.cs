@@ -55,6 +55,11 @@ namespace HQCheckLists.Managers
     {
       cleanItemService.Update(model, out response);
     }
-    
+    public CleaningItem CleaningItemByCleaningItemId(ClaimsPrincipal user, string cleaningItemId)
+    {
+      return cleanItemService.Read(b => b.Id == cleaningItemId).FirstOrDefault();
+    }
+
+
   }
 }

@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>房间照相</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <img *ngIf="CleaningPicture!=null&&CleaningPicture.Id!=null" [src]="CleaningPicture.Id|hqimage:[2,600]" alt="">
+  <sdhc-post [PostModel]="CleaningPicture" [Name]="'图片区域'"></sdhc-post>
+</ion-content>
+<ion-footer no-border>
+  <ion-toolbar>
+    <button ion-button ion-button full (click)="Save()">保存</button>
+  </ion-toolbar>
+</ion-footer>

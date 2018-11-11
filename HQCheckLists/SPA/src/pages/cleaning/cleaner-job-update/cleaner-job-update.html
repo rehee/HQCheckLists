@@ -1,52 +1,61 @@
 <ion-header>
   <ion-navbar>
     <ion-title>清洁</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="Pictures()">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <ion-fab style="right:5%;top:2%;">
+    <button ion-fab (click)="TakePic()">照相</button>
+  </ion-fab>
+  <ion-card>
+
+    <ion-card-header>
+      检查房间
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail item-start>
+            <img [src]="CleaningData.CleaningRecord.ImageCorridorId|hqimage:[2,350]">
+            </ion-thumbnail>
+            <h2 (click)="CheckRoom('ImageCorridorId')">走廊</h2>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
   <ion-card>
     <ion-card-header>
       检查床上用品
     </ion-card-header>
 
     <ion-card-content>
-      <ion-item>
-        <ion-label>
-          大床单 <br>应有 1
-        </ion-label>
-          <ion-toggle></ion-toggle>
-      </ion-item>
-      <ion-item>
-        <ion-range pin="true"></ion-range>
-      </ion-item>
+      <hq-cleaner-check [CleaningRecord]="CleaningData.CleaningRecord" [Title]="'浴巾'" [Max]="CleaningData.CleaningRecord.NumberBathTowelInit"
+        [Property]="'NumberBathTowelActual'"></hq-cleaner-check>
+      <hq-cleaner-check [CleaningRecord]="CleaningData.CleaningRecord" [Title]="'手巾'" [Max]="CleaningData.CleaningRecord.NumberHandTowelInit"
+        [Property]="'NumberHandTowelActual'"></hq-cleaner-check>
+      <hq-cleaner-check [CleaningRecord]="CleaningData.CleaningRecord" [Title]="'地巾'" [Max]="CleaningData.CleaningRecord.NumberFloorTowelInit"
+        [Property]="'NumberFloorTowelActual'"></hq-cleaner-check>
     </ion-card-content>
-
   </ion-card>
   <ion-card>
     <ion-card-header>
       检查室内用品
     </ion-card-header>
     <ion-card-content>
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="img/thumbnail-totoro.png"/>
-        </ion-thumbnail>
-        <h2>大床单</h2>
-        <p>应有</p>
-        <button ion-button clear item-end (click)="Pic()">View</button>
-      </ion-item>
-      <ion-item>
-        <ion-label>全齐</ion-label>
-        <ion-toggle></ion-toggle>
-      </ion-item>
-      <ion-item style="display:none;">
-        <input id="a" type="file">
-      </ion-item>
-      <ion-item>
-
-        <ion-range pin="true"></ion-range>
-      </ion-item>
+      <hq-cleaner-inventory *ngFor="let item of CleaningData.Items" [Item]="item"></hq-cleaner-inventory>
     </ion-card-content>
   </ion-card>
-  <button ion-button ion-button full>开始打扫</button>
+  <ion-card>
+    <button ion-button full color="danger" (click)="Complete()">完成打扫</button>
+  </ion-card>
 </ion-content>
+<ion-footer no-border>
+  <ion-toolbar>
+    <button ion-button full (click)="Save()">保存</button>
+  </ion-toolbar>
+</ion-footer>

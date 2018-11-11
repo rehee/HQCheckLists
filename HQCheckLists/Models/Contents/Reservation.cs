@@ -27,6 +27,13 @@ namespace HQCheckLists.Models.Contents
     [InputType(EditorType = EnumInputType.Number)]
     public int GuestNumber { get; set; } = 1;
 
+    [Display(Name = "铺床数")]
+    [InputType(EditorType = EnumInputType.Number)]
+    public int BedNumber { get; set; } = 1;
+
+    [Display(Name = "需要沙发床")]
+    [InputType(EditorType = EnumInputType.Bool)]
+    public bool SofaBed { get; set; } = false;
 
     [Display(Name = "是否需要车位")]
     [InputType(EditorType = EnumInputType.Bool)]

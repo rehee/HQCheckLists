@@ -1,0 +1,31 @@
+<ion-item>
+  <ion-thumbnail item-start>
+    <img [src]="Item.InventoryId|hqimage:[1,350]"/>
+  </ion-thumbnail>
+  <h2>{{Item.Name}}</h2>
+  <button ion-button clear item-end (click)="Pic()">拍照/上传照片</button>
+</ion-item>
+<ion-item>
+  <ion-label>应有 {{Item.InitNumber}}</ion-label>
+  <ion-toggle [(ngModel)]="Item.IsFull" (ngModelChange)="updateItem(item)"></ion-toggle>
+</ion-item>
+<ion-item style="display:none;">
+  <input id="img_{{Item.Id}}" type="file" (change)="FileChange($event,'UploadFile')">
+</ion-item>
+<ion-item *ngIf="!Item.IsFull">
+    <div style="width:33%;display:inline-block">
+      <button ion-button large color="danger" (click)="Remove()">
+        <ion-icon name="remove"></ion-icon>
+      </button>
+    </div>
+    <div style="width:31%;display:inline-block; text-align: center">
+      <button ion-button clear large color="dark">
+        {{Value()}}
+      </button>
+    </div>
+    <div style="width:33%;display:inline-block;text-align: right" (click)="Add()">
+      <button ion-button large>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </div>
+</ion-item>

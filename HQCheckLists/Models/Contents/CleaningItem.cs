@@ -15,6 +15,9 @@ namespace HQCheckLists.Models.Contents
     [InputType(EditorType = EnumInputType.Hidden)]
     public string InventoryId { get; set; }
 
+    [InputType(EditorType = EnumInputType.Hidden)]
+    public bool IsFull { get; set; } = false;
+
     [Display(Name = "应有数量")]
     [InputType(EditorType = EnumInputType.Number)]
     public decimal InitNumber { get; set; }

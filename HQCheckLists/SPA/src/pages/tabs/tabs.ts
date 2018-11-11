@@ -26,8 +26,6 @@ export class TabsPage {
     // );
   }
   async ionViewWillEnter() {
-    console.log('will enter');
-    console.log(2)
     await CoreFunction.Delay(1000);
     this.TabItems.push({
       page: CleanCleanerJobsPage,

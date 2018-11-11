@@ -33,7 +33,7 @@ namespace HQCheckLists
       services.AddScoped<IReservationService, ReservationService>();
       services.AddScoped<ICleaningService, CleaningService>();
       services.AddScoped<ICleaningItemService, CleaningItemService>();
-
+      services.AddScoped<ICleaningPictureService, CleaningPictureService>();
 
       services.AddScoped<IPropertyManager, PropertyManager>();
       services.AddScoped<IPropertyInventoryManager, PropertyInventoryManager>();
@@ -41,6 +41,7 @@ namespace HQCheckLists
       services.AddScoped<ICleaningManager, CleaningManager>();
       services.AddScoped<ICleaningItemManager, CleaningItemManager>();
       services.AddScoped<IUserManager, UserManager>();
+      services.AddScoped<ICleaningPictureManager, CleaningPictureManager>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

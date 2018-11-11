@@ -5,6 +5,7 @@ import { CleanerJob, CleaningView } from '../../../models/cleaning';
 import { CleanCleanerJobsPage } from '../clean-cleaner-jobs/clean-cleaner-jobs';
 import { Property } from '../../../models';
 import { CleanerJobUpdatePage } from '../cleaner-job-update/cleaner-job-update';
+import { EnumStatus } from '../../../models/enums/enum-status';
 
 @Component({
   selector: 'page-cleaner-job-detail',
@@ -41,7 +42,14 @@ export class CleanerJobDetailPage {
     console.log(this.ThisProperty);
     console.log(this.CleaningData);
   }
-  Start() {
+  IsPending(): boolean {
+    return this.CleaningData.CleaningRecord.Status == EnumStatus.Pending;
+  }
+  async Start() {
+    let result = await this.ds.CleaningUpdateStartCleaning(this.CleaningId);
+    if (!result || !result.Success) {
+      return;
+    }
     this.navCtrl.pop();
     this.navCtrl.push(CleanerJobUpdatePage, { cleaningId: this.CleaningId });
   }

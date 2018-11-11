@@ -19,10 +19,17 @@ namespace HQCheckLists.Models.Contents
     [InputType(EditorType = EnumInputType.FileUpload)]
     public string Image { get; set; } = "";
 
+    [Display(Name = "房间")]
+    [InputType(EditorType = EnumInputType.Number)]
+    public int BedRoom { get; set; } = 1;
+
     [Display(Name ="浴室数量")]
     [InputType(EditorType = EnumInputType.Number)]
     public int BathRoom { get; set; } = 1;
 
+    [Display(Name = "基础清洁费")]
+    [InputType(EditorType = EnumInputType.Number)]
+    public Decimal CleaningFee { get; set; } = 20;
 
   }
 }

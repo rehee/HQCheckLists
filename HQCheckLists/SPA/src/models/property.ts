@@ -5,7 +5,9 @@ export class Property {
   PropertyAddress: string;
   PropertyOwner: string;
   Image: string;
+  BedRoom:number;
   BathRoom: number;
+  CleaningFee:number;
 }
 
 export class Inventory {

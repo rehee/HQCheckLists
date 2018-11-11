@@ -9,7 +9,7 @@
     <ion-item-group *ngFor="let job of Jobs">
       <ion-item-divider color="light">{{job.JobDate|date:'yyyy-MM-dd'}}</ion-item-divider>
       <button ion-item *ngFor="let item of job.Jobs" (click)="GotoDetail(item)">
-        {{item.Title}}
+        {{item.Title}} {{JobStatus(item.Status)}}
       </button>
     </ion-item-group>
   </ion-list>

@@ -22,6 +22,8 @@ export class ApiProperty {
   }
 }
 export enum ApiCall {
+  Image = 1,
+
   PropertyCreate = 101,
   PropertyRead = 102,
   PropertyUpdate = 103,
@@ -50,14 +52,27 @@ export enum ApiCall {
   CleaningReadByReservationId = 505,
   CleaningReadCleanerJob = 506,
   CleaningReadByCleaningId = 507,
+  CleaningUpdateStartCleaning = 508,
+  CleaningUpdateCompleteCleaning = 509,
+  CleaningUpdateBedChecking = 510,
 
   CleaningItemCreate = 601,
   CleaningItemRead = 602,
   CleaningItemUpdate = 603,
   CleaningItemDelete = 604,
   CleaningItemReadPostModels = 605,
+  CleaningItemUpdateItem = 606,
 
   UserReadAllCleaner = 711,
+
+  CleaningPictureCreate = 801,
+  CleaningPictureReadByCleaningPicId = 802,
+  CleaningPictureReadByCleaningId = 803,
+  CleaningPictureUpdate = 804,
+  CleaningPictureDelete = 805,
+
+
+
 }
 export class Config {
   static URLTyle = {
@@ -67,7 +82,7 @@ export class Config {
   static DefaultApi = "";
   static BaseUrl: string = Config.URLTyle.PROD;
   static ApiUrl: { [key: number]: ApiProperty } = {
-
+    [ApiCall.Image]: Config.setApi("", false, []),
     [ApiCall.PropertyCreate]: Config.setApi("/Api/Property/Create", false, []),
     [ApiCall.PropertyRead]: Config.setApi("/Api/Property/Read", false, []),
     [ApiCall.PropertyUpdate]: Config.setApi("/Api/Property/Update", false, []),
@@ -96,17 +111,25 @@ export class Config {
     [ApiCall.CleaningReadByReservationId]: Config.setApi("/Api/Cleaning/ReadByReservationId", false, []),
     [ApiCall.CleaningReadCleanerJob]: Config.setApi("/Api/Cleaning/ReadCleanerJon", false, []),
     [ApiCall.CleaningReadByCleaningId]: Config.setApi("/Api/Cleaning/ReadByCleaningId", false, []),
-
+    [ApiCall.CleaningUpdateStartCleaning]: Config.setApi("/Api/Cleaning/UpdateStartCleaning", false, []),
+    [ApiCall.CleaningUpdateCompleteCleaning]: Config.setApi("/Api/Cleaning/UpdateCompleteCleaning", false, []),
+    [ApiCall.CleaningUpdateBedChecking]: Config.setApi("/Api/Cleaning/UpdateBedChecking", false, []),
 
 
 
 
     [ApiCall.CleaningItemReadPostModels]: Config.setApi("/Api/CleaningItem/ReadPostModels", false, []),
     [ApiCall.CleaningItemUpdate]: Config.setApi("/Api/CleaningItem/Update", false, []),
+    [ApiCall.CleaningItemUpdateItem]: Config.setApi("/Api/CleaningItem/UpdateItem", false, []),
+
 
     [ApiCall.UserReadAllCleaner]: Config.setApi("/Api/User/ReadAllCleaner", false, []),
 
-
+    [ApiCall.CleaningPictureCreate]: Config.setApi("/Api/CleaningPicture/Create", false, []),
+    [ApiCall.CleaningPictureReadByCleaningPicId]: Config.setApi("/Api/CleaningPicture/ReadByCleaningPicId", false, []),
+    [ApiCall.CleaningPictureReadByCleaningId]: Config.setApi("/Api/CleaningPicture/ReadByCleaningId", false, []),
+    [ApiCall.CleaningPictureUpdate]: Config.setApi("/Api/CleaningPicture/Update", false, []),
+    [ApiCall.CleaningPictureDelete]: Config.setApi("/Api/CleaningPicture/Delete", false, []),
   }
   private static setApi(url: string, useMock: boolean, m: any) {
     return new ApiProperty(url, useMock, m);

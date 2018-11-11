@@ -15,31 +15,32 @@
       <h2>打扫日期: {{CleaningData.CleaningRecord.CleaningDate|date:'yyyy-MM-dd HH:mm'}}</h2>
     </ion-item>
     <ion-item>
-      <h2>铺床数量: </h2>
+      <h2>铺床数量: {{CleaningData.CleaningRecord.CustomerPrepare}} </h2>
     </ion-item>
     <ion-item>
-      <h2>沙发床: </h2>
+      <h2>沙发床: {{CleaningData.CleaningRecord.SofaBad?'是':'否'}}</h2>
     </ion-item>
     <ion-item>
-      <h2>需带床单: </h2>
+      <h2>需带床单: {{CleaningData.CleaningRecord.SheetNumber}}</h2>
     </ion-item>
     <ion-item>
-      <h2>需带大床单: </h2>
+      <h2>需带大床单: {{CleaningData.CleaningRecord.BigSheetNumber}}</h2>
     </ion-item>
     <ion-item>
-      <h2>需带被罩: </h2>
+      <h2>需带被罩: {{CleaningData.CleaningRecord.CoverNumber}}</h2>
+    </ion-item>
+
+    <ion-item>
+      <h2>需带枕套: {{CleaningData.CleaningRecord.CoverNumber*2}}</h2>
     </ion-item>
     <ion-item>
-      <h2>需带枕套: </h2>
+      <h2>需带浴巾: {{CleaningData.CleaningRecord.NumberBathTowelBring}}</h2>
     </ion-item>
     <ion-item>
-      <h2>需带澡巾: </h2>
+      <h2>需带手巾: {{CleaningData.CleaningRecord.NumberHandTowelBring}}</h2>
     </ion-item>
     <ion-item>
-      <h2>需带手巾: </h2>
-    </ion-item>
-    <ion-item>
-      <h2>需带地巾: </h2>
+      <h2>需带地巾: {{CleaningData.CleaningRecord.NumberFloorTowelBring}}</h2>
     </ion-item>
   </ion-card>
   <ion-card>
@@ -49,25 +50,13 @@
 
     <ion-card-content>
       <ion-item>
-        应有澡巾
+        应有浴巾 {{CleaningData.CleaningRecord.NumberBathTowelInit}}
       </ion-item>
       <ion-item>
-        应有手巾
+        应有手巾 {{CleaningData.CleaningRecord.NumberHandTowelInit}}
       </ion-item>
       <ion-item>
-        应有地巾
-      </ion-item>
-      <ion-item>
-        应有床单
-      </ion-item>
-      <ion-item>
-        应有大床单
-      </ion-item>
-      <ion-item>
-        应有被罩
-      </ion-item>
-      <ion-item>
-        应有枕套
+        应有地巾 {{CleaningData.CleaningRecord.NumberFloorTowelInit}}
       </ion-item>
     </ion-card-content>
 
@@ -82,5 +71,5 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
-  <button ion-button ion-button full (click)="Start()">开始打扫</button>
+  <button *ngIf="IsPending()" ion-button ion-button full (click)="Start()">开始打扫</button>
 </ion-content>
