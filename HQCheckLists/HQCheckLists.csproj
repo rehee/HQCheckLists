@@ -17,7 +17,6 @@
     <Content Remove="wwwroot\lib\**" />
     <EmbeddedResource Remove="SPA\**" />
     <EmbeddedResource Remove="wwwroot\lib\**" />
-    <EmbeddedResource Include="Areas\Admin\Views\**\*.cshtml" />
     <None Remove="SPA\**" />
     <None Remove="wwwroot\lib\**" />
   </ItemGroup>
@@ -29,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Areas\Api\Data\" />
     <Folder Include="Areas\Api\Models\" />
     <Folder Include="Areas\Api\Views\" />

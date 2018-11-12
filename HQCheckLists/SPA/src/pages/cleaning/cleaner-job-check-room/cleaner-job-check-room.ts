@@ -31,7 +31,6 @@ export class CleanerJobCheckRoomPage {
       navCtrl.pop();
     }
     this.RoomPicId = this.CleaningJob[this.Property];
-    console.log(this.RoomPicId);
     this.Init();
   }
 
@@ -39,7 +38,6 @@ export class CleanerJobCheckRoomPage {
     let preResult: ApiResponse<ContentPostModel>;
     if (this.RoomPicId) {
       preResult = await this.ds.CleaningPicturePreUpdate(this.RoomPicId);
-      console.log(preResult);
 
     } else {
       preResult = await this.ds.CleaningPicturePreCreate(null);
@@ -50,6 +48,9 @@ export class CleanerJobCheckRoomPage {
     this.RoomPicture = preResult.Data;
   }
   async Save() {
+    if (!this.RoomPicture.Name) {
+      this.RoomPicture.Name = "同上";
+    }
     if (!this.RoomPicId) {
       let result = await this.ds.CleaningPictureCreate(this.RoomPicture);
       if (!result || !result.Success) {
@@ -59,7 +60,6 @@ export class CleanerJobCheckRoomPage {
       await this.ds.CleaningUpdateBedChecking(this.CleaningJob);
     } else {
       await this.ds.CleaningPictureUpdate(this.RoomPicture);
-      console.log(1);
     }
 
     this.navCtrl.pop();

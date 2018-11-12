@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { DataService } from '../../../services';
 import { ContentPostModel } from '../../../models/contents/content-pass';
+import { AppFunctions } from '../../../config/app-function';
 
 @Component({
   selector: 'page-reservation-maintain',
@@ -17,35 +18,44 @@ export class ReservationMaintainPage {
     this.Init();
   }
   async Init() {
+    AppFunctions.PresentLoader();
     if (!this.PropertyId && !this.ReservationId) {
-      return;
+      this.navCtrl.pop();
     }
-    if (!!this.PropertyId) {
+    if (this.PropertyId) {
       let createResult = await this.ds.ReservationPreCreate(this.PropertyId);
       if (!createResult || !createResult.Success) {
-        return;
+        this.navCtrl.pop();
       }
-
       this.Model = createResult.Data;
     }
-    if (!!this.ReservationId) {
+    if (this.ReservationId) {
       let updateResult = await this.ds.ReservationPreUpdate(this.ReservationId);
       if (!updateResult || !updateResult.Success) {
-        return;
+        this.navCtrl.pop();
       }
       this.Model = updateResult.Data;
     }
+    AppFunctions.DismissLoader();
   }
+  Processing: boolean = false;
   async Maintain() {
-    if (!this.Model) {
+    if (!this.Model || !this.Model.Name) {
       return;
     }
     if (!this.PropertyId && !this.ReservationId) {
       return;
     }
+    if (this.Processing) {
+      return;
+    }
+    this.Processing = true;
+    AppFunctions.PresentLoader();
     if (!!this.PropertyId) {
       let createResult = await this.ds.ReservationCreate(this.Model);
       if (!createResult || !createResult.Success) {
+        AppFunctions.DismissLoader();
+        this.navCtrl.pop();
         return;
       }
       this.Model = createResult.Data;
@@ -53,10 +63,13 @@ export class ReservationMaintainPage {
     if (!!this.ReservationId) {
       let updateResult = await this.ds.ReservationUpdate(this.Model);
       if (!updateResult || !updateResult.Success) {
+        AppFunctions.DismissLoader();
+        this.navCtrl.pop();
         return;
       }
       this.Model = updateResult.Data;
     }
+    AppFunctions.DismissLoader();
     this.navCtrl.pop();
   }
 }

@@ -74,6 +74,28 @@ namespace HQCheckLists.Controllers
         return null;
       }
     }
+    public IActionResult CleanItem(string id, int widthpx = 0)
+    {
+      try
+      {
+        if (string.IsNullOrEmpty(id))
+          return null;
+        var item = db.Where<CleaningItem>(b => b.Id == id).FirstOrDefault();
+        if (item == null)
+          return null;
+        if (String.IsNullOrEmpty(item.Images))
+          return null;
+        var a = item.Images.GetFileStreamFromPath(this, widthpx);
+        var c = Convert.ToBase64String(ReadFully(a));
+        var f = item.Images.GetFileFromPath(this, widthpx);
+        return f;
+      }
+      catch (Exception ex)
+      {
+        return null;
+      }
+    }
+
     public Stream CleaningPics(string id, int widthpx = 0)
     {
       try

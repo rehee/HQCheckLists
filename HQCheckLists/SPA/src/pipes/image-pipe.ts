@@ -14,6 +14,7 @@ export enum ImageType {
   Property,
   PropertyItem,
   CleanPicture,
+  CleanItem,
 }
 
 @Pipe({ name: 'hqimage' })
@@ -32,6 +33,9 @@ export class HQImagePipe implements PipeTransform {
         break;
       case ImageType.CleanPicture:
         url = `/build/CleaningPic/${id}/${args[1]}`;
+        break;
+      case ImageType.CleanItem:
+        url = `/build/CleanItem/${id}/${args[1]}`;
         break;
       default:
         break;

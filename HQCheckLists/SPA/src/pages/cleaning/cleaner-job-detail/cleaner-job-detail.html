@@ -43,6 +43,14 @@
       <h2>需带地巾: {{CleaningData.CleaningRecord.NumberFloorTowelBring}}</h2>
     </ion-item>
   </ion-card>
+  <ion-card *ngIf="CleaningData&&CleaningData.CleaningRecord&&CleaningData.CleaningRecord.SpecialRequirement">
+    <ion-card-header>
+      特殊需求
+    </ion-card-header>
+    <ion-card-content>
+      {{CleaningData.CleaningRecord.SpecialRequirement}}
+    </ion-card-content>
+  </ion-card>
   <ion-card>
     <ion-card-header>
       检查床上用品

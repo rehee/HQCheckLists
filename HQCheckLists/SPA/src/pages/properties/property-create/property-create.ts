@@ -2,7 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ContentPostModel } from '../../../models/contents/content-pass';
 import { DataService } from '../../../services';
-import { removeSummaryDuplicates } from '@angular/compiler';
+import { removeSummaryDuplicates, ReturnStatement } from '@angular/compiler';
+import { AppFunctions } from '../../../config/app-function';
 
 @Component({
   selector: 'page-property-create',
@@ -18,6 +19,7 @@ export class PropertycreatePage {
   }
 
   async init() {
+    AppFunctions.PresentLoader();
     if (!this.PropertyId) {
       let result = await this.ds.PropertyPreCreate();
       if (result == null || !result.Success) {
@@ -31,9 +33,18 @@ export class PropertycreatePage {
       }
       this.PropertyPass = updateResult.Data;
     }
+    AppFunctions.DismissLoader();
   }
-
+  Processing: boolean = false;
   async Maintain() {
+    if (!this.PropertyPass.Name) {
+      return;
+    }
+    if (this.Processing) {
+      return;
+    }
+    this.Processing = true;
+    AppFunctions.PresentLoader();
     if (!this.PropertyId) {
       await this.ds.PropertCreate(this.PropertyPass);
       this.navCtrl.pop();
@@ -41,5 +52,8 @@ export class PropertycreatePage {
       await this.ds.PropertyUpdate(this.PropertyPass);
       this.navCtrl.pop();
     }
+    this.Processing = false;
+    AppFunctions.DismissLoader();
   }
+
 }

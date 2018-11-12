@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>清洁详情</ion-title>
+
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+  <clean-picture-detail *ngFor="let item of RoomPicturs" [Item]="item" [Title]="item.Title"></clean-picture-detail>
+  <ion-card>
+    <ion-card-header>
+      床上物品
+    </ion-card-header>
+    <ion-list>
+      <ion-item>浴巾: 应有 {{Model.NumberBathTowelInit}} 实有 {{Model.NumberBathTowelActual}}</ion-item>
+      <ion-item>手巾: 应有 {{Model.NumberHandTowelInit}} 实有 {{Model.NumberHandTowelActual}}</ion-item>
+      <ion-item>地巾: 应有 {{Model.NumberFloorTowelInit}} 实有 {{Model.NumberFloorTowelActual}}</ion-item>
+    </ion-list>
+  </ion-card>
+  <page-clean-item-detail *ngFor="let item of Items" [Item]="item"></page-clean-item-detail>
+  <clean-picture-detail *ngFor="let item of CleaningPics" [Item]="item"></clean-picture-detail>
+</ion-content>

@@ -12,8 +12,15 @@
   <ion-fab style="right:5%;top:2%;">
     <button ion-fab (click)="TakePic()">照相</button>
   </ion-fab>
-  <ion-card>
-
+  <ion-card *ngIf="CleaningData&&CleaningData.CleaningRecord&&CleaningData.CleaningRecord.SpecialRequirement">
+    <ion-card-header>
+      特殊需求
+    </ion-card-header>
+    <ion-card-content>
+      {{CleaningData.CleaningRecord.SpecialRequirement}}
+    </ion-card-content>
+  </ion-card>
+<ion-card>
     <ion-card-header>
       检查房间
     </ion-card-header>
@@ -21,7 +28,7 @@
       <ion-list>
         <ion-item>
           <ion-thumbnail item-start>
-            <img [src]="CleaningData.CleaningRecord.ImageCorridorId|hqimage:[2,350]">
+            <img  [src]="CleaningData.CleaningRecord.ImageCorridorId|hqimage:[2,350]">
             </ion-thumbnail>
             <h2 (click)="CheckRoom('ImageCorridorId')">走廊</h2>
         </ion-item>

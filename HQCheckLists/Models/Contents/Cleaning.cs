@@ -37,11 +37,11 @@ namespace HQCheckLists.Models.Contents
     [InputType(EditorType = EnumInputType.Number)]
     public int NextBookingDay { get; set; } = 1;
 
-    [Display(Name = "上客床数")]
+    [Display(Name = "当前床数")]
     [InputType(EditorType = EnumInputType.Number)]
     public int CurrentBedUsed { get; set; } = 1;
 
-    [Display(Name = "床铺套数")]
+    [Display(Name = "需要铺床数")]
     [InputType(EditorType = EnumInputType.Number)]
     public int CustomerPrepare { get; set; } = 1;
 
@@ -64,38 +64,36 @@ namespace HQCheckLists.Models.Contents
     [Display(Name = "应有浴巾")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NumberBathTowelInit { get; set; } = 1;
-    [Display(Name = "实有浴巾")]
-    [InputType(EditorType = EnumInputType.Number)]
-    public int NumberBathTowelActual { get; set; } = 1;
-    [InputType(EditorType = EnumInputType.Hidden)]
-    public bool NumberBathTowelActualIsFull { get; set; } = false;
     [Display(Name = "需带浴巾")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NumberBathTowelBring { get; set; } = 1;
+    [InputType(EditorType = EnumInputType.Hidden)]
+    public int NumberBathTowelActual { get; set; } = 1;
+    [InputType(EditorType = EnumInputType.Hidden)]
+    public bool NumberBathTowelActualIsFull { get; set; } = false;
+    
     [Display(Name = "应有手巾")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NumberHandTowelInit { get; set; } = 1;
-    [InputType(EditorType = EnumInputType.Hidden)]
-    public bool NumberHandTowelActualIsFull { get; set; } = false;
-    [Display(Name = "实有手巾")]
-    [InputType(EditorType = EnumInputType.Number)]
-    public int NumberHandTowelActual { get; set; } = 1;
     [Display(Name = "需带手巾")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NumberHandTowelBring { get; set; } = 1;
+    [InputType(EditorType = EnumInputType.Hidden)]
+    public bool NumberHandTowelActualIsFull { get; set; } = false;
+    [InputType(EditorType = EnumInputType.Hidden)]
+    public int NumberHandTowelActual { get; set; } = 1;
 
     [Display(Name = "应有地巾")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NumberFloorTowelInit { get; set; } = 1;
-    [Display(Name = "实有地巾")]
-    [InputType(EditorType = EnumInputType.Number)]
-    public int NumberFloorTowelActual { get; set; } = 1;
-    [InputType(EditorType = EnumInputType.Hidden)]
-    public bool NumberFloorTowelActualIsFull { get; set; } = false;
     [Display(Name = "需带地巾")]
     [InputType(EditorType = EnumInputType.Number)]
     public int NumberFloorTowelBring { get; set; } = 1;
-
+    [InputType(EditorType = EnumInputType.Hidden)]
+    public int NumberFloorTowelActual { get; set; } = 1;
+    [InputType(EditorType = EnumInputType.Hidden)]
+    public bool NumberFloorTowelActualIsFull { get; set; } = false;
+    
 
     [Display(Name = "附加需求")]
     [InputType(EditorType = EnumInputType.TextArea)]

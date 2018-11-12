@@ -19,4 +19,19 @@ export class AppFunctions {
     }
     AppFunctions.Loader.dismiss();
   }
+
+  public static GetRoomPicture(): RoomPicture[] {
+    let result = [];
+    result.push(new RoomPicture("ImageCorridorId","走廊"))
+    return  result;
+  }
+}
+
+export class RoomPicture {
+  Property: string = "";
+  Title: string = "";
+  constructor(property: string = "", title: string = "") {
+    this.Property = property;
+    this.Title = title;
+  }
 }

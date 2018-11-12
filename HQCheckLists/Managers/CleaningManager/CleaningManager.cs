@@ -97,8 +97,8 @@ namespace HQCheckLists.Managers
       }
       else
       {
-        initBathTowel =  guestNumber;
-        initHandTowel =  guestNumber;
+        initBathTowel = guestNumber;
+        initHandTowel = guestNumber;
         initFloorTowel = property.BathRoom;
       }
       bigSheet = Math.Max(bigSheet, nextBigSheet);
@@ -231,12 +231,12 @@ namespace HQCheckLists.Managers
         };
         return job;
       }).ToList();
-      var result = cleanItems.GroupBy(b => b.CleaningDate).Select(b =>
+      var result = cleanItems.GroupBy(b => b.CleaningDate.ToShortDateString()).Select(b =>
       {
         var cleanJob = new CleanerJob()
         {
-          JobDate = b.Key,
-          Jobs = b.ToList()
+          JobDate = b.Key.MyTryConvert<DateTime>(),
+          Jobs = b.OrderByDescending(c => c.CleaningDate).ToList()
         };
         return cleanJob;
       }).ToList();

@@ -31,13 +31,19 @@ import { SDHCInputDropDownCom } from '../components/sdhc-input/sdhc-input-dropdo
 import { SDHCInputDateTimeCom } from '../components/sdhc-input/sdhc-input-datetime/sdhc-input-datetime';
 import { SDHCInputBoolCom } from '../components/sdhc-input/sdhc-input-bool/sdhc-input-bool';
 import { ReservationDetailPage, ReservationListPage, ReservationMaintainPage } from '../pages/reservation/index';
-import { CleanerJobCheckPicturesPage, CleanerJobCheckPicturePage, CleanerJobCheckRoomPage, CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage } from '../pages/cleaning/index';
+import { CleanPictureDetailPage, CleanerJobCheckPicturesPage, CleanerJobCheckPicturePage, CleanerJobCheckRoomPage, CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage } from '../pages/cleaning/index';
 import { HqSelectCom } from '../components/hq-inputs/hq-select/hq-select';
 import { LogOffPage } from '../pages/publics/log-off/log-off';
 import { HQImagePipe } from '../pipes/image-pipe';
 import { CameraMock } from '../config/mocks/camera-mock';
 import { HQCleanerCheck, HQCleanerInventory } from '../components/hq-inputs';
 import { ImageService } from '../services/image-service';
+import { HQTimeSpendPipe } from '../pipes/time-spend-pipe';
+import { CleaningReservePipe } from '../pipes/cleaning-reserve-pipe';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { PhotoLibrary } from '@ionic-native/photo-library';
 @NgModule({
   declarations: [
     MyApp,
@@ -46,9 +52,9 @@ import { ImageService } from '../services/image-service';
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
     HQCleanerInventory, HQCleanerCheck, SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
     ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
-    CleanerJobCheckPicturesPage, CleanerJobCheckPicturePage, CleanerJobCheckRoomPage, CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
+    CleanPictureDetailPage, CleanerJobCheckPicturesPage, CleanerJobCheckPicturePage, CleanerJobCheckRoomPage, CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
     HqSelectCom,
-    HQImagePipe
+    HQImagePipe, HQTimeSpendPipe, CleaningReservePipe
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -58,7 +64,7 @@ import { ImageService } from '../services/image-service';
         name: '__hqchecklist_site_db',
         driverOrder: ['indexeddb', 'sqlite', 'websql']
       }
-    )
+    ), IonicImageViewerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -68,14 +74,15 @@ import { ImageService } from '../services/image-service';
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
     SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
     ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
-    CleanerJobCheckPicturesPage, CleanerJobCheckPicturePage, CleanerJobCheckRoomPage, CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
+    CleanPictureDetailPage, CleanerJobCheckPicturesPage, CleanerJobCheckPicturePage, CleanerJobCheckRoomPage, CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
     HqSelectCom,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    DataService, UserService, Network, { provide: Camera, useClass: CameraMock }, ImageService
+    DataService, UserService, Network, { provide: Camera, useClass: CameraMock }, ImageService, InAppBrowser, SocialSharing,
+    PhotoLibrary
   ]
 })
 export class AppModule { }

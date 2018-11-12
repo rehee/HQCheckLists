@@ -10,3 +10,4 @@ export * from './cleaner-job-update/cleaner-job-update';
 export * from './cleaner-job-check-room/cleaner-job-check-room';
 export * from './cleaner-job-check-picture/cleaner-job-check-picture';
 export * from './cleaner-job-check-pictures/cleaner-job-check-pictures';
+export * from './clean-picture-detail/clean-picture-detail';

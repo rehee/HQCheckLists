@@ -36,7 +36,12 @@ export class CleaningMaintainPage {
         this.StatusSelects.push(new SelectItem(String(s), String(s)));
       }
     }
-    this.Init();
+    AppFunctions.PresentLoader();
+    this.Init().then(() => {
+      AppFunctions.DismissLoader();
+    }).catch(() => {
+      AppFunctions.DismissLoader();
+    });
   }
   async Init() {
     if (!this.CleaningId) {
@@ -78,21 +83,23 @@ export class CleaningMaintainPage {
     if (!this.CleaningId) {
       AppFunctions.PresentLoader();
       let createResult = await this.ds.CleaningCreate(this.Model);
-      AppFunctions.DismissLoader();
       if (!createResult && !createResult.Success) {
         this.IsWorking = false;
         return;
       }
       this.CleaningId = createResult.Data.Id;
-      this.Init();
+      await this.Init();
+      this.IsWorking = false;
+      AppFunctions.DismissLoader()
     } else {
+      this.ItemCount = this.CleanItems.length - 1;
+      this.CheckLoop();
       let updateResult = await this.ds.CleaningUpdate(this.Model);
       if (!updateResult || !updateResult.Success) {
         this.IsWorking = false;
+        this.ItemCount = 0
         return;
       }
-      this.ItemCount = this.CleanItems.length - 1;
-      this.CheckLoop();
       this.CleanItems.forEach(async b => {
         await this.ds.CleaningItemUpdate(b);
         this.ItemCount--;
@@ -104,10 +111,12 @@ export class CleaningMaintainPage {
   async CheckLoop() {
     AppFunctions.PresentLoader();
     do {
-      await CoreFunction.Delay(1000);
+      await CoreFunction.Delay(500);
     } while (this.ItemCount > 0)
+    await this.Init();
+    this.IsWorking = false;
     AppFunctions.DismissLoader();
-    this.Init();
+
   }
   async CleanItemPostModels() {
     if (!this.CleaningId) {

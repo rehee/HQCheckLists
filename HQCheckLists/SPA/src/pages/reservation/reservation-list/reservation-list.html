@@ -1,24 +1,38 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>预定</ion-title>
-      <ion-buttons end>
-        <button ion-button icon-only (click)="Create()" color="primary">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar>
+    <ion-title>预定</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="Create()" color="primary">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
-  <ion-content>
-    <ion-list>
-      <ion-item *ngFor="let r of Reservations">
-        {{r.Name}}
-        <button ion-button color="primary" (click)="Maintain(r.Id)">
-            修改
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let r of Reservations">
+      <h3>
+        In: {{r.CheckInDate|date:"yy-MMM-dd HH:mm"}} Out: {{r.CheckOutDate|date:"yy-MMM-dd HH:mm"}}
+        <button ion-button color="primary" style="float: right;" (click)="Maintain(r.Id)">
+          修改
         </button>
-        <button ion-button color="primary" (click)="MaintainCleaning(r)">
-            清洁
+      </h3>
+      <h3>
+        {{(r.CheckInDate|hqtimespend)==0?'(今日入住)':''}}
+        {{(r.CheckInDate|hqtimespend)?'('+(r.CheckInDate|hqtimespend)+')':''}} {{r.Name}}
+      </h3>
+      <p>
+        {{r.NeedCarpark?'需要车位':''}} {{r.SofaBed?'需要沙发床':''}}
+        <button ion-button color="primary" style="float: right;" (click)="MaintainCleaning(r)">
+          清洁
         </button>
-      </ion-item>
-    </ion-list>
-  </ion-content>
+        <button ion-button color="primary" style="float: right;" (click)="CleaningDetail(r)">
+          查看
+        </button>
+        <span style="float: right;">{{(r.Id|cleaningreserve | async)?.name}}</span>
+
+      </p>
+    </ion-item>
+  </ion-list>
+</ion-content>

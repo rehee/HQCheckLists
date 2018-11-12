@@ -1,0 +1,14 @@
+<ion-card>
+  <ion-item>
+    <ion-thumbnail item-start>
+      <img [src]="Item.InventoryId|hqimage:[1,200]">
+            </ion-thumbnail>
+      <h2>{{Item.Name}}</h2>
+      <p>应有 {{Item.InitNumber}} 实有 {{Item.ActuallyNumber}}</p>
+  </ion-item>
+  <ion-card-content>
+    <img *ngIf="Item.Images" [src]="Item.Id|hqimage:[3,600]" imageViewer="{{Item.Id|hqimage:[3,0]}}">
+    <input #dummy style="{display: none}" type="hidden" value="{{ Item.Id|hqimage:[3,0] }}">
+    <input type="button" (click)="Share()">
+  </ion-card-content>
+</ion-card>

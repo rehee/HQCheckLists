@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { DataService } from '../../../services';
 import { Reservation } from '../../../models/reservation';
 import { ReservationMaintainPage } from '../reservation-maintain/reservation-maintain';
-import { CleaningMaintainPage } from '../../cleaning';
+import { CleaningMaintainPage, CleaningDetailPage } from '../../cleaning';
 
 @Component({
   selector: 'page-reservation-list',
@@ -43,7 +43,7 @@ export class ReservationListPage {
     if (!!r && !!r.Id) {
       let cleaning = await this.ds.CleaningReadByReservationId(r.Id);
       if (!!cleaning && cleaning.Success) {
-        r.CleaningRecord  = cleaning.Data;
+        r.CleaningRecord = cleaning.Data;
       }
     }
   }
@@ -54,5 +54,9 @@ export class ReservationListPage {
       return;
     }
     this.navCtrl.push(CleaningMaintainPage, { reservationId: r.Id, propertyId: r.PropertyId });
+  }
+
+  CleaningDetail(r: Reservation) {
+    this.navCtrl.push(CleaningDetailPage, { reservationId: r.Id });
   }
 }
