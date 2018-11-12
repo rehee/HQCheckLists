@@ -86,3 +86,7 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+.ignores img, .image-wrapper img{
+  -webkit-touch-callout: default;
+}

@@ -18,39 +18,7 @@ export class LandingPage {
     private photoLibrary: PhotoLibrary, private socialSharing: SocialSharing
   ) {
     this.Init();
-    this.photoLibrary.requestAuthorization({
-      "read": true,
-      "write": true
-    }).then(() => {
-      window['cordova']['plugins']['photoLibrary']['getLibrary'](f=>{
-        window['cordova']['plugins']['photoLibrary']['saveImage']('https://i.stack.imgur.com/9Khwe.jpg','myapp',()=>{
-          alert(1);
-        },()=>{alert(2)})
-      })
-      // this.photoLibrary.saveImage("https://i.stack.imgur.com/9Khwe.jpg", "MyApp").then(() => { alert(1) }).catch(b => alert(b));
-      // this.photoLibrary.getLibrary().subscribe({
 
-      //   next: library => {
-      //     library.forEach(function(libraryItem) {
-      //       console.log(libraryItem.id);          // ID of the photo
-      //       console.log(libraryItem.photoURL);    // Cross-platform access to photo
-      //       console.log(libraryItem.thumbnailURL);// Cross-platform access to thumbnail
-      //       console.log(libraryItem.fileName);
-      //       console.log(libraryItem.width);
-      //       console.log(libraryItem.height);
-      //       console.log(libraryItem.creationDate);
-      //       console.log(libraryItem.latitude);
-      //       console.log(libraryItem.longitude);
-      //       console.log(libraryItem.albumIds);    // array of ids of appropriate AlbumItem, only of includeAlbumsData was used
-      //     });
-      //   },
-      //   error: err => { alert('could not get photos'); },
-      //   complete: () => { alert('done getting photos'); }
-      // });
-
-      // this.photoLibrary.getLibrary()
-    })
-      .catch(err => alert('permissions weren\'t granted'));
   }
   async Init() {
     let currentUser = await SiteInfo.GetSiteValue(SiteKey.UserName);
@@ -61,12 +29,9 @@ export class LandingPage {
       this.home();
     }
   }
-  New() {
-    window.open("https://www.w3schools.com");
-  }
+
   async Logout() {
     let result = await SiteInfo.GetUserType();
-    console.log(result == EnumUserType.Admin);
   }
   home() {
     this.navCtrl.push(TabsPage);
@@ -100,7 +65,6 @@ export class LandingPage {
             userLogin.Password = data['password'];
             let loginF = async () => {
               let user = await SiteInfo.GetSiteValue(SiteKey.UserName);
-              console.log(user);
               if (!user) {
                 this.presentPrompt();
               } else {

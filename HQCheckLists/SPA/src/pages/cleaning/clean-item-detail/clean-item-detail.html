@@ -8,7 +8,5 @@
   </ion-item>
   <ion-card-content>
     <img *ngIf="Item.Images" [src]="Item.Id|hqimage:[3,600]" imageViewer="{{Item.Id|hqimage:[3,0]}}">
-    <input #dummy style="{display: none}" type="hidden" value="{{ Item.Id|hqimage:[3,0] }}">
-    <input type="button" (click)="Share()">
   </ion-card-content>
 </ion-card>
