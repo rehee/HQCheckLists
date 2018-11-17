@@ -16,19 +16,22 @@ export class HQTimeSpendPipe implements PipeTransform {
 
   }
   transform(input: Date): number {
+    let inputDate = new Date(input);
+    if (!inputDate) {
+      return -1;
+    }
     let today = new Date();
     let date = new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`)
-    let tomorrow = new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate() + 1}`)
-    var day = 1000 * 60 * 24;
-    if (date > input) {
-      return null;
+    // let tomorrow = new Date(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate() + 1}`)
+    var day = 1000 * 60 * 60 * 24;
+
+    if (date >= input) {
+      return -1;
     }
-    if (input > tomorrow) {
-      let inputNumber = input.getTime();
+    if (date >= input != true) {
+      let inputNumber = inputDate.getTime();
       let newNumber = date.getTime();
-      return Math.floor((inputNumber - newNumber) / day);
-    } else {
-      return 0;
+      return Math.ceil((inputNumber - newNumber) / day);
     }
   }
 }

@@ -1,4 +1,5 @@
 import { Cleaning } from "./cleaning";
+import { EnumStatus } from "./enums/enum-status";
 
 export class Reservation {
   Id: string = "";
@@ -13,4 +14,21 @@ export class Reservation {
   CleaningRecord: Cleaning = new Cleaning();
   BedNumber: number = 1;
   SofaBed: boolean = false;
+}
+
+export class ReservationSummary {
+  PropertyId: string = "";
+  CleaningId: string = "";
+  CurrentReservationId: string = "";
+  CurrentReservation: Reservation;
+  LastReservationId: string = "";
+  LastReservation: Reservation;
+  PropertyName: string = "";
+  CleaningName: string = "";
+  CleaningStatus?: EnumStatus;
+}
+
+export class ReservationSummaryDate {
+  CheckInDate: Date;
+  Reservations: ReservationSummary[] = [];
 }

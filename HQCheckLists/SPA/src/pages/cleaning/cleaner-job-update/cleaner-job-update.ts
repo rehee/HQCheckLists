@@ -42,8 +42,6 @@ export class CleanerJobUpdatePage {
       return;
     }
     this.ThisProperty = propertyResult.Data;
-    console.log(this.ThisProperty);
-    console.log(this.CleaningData);
   }
   async Save(complete: boolean = false) {
     AppFunctions.PresentLoader();

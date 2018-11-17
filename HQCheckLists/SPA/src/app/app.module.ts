@@ -44,6 +44,9 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { PhotoLibrary } from '@ionic-native/photo-library';
+import { ReservationSelectPage } from '../pages/reservation/reservation-select/reservation-select';
+import { CleaningStatusPipe } from '../pipes/cleaning-status-pipe';
+import { HQUserePipe } from '../pipes/hq-user-pipe';
 @NgModule({
   declarations: [
     MyApp,
@@ -51,10 +54,10 @@ import { PhotoLibrary } from '@ionic-native/photo-library';
     HomePage,
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
     HQCleanerInventory, HQCleanerCheck, SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
-    ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
+    ReservationSelectPage, ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
     CleanPictureDetailPage, CleanerJobCheckPicturesPage, CleanerJobCheckPicturePage, CleanerJobCheckRoomPage, CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
     HqSelectCom,
-    HQImagePipe, HQTimeSpendPipe, CleaningReservePipe
+    HQUserePipe, CleaningStatusPipe, HQImagePipe, HQTimeSpendPipe, CleaningReservePipe
   ],
   imports: [
     BrowserModule, HttpModule,
@@ -73,7 +76,7 @@ import { PhotoLibrary } from '@ionic-native/photo-library';
     HomePage,
     TabsPage, InventoryListPage, InventoryCreatePage, InventoryDetailPage, LandingPage, PropertyListPage, PropertycreatePage,
     SDHCInputBoolCom, SDHCInputDateTimeCom, SDHCPostCom, SDHCItemCom, SDHCInputTextCom, SDHCInputTextAreaCom, SDHCInputNumberCom, SDHCInputFileCom, SDHCInputDropDownCom,
-    ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
+    ReservationSelectPage, ReservationDetailPage, ReservationListPage, ReservationMaintainPage,
     CleanPictureDetailPage, CleanerJobCheckPicturesPage, CleanerJobCheckPicturePage, CleanerJobCheckRoomPage, CleanerJobUpdatePage, CleanerJobDetailPage, CleanCleanerJobsPage, CleaningDetailPage, CleaningListPage, CleaningMaintainPage, CleanItemListPage, CleanItemMaintainPage, CleanItemDetailPage,
     HqSelectCom,
   ],

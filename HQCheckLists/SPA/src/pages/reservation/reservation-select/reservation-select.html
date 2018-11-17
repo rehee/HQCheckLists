@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>预定</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="BookLength">
+      <ion-segment-button (click)="Lists()" value="1">
+        今天
+      </ion-segment-button>
+      <ion-segment-button (click)="Lists()" value="7">
+        一周
+      </ion-segment-button>
+      <ion-segment-button (click)="Lists()" value="31">
+        一月
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-group *ngFor="let item of List">
+      <ion-item-divider color="light">{{item.CheckInDate|date:"yyyy-MM-dd (E)"}} 入住数:{{(item.Reservations.length)}}</ion-item-divider>
+      <ion-item *ngFor="let r of item.Reservations">
+        <h3>
+          {{r.CurrentReservation.CheckInDate|date:"HH:mm"}}/ ({{r.PropertyName}})
+          <button ion-button clear (click)="GoToProperty(r.PropertyId)" style="float:right;height: inherit;">房产详情</button>
+        </h3>
+        <h3>
+          {{r.CurrentReservation.Name}}
+        </h3>
+        <p>
+          客人数:{{r.CurrentReservation.GuestNumber}} 床数:{{r.CurrentReservation.BedNumber}}
+          沙发床:{{r.CurrentReservation.SofaBed?"是":"否"}}
+          <button ion-button clear (click)="GoToReserve(r.CurrentReservation.Id)" style="float:right;height: inherit;">预定详情</button>
+        </p>
+        <div *ngIf="r.LastReservation">
+          <h2>之前预定 </h2>
+          <h2>
+            {{r.LastReservation.Name}}
+            <button ion-button clear (click)="GoToReserve(r.LastReservation.Id)" style="float:right;height: inherit;">预定详情</button>
+          </h2>
+          <p>
+            入住:{{r.LastReservation.CheckInDate|date:"yyyy-MM-dd HH:mm"}}
+            /离开:{{r.LastReservation.CheckOutDate|date:"yyyy-MM-dd HH:mm"}}
+          </p>
+          <p>
+            客人数:{{r.LastReservation.GuestNumber}} 床数:{{r.LastReservation.BedNumber}}
+            沙发床:{{r.LastReservation.SofaBed?"是":"否"}}
+          </p>
+          <h2>打扫</h2>
+          <p *ngIf="!r.CleaningId">
+            没有打扫
+            <button ion-button clear (click)="GoToCleaning(r.LastReservation)" style="float:right;height: inherit;">创建打扫</button>
+          </p>
+          <p *ngIf="r.CleaningStatus==0">
+            {{r.CleaningStatus|cleaningstatus}} 清洁工:{{r.CleaningName}}
+            <button ion-button clear (click)="GoToCleaning(r.LastReservation,r.CleaningId)" style="float:right;height: inherit;">修改打扫</button>
+          </p>
+          <p *ngIf="r.CleaningStatus>0">
+            {{r.CleaningStatus|cleaningstatus}} 清洁工:{{r.CleaningName}}
+            <button ion-button clear (click)="GoToCleaningDetail(r.CleaningId)" style="float:right;height: inherit;">查看打扫</button>
+          </p>
+
+        </div>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+
+</ion-content>

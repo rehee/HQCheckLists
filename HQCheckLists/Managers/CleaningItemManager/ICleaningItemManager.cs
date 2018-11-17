@@ -1,4 +1,5 @@
 ﻿using HQCheckLists.Models.Contents;
+using HQCheckLists.ViewModels.Reservations;
 using SDHCC.Core.MethodResponse;
 using SDHCC.DB.Content;
 using System;

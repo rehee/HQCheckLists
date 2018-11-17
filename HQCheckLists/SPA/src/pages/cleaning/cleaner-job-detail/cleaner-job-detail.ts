@@ -39,8 +39,6 @@ export class CleanerJobDetailPage {
       return;
     }
     this.ThisProperty = propertyResult.Data;
-    console.log(this.ThisProperty);
-    console.log(this.CleaningData);
   }
   IsPending(): boolean {
     return this.CleaningData.CleaningRecord.Status == EnumStatus.Pending;

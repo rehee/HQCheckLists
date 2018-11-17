@@ -19,8 +19,8 @@
         </button>
       </h3>
       <h3>
-        {{(r.CheckInDate|hqtimespend)==0?'(今日入住)':''}}
-        {{(r.CheckInDate|hqtimespend)?'('+(r.CheckInDate|hqtimespend)+')':''}} {{r.Name}}
+        {{(r.CheckInDate|hqtimespend)==1?'(今日入住)':''}}
+        {{(r.CheckInDate|hqtimespend)>1?'('+(r.CheckInDate|hqtimespend)+')':''}} {{r.Name}}
       </h3>
       <p>
         {{r.NeedCarpark?'需要车位':''}} {{r.SofaBed?'需要沙发床':''}}

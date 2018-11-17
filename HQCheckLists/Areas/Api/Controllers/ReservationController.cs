@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HQCheckLists.Managers;
 using HQCheckLists.Models.Apis;
 using HQCheckLists.Models.Contents;
+using HQCheckLists.ViewModels.Reservations;
 using Microsoft.AspNetCore.Mvc;
 using SDHCC.DB.Content;
 
@@ -46,9 +47,16 @@ namespace HQCheckLists.Areas.Api.Controllers
     [HttpPost]
     public JsonResult Update(ContentPostModel model)
     {
-      reservationManager.ReservationUpdate(User, model,out var response);
+      reservationManager.ReservationUpdate(User, model, out var response);
       return Json(
         new ApiResponse<ContentPostModel>(response.Success, null, model));
+    }
+
+    public JsonResult ReadSummaryByDays(int id)
+    {
+      var result = reservationManager.ReadReservationSummaryListByLength(User, id);
+      return Json(
+        new ApiResponse<IEnumerable<ReservationSummaryDate>>(result!=null, null, result));
     }
   }
 }

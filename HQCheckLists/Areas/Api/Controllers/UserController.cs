@@ -17,12 +17,18 @@ namespace HQCheckLists.Areas.Api.Controllers
     {
       this.userManager = userManager;
     }
-    
+
     public JsonResult ReadAllCleaner(bool activeUser = true)
     {
       var result = userManager.GetAllCleaner(User, activeUser);
       return Json(
-        new ApiResponse<IEnumerable<HQUser>>(result!=null,null,result));
+        new ApiResponse<IEnumerable<HQUser>>(result != null, null, result));
+    }
+    public JsonResult ReadUserById(string id)
+    {
+      var result = userManager.GetUserById(User, id);
+      return Json(
+        new ApiResponse<HQUser>(result != null, null, result));
     }
   }
 }

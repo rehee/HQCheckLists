@@ -22,7 +22,6 @@ export class LandingPage {
   }
   async Init() {
     let currentUser = await SiteInfo.GetSiteValue(SiteKey.UserName);
-    console.log(currentUser);
     if (currentUser == null || currentUser == "") {
       this.presentPrompt();
     } else {

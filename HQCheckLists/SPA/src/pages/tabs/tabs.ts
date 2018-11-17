@@ -6,6 +6,7 @@ import { LandingPage } from '../publics/landing/landing';
 import { LogOffPage } from '../publics/log-off/log-off';
 import { CoreFunction } from '../../core/core-function';
 import { CleanCleanerJobsPage } from '../cleaning';
+import { ReservationSelectPage } from '../reservation/reservation-select/reservation-select';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -33,9 +34,9 @@ export class TabsPage {
       icon: "contacts"
     });
     this.TabItems.push({
-      page: PropertyListPage,
-      title: "Home3",
-      icon: "contacts"
+      page: ReservationSelectPage,
+      title: "近期预定",
+      icon: "clipboard"
     });
   }
 }

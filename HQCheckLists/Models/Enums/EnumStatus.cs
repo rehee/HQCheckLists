@@ -10,7 +10,7 @@ namespace HQCheckLists.Models.Enums
     Draft,
     Pending,
     Processing,
+    Complete,
     Approving,
-    Complete
   }
 }

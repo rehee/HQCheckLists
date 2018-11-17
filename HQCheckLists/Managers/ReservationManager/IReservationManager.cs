@@ -1,4 +1,5 @@
 ﻿using HQCheckLists.Models.Contents;
+using HQCheckLists.ViewModels.Reservations;
 using SDHCC.Core.MethodResponse;
 using SDHCC.DB.Content;
 using System;
@@ -19,6 +20,6 @@ namespace HQCheckLists.Managers
 
     ContentPostModel ReservationUpdate(ClaimsPrincipal user, string reservationId);
     void ReservationUpdate(ClaimsPrincipal user, ContentPostModel model, out MethodResponse response);
-
+    IEnumerable<ReservationSummaryDate> ReadReservationSummaryListByLength(ClaimsPrincipal user, int length);
   }
 }

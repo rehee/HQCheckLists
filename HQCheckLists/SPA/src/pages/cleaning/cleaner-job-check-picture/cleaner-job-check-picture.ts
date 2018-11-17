@@ -17,7 +17,6 @@ export class CleanerJobCheckPicturePage {
       navCtrl.pop();
     }
     this.CleaningPicture = cleaningPicture;
-    console.log(cleaningPicture);
     this.Init();
   }
 

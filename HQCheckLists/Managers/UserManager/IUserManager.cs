@@ -10,5 +10,6 @@ namespace HQCheckLists.Managers
   public interface IUserManager
   {
     IEnumerable<HQUser> GetAllCleaner(ClaimsPrincipal user, bool active = true);
+    HQUser GetUserById(ClaimsPrincipal user, string userId);
   }
 }

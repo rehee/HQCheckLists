@@ -5,7 +5,9 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-
+  <h2>
+    {{Model.Name}} ({{(Model.CleanerId|hquser|async)?.UserName}}) {{Model.Status|cleaningstatus}}
+  </h2>
   <clean-picture-detail *ngFor="let item of RoomPicturs" [Item]="item" [Title]="item.Title"></clean-picture-detail>
   <ion-card>
     <ion-card-header>
@@ -19,4 +21,7 @@
   </ion-card>
   <page-clean-item-detail *ngFor="let item of Items" [Item]="item"></page-clean-item-detail>
   <clean-picture-detail *ngFor="let item of CleaningPics" [Item]="item"></clean-picture-detail>
+  <div *ngIf="Model.Status == 3">
+    <button ion-button full >验收</button>
+  </div>
 </ion-content>

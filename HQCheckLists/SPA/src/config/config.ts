@@ -44,6 +44,7 @@ export enum ApiCall {
   ReservationRead = 402,
   ReservationUpdate = 403,
   ReservationDelete = 404,
+  ReservationReadByTimeLength = 405,
 
   CleaningCreate = 501,
   CleaningRead = 502,
@@ -63,7 +64,8 @@ export enum ApiCall {
   CleaningItemReadPostModels = 605,
   CleaningItemUpdateItem = 606,
 
-  UserReadAllCleaner = 711,
+  UserReadAllCleaner = 701,
+  UserReadUserById = 702,
 
   CleaningPictureCreate = 801,
   CleaningPictureReadByCleaningPicId = 802,
@@ -103,7 +105,7 @@ export class Config {
     [ApiCall.ReservationRead]: Config.setApi("/Api/Reservation/Read", false, []),
     [ApiCall.ReservationUpdate]: Config.setApi("/Api/Reservation/Update", false, []),
     // [ApiCall.ReservationDelete]: Config.setApi("/Api/Reservation", false, []),
-
+    [ApiCall.ReservationReadByTimeLength]: Config.setApi("/Api/Reservation/ReadSummaryByDays", false, []),
     [ApiCall.CleaningCreate]: Config.setApi("/Api/Cleaning/Create", false, []),
     [ApiCall.CleaningRead]: Config.setApi("/Api/Cleaning/Read", false, []),
     [ApiCall.CleaningUpdate]: Config.setApi("/Api/Cleaning/Update", false, []),
@@ -124,6 +126,8 @@ export class Config {
 
 
     [ApiCall.UserReadAllCleaner]: Config.setApi("/Api/User/ReadAllCleaner", false, []),
+    [ApiCall.UserReadUserById]: Config.setApi("/Api/User/ReadUserById", false, []),
+
 
     [ApiCall.CleaningPictureCreate]: Config.setApi("/Api/CleaningPicture/Create", false, []),
     [ApiCall.CleaningPictureReadByCleaningPicId]: Config.setApi("/Api/CleaningPicture/ReadByCleaningPicId", false, []),

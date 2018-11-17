@@ -18,7 +18,6 @@ export class CleanCleanerJobsPage {
   }
   async Init() {
     let result = await this.ds.CleaningReadCleanerJob();
-    console.log(result);
     if (!result || !result.Success) {
       return;
     }

@@ -5,7 +5,7 @@ import { HttpType, ApiCall } from '../config/config';
 import { Property, Inventory } from '../models';
 import { ApiResponse } from '../models/ApiResponse';
 import { ContentPostModel } from '../models/contents/content-pass';
-import { Reservation } from '../models/reservation';
+import { Reservation, ReservationSummaryDate } from '../models/reservation';
 import { Cleaning, CleanerJob, CleaningView, CleaningItem, CleaningPicture } from '../models/cleaning';
 import { HQUser } from '../models/users/hq-user';
 @Injectable()
@@ -74,6 +74,10 @@ export class DataService {
     return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.ReservationUpdate), model);
   }
 
+  public async ReservationReadByTimeLength(days:string): Promise<ApiResponse<ReservationSummaryDate[]>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.ReservationReadByTimeLength), null,`/${days}`);
+  }
+
   public async CleaningReadByPropertyId(propertyId: string): Promise<ApiResponse<Cleaning[]>> {
     return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.CleaningRead), null, `/?propertyId=${propertyId}`);
   }
@@ -101,7 +105,6 @@ export class DataService {
   }
   public async CleaningUpdateStartCleaning(cleaningId: string): Promise<ApiResponse<any>> {
     let m = { cleaningId: cleaningId };
-    console.log(m);
     return await (await this.httpRequest())(HttpType.Post, Number(ApiCall.CleaningUpdateStartCleaning), m);
   }
   public async CleaningUpdateCompleteCleaning(cleaningId: string): Promise<ApiResponse<any>> {
@@ -120,7 +123,6 @@ export class DataService {
   }
   public async CleaningItemUpdateItem(item: CleaningItem): Promise<ApiResponse<ContentPostModel[]>> {
     let file = item.UploadFile;
-    console.log(file);
     let files = []
     if (!file != true) {
       files.push(file);
@@ -133,6 +135,9 @@ export class DataService {
 
   public async UserReadAllCleaner(activeUser: boolean): Promise<ApiResponse<HQUser[]>> {
     return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.UserReadAllCleaner), null, `/?activeUser=${String(activeUser)}`);
+  }
+  public async UserReadById(userId:string): Promise<ApiResponse<HQUser>> {
+    return await (await this.httpRequest())(HttpType.Get, Number(ApiCall.UserReadUserById), null, `/${String(userId)}`);
   }
 
   public async CleaningPicturePreCreate(cleaningId: string): Promise<ApiResponse<ContentPostModel>> {
@@ -154,7 +159,6 @@ export class DataService {
     return await (await this.httpRequest())(HttpType.Mix, Number(ApiCall.CleaningPictureUpdate), model);
   }
   public async CleaningPictureDelete(model: CleaningPicture): Promise<ApiResponse<any>> {
-    console.log(model);
     return await (await this.httpRequest())(HttpType.Post, Number(ApiCall.CleaningPictureDelete), model);
   }
 

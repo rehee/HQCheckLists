@@ -27,5 +27,9 @@ namespace HQCheckLists.Managers
       }
       return query.ToList();
     }
+    public HQUser GetUserById(ClaimsPrincipal user, string userId)
+    {
+      return db.Where<HQUser>(b => b.Id == userId).FirstOrDefault();
+    }
   }
 }
