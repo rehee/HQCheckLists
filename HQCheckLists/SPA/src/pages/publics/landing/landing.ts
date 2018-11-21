@@ -33,7 +33,9 @@ export class LandingPage {
     let result = await SiteInfo.GetUserType();
   }
   home() {
-    this.navCtrl.push(TabsPage);
+    SiteInfo.GetUserType().then(b=>{
+      this.navCtrl.push(TabsPage, { userRole: b });
+    });
   }
   presentPrompt() {
     let alert = this.alertCtrl.create({

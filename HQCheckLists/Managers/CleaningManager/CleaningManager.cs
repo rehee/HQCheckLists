@@ -129,6 +129,7 @@ namespace HQCheckLists.Managers
         NumberFloorTowelInit = initFloorTowel,
         NumberFloorTowelActual = initFloorTowel,
         NumberFloorTowelBring = property.BathRoom,
+        CleaningFee = property.CleaningFee,
       };
 
       return cleaning.ConvertToPassingModel();

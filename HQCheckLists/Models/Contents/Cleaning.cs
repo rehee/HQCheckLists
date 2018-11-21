@@ -104,5 +104,12 @@ namespace HQCheckLists.Models.Contents
 
     [InputType(EditorType = EnumInputType.Hidden)]
     public string ImageCorridorId { get; set; }
+
+    [Display(Name = "清洁费")]
+    [InputType(EditorType = EnumInputType.Number)]
+    public Decimal CleaningFee { get; set; } = 0;
+
+    [InputType(EditorType = EnumInputType.Hidden)]
+    public DateTime? PaidTime { get; set; } = null;
   }
 }
